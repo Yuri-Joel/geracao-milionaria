@@ -1,0 +1,17 @@
+{
+    "titulo": "Geração Milionária",
+    "descricao": "Associação de ajuda voluntária com foco em transformação social.",
+    "projetos": [
+      {
+        "nome": "Cesta Básica Solidária",
+        "descricao": "Distribuição de cestas para famílias em situação de vulnerabilidade.",
+        "imagem": "/images/cesta.jpg"
+      },
+      {
+        "nome": "Aula de Reforço",
+        "descricao": "Aulas de reforço escolar para crianças carentes.",
+        "imagem": "/images/aula.jpg"
+      }
+    ]
+  }
+  
