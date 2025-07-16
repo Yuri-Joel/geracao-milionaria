@@ -1,174 +1,227 @@
 import type React from "react"
 import { Link } from "react-router-dom"
-import { ArrowRight, Users, Target, Award, TrendingUp } from "lucide-react"
-import Carousel from "../components/Carrosel"
+import { ArrowRight, Users, Target, Award, TrendingUp, Heart, Star, Globe } from "lucide-react"
+import EnhancedCarousel from "../components/EnhancedCarousel"
 import homeData from "../data/home.json"
+import Header from "../components/Header"
+import Footer from "../components/Footer"
+import { useEffect, useState } from "react"
+import { useInView } from '../hooks/useInView'
+
 
 const Home: React.FC = () => {
-  const { carousel, sections } = homeData
+  const [loading, setLoading] = useState(true);
 
+  const { carousel, sections } = homeData
+  const { ref, isInView } = useInView()
+  
+  // Enhanced carousel slides with categories
+  const enhancedSlides = carousel.slides.map((slide, index) => ({
+    ...slide,
+    category: ["IMPACTO SOCIAL", "TRANSFORMAÇÃO", "OPORTUNIDADES"][index % 3],
+  }))
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center">
+        {/* Barra no topo */}
+        <div className="w-full h-2 bg-[#D10A11] absolute top-0" />
+  
+        {/* Logo com animação */}
+        <img
+          src="/assets/2024/07/2-100x100.webp"
+          alt="Logo"
+          className="w-24 h-24 animate-spin-slow"
+        />
+      </div>
+    );
+  }
+  
   return (
     <div className="pt-24">
-      {/* Carousel Section */}
-      <Carousel slides={carousel.slides} autoplay={carousel.autoplay} delay={carousel.delay} />
 
-      {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-r from-gray-50 to-white">
+      <Header />
+      {/* Enhanced Carousel Section */}
+      <EnhancedCarousel slides={enhancedSlides} autoplay={carousel.autoplay} delay={carousel.delay} />
+
+      {/* Floating Stats Cards */}
+      <section className="relative mt-20 z-30">
         <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            {sections.stats.map((stat, index) => (
+              <div
+                key={index}
+                className="bg-white/95 backdrop-blur-md p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-white/20"
+                style={{
+                  animationDelay: `${index * 0.1}s`,
+                }}
+              >
+                <div className="text-center">
+                  <div className="text-2xl md:text-3xl font-bold text-[#D10A11] mb-2 animate-count-up">
+                    {stat.number}
+                  </div>
+                  <div className="text-gray-600 font-medium text-sm md:text-base">{stat.label}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+  <section className="py-10 bg-gradient-to-br from-gray-50 via-white to-gray-50 relative overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-[#D10A11]/5 rounded-full blur-3xl animate-float"></div>
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#F7B32B]/5 rounded-full blur-3xl animate-float-delayed"></div>
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-6xl font-bold text-[#D10A11] mb-6 leading-tight">{sections.hero.title}</h1>
-            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">{sections.hero.subtitle}</p>
-            <Link
-              to={sections.hero.cta.link}
-              className="inline-flex items-center px-8 py-4 bg-[#D10A11] hover:bg-[#b00a10] text-white font-semibold rounded-lg transition-colors duration-200 group text-lg"
-            >
-              {sections.hero.cta.text}
-              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
-            </Link>
+            <div className="animate-fade-in-up">
+              <h1 className="text-5xl md:text-7xl font-bold text-[#D10A11] mb-8 leading-tight">
+                {sections.hero.title}
+              </h1>
+              <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
+                {sections.hero.subtitle}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                <Link
+                  to={sections.hero.cta.link}
+                  className="group inline-flex items-center px-10 py-5 bg-[#D10A11] hover:bg-[#b00a10] text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-2xl text-lg"
+                >
+                  {sections.hero.cta.text}
+                  <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
+                </Link>
+                <Link
+                  to="/sobre"
+                  className="group inline-flex items-center px-10 py-5 border-2 border-[#D10A11] text-[#D10A11] hover:bg-[#D10A11] hover:text-white font-semibold rounded-full transition-all duration-300 text-lg"
+                >
+                  Nossa História
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-16 bg-white">
+      {/* Interactive Features Section */}
+      <section className="py-10 bg-white relative overflow-hidden">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {sections.stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-[#D10A11] mb-2">{stat.number}</div>
-                <div className="text-gray-600 font-medium">{stat.label}</div>
+          <div className="text-center mb-20 animate-fade-in-up">
+            <h2 className="text-4xl md:text-6xl font-bold text-[#D10A11] mb-6">
+              Por que escolher a Geração Milionária?
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Oferecemos soluções completas para o seu desenvolvimento pessoal e profissional
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                icon: Users,
+                title: "Comunidade Ativa",
+                description: "Faça parte de uma comunidade engajada de pessoas que buscam crescimento e sucesso.",
+                color: "red",
+                delay: "0s",
+              },
+              {
+                icon: Target,
+                title: "Foco em Resultados",
+                description: "Metodologias comprovadas e estratégias práticas para alcançar seus objetivos.",
+                color: "amber",
+                delay: "0.1s",
+              },
+              {
+                icon: Award,
+                title: "Excelência",
+                description: "Padrão de qualidade elevado em todos os nossos programas e serviços oferecidos.",
+                color: "red",
+                delay: "0.2s",
+              },
+              {
+                icon: TrendingUp,
+                title: "Crescimento",
+                description: "Acompanhamento contínuo do seu progresso e evolução em todas as áreas da vida.",
+                color: "amber",
+                delay: "0.3s",
+              },
+            ].map((feature, index) => (
+              <div
+                key={index}
+                className="group bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border border-gray-100 hover:border-[#D10A11]/20 animate-fade-in-up"
+                style={{ animationDelay: feature.delay }}
+              >
+                <div
+                  className={`w-16 h-16 ${
+                    feature.color === "red" ? "bg-red-100" : "bg-amber-100"
+                  } rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
+                >
+                  <feature.icon
+                    className={`w-8 h-8 ${feature.color === "red" ? "text-[#D10A11]" : "text-[#F7B32B]"}`}
+                  />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-4 group-hover:text-[#D10A11] transition-colors duration-300">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600 leading-relaxed">{feature.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-20 bg-gray-50">
+      {/* Testimonials with Carousel */}
+      <section className="py-32 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#D10A11] mb-4">
-              Por que escolher a Geração Milionária?
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Oferecemos soluções completas para o seu desenvolvimento pessoal e profissional
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 border-t-4 border-[#D10A11]">
-              <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-6">
-                <Users className="w-6 h-6 text-[#D10A11]" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Comunidade Ativa</h3>
-              <p className="text-gray-600">
-                Faça parte de uma comunidade engajada de pessoas que buscam crescimento e sucesso.
-              </p>
-            </div>
-
-            <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 border-t-4 border-[#F7B32B]">
-              <div className="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-6">
-                <Target className="w-6 h-6 text-[#F7B32B]" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Foco em Resultados</h3>
-              <p className="text-gray-600">
-                Metodologias comprovadas e estratégias práticas para alcançar seus objetivos.
-              </p>
-            </div>
-
-            <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 border-t-4 border-[#D10A11]">
-              <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-6">
-                <Award className="w-6 h-6 text-[#D10A11]" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Excelência</h3>
-              <p className="text-gray-600">
-                Padrão de qualidade elevado em todos os nossos programas e serviços oferecidos.
-              </p>
-            </div>
-
-            <div className="bg-white p-8 rounded-xl shadow-sm hover:shadow-md transition-shadow duration-200 border-t-4 border-[#F7B32B]">
-              <div className="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-6">
-                <TrendingUp className="w-6 h-6 text-[#F7B32B]" />
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Crescimento</h3>
-              <p className="text-gray-600">
-                Acompanhamento contínuo do seu progresso e evolução em todas as áreas da vida.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-[#D10A11]">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Pronto para transformar sua vida?</h2>
-            <p className="text-xl text-red-100 mb-8">
-              Junte-se a milhares de pessoas que já descobriram o caminho para o sucesso
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="/contato"
-                className="inline-flex items-center px-8 py-4 bg-white text-[#D10A11] font-semibold rounded-lg hover:bg-gray-100 transition-colors duration-200"
-              >
-                Entre em Contato
-              </Link>
-              <Link
-                to="/sobre"
-                className="inline-flex items-center px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white hover:text-[#D10A11] transition-colors duration-200"
-              >
-                Saiba Mais
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-[#D10A11] mb-4">Depoimentos</h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-6xl font-bold text-[#D10A11] mb-6">Histórias de Transformação</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Veja o que dizem as pessoas que já transformaram suas vidas com a Geração Milionária
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[1, 2, 3].map((index) => (
-              <div key={index} className="bg-gray-50 p-8 rounded-xl relative">
-                <div className="absolute top-0 right-0 transform translate-x-2 -translate-y-2">
-                  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <div
+                key={index}
+                className="group bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 relative overflow-hidden"
+              >
+                {/* Quote Icon */}
+                <div className="absolute top-6 right-6 opacity-10 group-hover:opacity-20 transition-opacity duration-300">
+                  <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
-                      d="M16.6667 6.66667H6.66667V16.6667H16.6667V6.66667ZM33.3333 6.66667H23.3333V16.6667H33.3333V6.66667ZM16.6667 23.3333H6.66667V33.3333H16.6667V23.3333ZM33.3333 23.3333H23.3333V33.3333H33.3333V23.3333Z"
-                      fill="#F7B32B"
-                      fillOpacity="0.2"
+                      d="M15 45V30C15 22.5 20 15 30 15V22.5C25 22.5 22.5 25 22.5 30H30V45H15ZM37.5 45V30C37.5 22.5 42.5 15 52.5 15V22.5C47.5 22.5 45 25 45 30H52.5V45H37.5Z"
+                      fill="#D10A11"
                     />
                   </svg>
                 </div>
-                <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 rounded-full bg-gray-300 mr-4"></div>
-                  <div>
-                    <h4 className="font-semibold">Nome do Cliente</h4>
+
+                <div className="flex items-center mb-6">
+                  <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#D10A11] to-[#F7B32B] p-0.5">
+                    <div className="w-full h-full rounded-full bg-gray-300"></div>
+                  </div>
+                  <div className="ml-4">
+                    <h4 className="font-semibold text-gray-900">Nome do Cliente</h4>
                     <p className="text-sm text-gray-500">Profissão</p>
                   </div>
                 </div>
-                <p className="text-gray-600 italic">
+
+                <p className="text-gray-600 italic mb-6 leading-relaxed">
                   "A Geração Milionária transformou completamente minha visão sobre finanças e desenvolvimento pessoal.
                   Hoje tenho mais clareza sobre meus objetivos e estou no caminho certo para alcançá-los."
                 </p>
-                <div className="flex mt-4">
+
+                <div className="flex">
                   {[1, 2, 3, 4, 5].map((star) => (
-                    <svg
+                    <Star
                       key={star}
-                      className="w-5 h-5 text-[#F7B32B]"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
-                    </svg>
+                      className="w-5 h-5 text-[#F7B32B] fill-current"
+                      style={{ animationDelay: `${star * 0.1}s` }}
+                    />
                   ))}
                 </div>
               </div>
@@ -177,23 +230,68 @@ const Home: React.FC = () => {
         </div>
       </section>
 
+      {/* CTA Section with Animation */}
+      <section className="py-32 bg-[#D10A11] relative overflow-hidden">
+        {/* Animated Background */}
+        <div className="absolute inset-0">
+          <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-[#D10A11] via-[#b00a10] to-[#D10A11] animate-gradient-x"></div>
+          <div className="absolute top-20 left-20 w-64 h-64 bg-white/5 rounded-full blur-3xl animate-float"></div>
+          <div className="absolute bottom-20 right-20 w-80 h-80 bg-[#F7B32B]/10 rounded-full blur-3xl animate-float-delayed"></div>
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-4xl md:text-6xl font-bold text-white mb-8 animate-fade-in-up">
+              Pronto para transformar sua vida?
+            </h2>
+            <p className="text-xl md:text-2xl text-red-100 mb-12 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+              Junte-se a milhares de pessoas que já descobriram o caminho para o sucesso
+            </p>
+            <div
+              className="flex flex-col sm:flex-row gap-6 justify-center items-center animate-fade-in-up"
+              style={{ animationDelay: "0.4s" }}
+            >
+              <Link
+                to="/contato"
+                className="group inline-flex items-center px-10 py-5 bg-white text-[#D10A11] font-semibold rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl text-lg"
+              >
+                <Heart className="mr-3 w-6 h-6 group-hover:text-[#F7B32B] transition-colors duration-300" />
+                Entre em Contato
+              </Link>
+              <Link
+                to="/sobre"
+                className="group inline-flex items-center px-10 py-5 border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-[#D10A11] transition-all duration-300 text-lg"
+              >
+                <Globe className="mr-3 w-6 h-6" />
+                Saiba Mais
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Partners Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-[#D10A11] mb-4">Nossos Parceiros</h2>
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#D10A11] mb-4">Nossos Parceiros</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">Empresas e instituições que acreditam no nosso trabalho</p>
           </div>
 
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
+          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60 hover:opacity-100 transition-opacity duration-500">
             {[1, 2, 3, 4, 5].map((index) => (
-              <div key={index} className="w-32 h-20 bg-white rounded-lg shadow-sm flex items-center justify-center">
+              <div
+                key={index}
+                className="w-32 h-20 bg-gray-100 rounded-lg shadow-sm flex items-center justify-center hover:shadow-md transition-all duration-300 transform hover:scale-105"
+              >
                 <div className="text-gray-400 font-semibold">Parceiro {index}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
+
+      <Footer />
     </div>
   )
 }
