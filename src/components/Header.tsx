@@ -2,23 +2,48 @@
 
 import type React from "react"
 import { useState } from "react"
-import { Link, useLocation } from "react-router-dom"
-import { Menu, X, Search } from "lucide-react"
-import homeData from "../data/home.json"
+import { Link, useLocation, useNavigate } from "react-router-dom"
+import { Menu, X, Search, ChevronDown } from "lucide-react"
+import homeData from "../data/header.json"
+import { useSearch } from "../context/SearchContext"
+
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const location = useLocation()
+  const location = useLocation();
 
+  
+const { setTerm } = useSearch()
+const navigate = useNavigate()
+const [searchInput, setSearchInput] = useState("")
   const navItems = [
     { name: "PÁGINA INICIAL", path: "/" },
     { name: "SOBRE NÓS", path: "/sobre" },
-    { name: "PROJETOS", path: "/projetos" },
-    { name: "GALERIA", path: "/galeria" },
+    {
+      name: "PROJETOS",
+      path: "/projetos",
+    
+    },
+    {
+      name: "GALERIA ",
+      path: "/galeria",
+      submenu: [
+        { name: "Fotos", path: "/galeria" },
+        { name: "Vídeos", path: "/galeria-de-videos" },
+      ],
+    },
     { name: "DOCUMENTOS", path: "/documentos" },
     { name: "COMO DOAR", path: "/como-doar" },
   ]
+  
+  const [showSearchInput, setShowSearchInput] = useState(false)
 
+  const handleSearch = () => {
+    if (searchInput.trim()) {
+      setTerm(searchInput)
+      navigate("/busca")
+    }
+  }
   const isActive = (path: string) => location.pathname === path
 
   return (
@@ -90,43 +115,118 @@ const Header: React.FC = () => {
 </Link>
 
 
-            {/* Desktop Navigation */}
-            <nav className="hidden md:flex space-x-6">
-              {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  to={item.path}
-                  className={`text-sm font-medium transition-colors duration-200 hover:text-[#D10A11] ${
-                    isActive(item.path) ? "text-[#D10A11] border-b-2 border-[#D10A11] pb-1" : "text-gray-700"
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              ))}
-            </nav>
+            <nav className="hidden md:flex space-x-6 relative">
+  {navItems.map((item, index) => (
+    <div key={index} className="relative group">
+      <Link
+  to={item.path}
+  className={`flex items-center gap-1 text-sm font-medium transition-colors duration-200 hover:text-[#D10A11] ${
+    isActive(item.path) ? "text-[#D10A11] border-b-2 border-[#D10A11] pb-1" : "text-gray-700"
+  }`}
+>
+  {item.name}
+  {item.submenu && <ChevronDown className="w-4 h-4 mt-0.5" />}
+</Link>
 
-            {/* Ficha de Inscrição Button */}
-            <div className="hidden md:flex items-center space-x-4">
-              <Link
-                to="/inscricao"
-                className="px-4 py-2 bg-[#D10A11] text-white rounded-full hover:bg-[#b00a10] transition-colors duration-200"
-              >
-                Ficha de Inscrição
-              </Link>
-              <button className="p-1" aria-label="Buscar">
-                <Search className="w-5 h-5" />
-              </button>
-            </div>
 
-            {/* Mobile Menu Button */}
-            <div className="flex md:hidden items-center space-x-4">
-              <button className="p-1" aria-label="Buscar">
-                <Search className="w-5 h-5" />
-              </button>
-              <button className="p-1" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
-            </div>
+      {/* Submenu */}
+      {item.submenu && (
+        <div className="absolute left-0 top-full mt-2 w-40 bg-white border shadow-lg opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 translate-y-2 z-50">
+          {item.submenu.map((sub) => (
+            <Link
+              key={sub.name}
+              to={sub.path}
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            >
+              {sub.name}
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
+  ))}
+</nav>
+
+
+         {/* Desktop: md e acima */}
+<div className="hidden md:flex items-center space-x-4">
+  {showSearchInput && (
+    <input
+    type="text"
+    placeholder="   Buscar..."
+    className=" py-1.5 text-sm rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#D10A11] transition duration-200"
+    value={searchInput}
+    onChange={(e) => setSearchInput(e.target.value)}
+    onKeyDown={(e) => {
+      if (e.key === "Enter") handleSearch()
+    }}
+    autoFocus
+  />
+  )}
+  <button
+    className="p-1"
+    aria-label="Buscar"
+    onClick={() => {
+      if (showSearchInput) {
+        handleSearch()
+      } else {
+        setShowSearchInput(true)
+      }
+    }}
+  >
+    <Search className="w-5 h-5" />
+  </button>
+
+  {/* Ficha de inscrição */}
+  <Link
+    to="/inscricao"
+    className="px-4 py-2 bg-[#D10A11] text-white rounded-full hover:bg-[#b00a10] transition-colors duration-200"
+  >
+    Ficha de Inscrição
+  </Link>
+</div>
+
+{/* Mobile: abaixo de md */}
+<div className="flex md:hidden items-center space-x-4">
+  {showSearchInput && (
+    <input
+    type="text"
+    placeholder="Buscar..."
+    className="px-3 py-1.5 text-sm rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#D10A11] transition duration-200"
+    value={searchInput}
+    onChange={(e) => setSearchInput(e.target.value)}
+    onKeyDown={(e) => {
+      if (e.key === "Enter") handleSearch()
+    }}
+    autoFocus
+  />
+  
+  )}
+  <button
+    className="p-1"
+    aria-label="Buscar"
+    onClick={() => {
+      if (showSearchInput) {
+        handleSearch()
+      } else {
+        setShowSearchInput(true)
+      }
+    }}
+  >
+    <Search className="w-5 h-5" />
+  </button>
+
+  {/* Botão menu hambúrguer */}
+  <button
+    className="p-1"
+    onClick={() => setIsMenuOpen(!isMenuOpen)}
+    aria-label="Toggle menu"
+  >
+    {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+  </button>
+</div>
+
+
           </div>
         </div>
 
@@ -144,6 +244,7 @@ const Header: React.FC = () => {
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
+                  {item.submenu && <ChevronDown className="w-4 h-4 mt-0.5" />}
                 </Link>
               ))}
               <Link

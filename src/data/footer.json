@@ -1,0 +1,41 @@
+{
+  "about": {
+    "title": "Geração Milionária",
+    "subtitle": "Transformando Vidas",
+    "description": "Somos uma organização dedicada ao desenvolvimento pessoal e profissional, criando pontes para o sucesso e transformando vidas através de oportunidades reais.",
+    "logo": "/assets/2024/07/2-100x100.webp"
+  },
+  "socialLinks": [
+    {
+      "platform": "Facebook",
+      "url": "https://web.facebook.com/p/Gera%C3%A7%C3%A3o-Milion%C3%A1ria-AGM-100082512764759/?_rdc=1&_rdr#"
+    },
+    {
+      "platform": "Instagram",
+      "url": "https://www.instagram.com/associacaogeracaomilionaria/?igsh=YzljYTk1ODg3Zg%3D%3D#"
+    },
+    {
+      "platform": "YouTube",
+      "url": "https://www.youtube.com/@Gera%C3%A7%C3%A3oMilion%C3%A1ria2"
+    }
+  ],
+  "quickLinks": [
+    { "label": "Página Inicial", "link": "/" },
+    { "label": "Sobre Nós", "link": "/sobre" },
+    { "label": "Projetos", "link": "/projetos" },
+    { "label": "Galeria", "link": "/galeria" },
+    { "label": "Comunicado", "link": "/comunicado" },
+    { "label": "Documentos", "link": "/documentos" },
+    { "label": "Como Doar", "link": "/como-doar" }
+  ],
+  "contact": {
+    "email": "contato@geracaomilionaria.com",
+    "phone": "(11) 99999-9999",
+    "address": "Estamos localizados\nno Camama."
+  },
+  "bottomLinks": [
+    { "label": "Política de Privacidade", "link": "/privacidade" },
+    { "label": "Termos de Uso", "link": "/termos" }
+  ],
+  "copyright": "© 2025 Geração Milionária. Todos os direitos reservados."
+}

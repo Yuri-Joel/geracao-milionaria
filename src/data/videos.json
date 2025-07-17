@@ -1,0 +1,69 @@
+{
+    "hero": {
+      "title": "GALERIA DE VÍDEOS",
+      "subtitle": "Momentos em Movimento",
+      "description": "Assista aos principais momentos, depoimentos e atividades da Geração Milionária em nossa coleção de vídeos."
+    },
+    "categories": [
+      {
+        "id": "depoimentos",
+        "name": "Depoimentos",
+        "description": "Histórias de transformação",
+        "color": "#D10A11"
+      },
+      {
+        "id": "eventos",
+        "name": "Eventos",
+        "description": "Cobertura de eventos",
+        "color": "#F7B32B"
+      },
+      {
+        "id": "workshops",
+        "name": "Workshops",
+        "description": "Sessões de capacitação",
+        "color": "#D10A11"
+      },
+      {
+        "id": "projetos",
+        "name": "Projetos",
+        "description": "Execução de projetos",
+        "color": "#F7B32B"
+      },
+      {
+        "id": "institucional",
+        "name": "Institucional",
+        "description": "Vídeos da organização",
+        "color": "#D10A11"
+      }
+    ],
+    "videos": [
+      {
+        "id": 11,
+        "title": "Depoimento: Ana Costa - Empreendedora de Sucesso",
+        "description": "Ana conta como conseguiu abrir seu próprio negócio após participar dos programas da GM.",
+        "category": "depoimentos",
+        "duration": "6:18",
+        "date": "2024-03-05",
+        "views": "1.7K","youtubeId": "dQw4w9WgXcQ",
+      "thumbnail": "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg"
+      },
+      {
+        "id": 12,
+        "title": "Conferência de Desenvolvimento Sustentável",
+        "description": "Principais momentos da conferência sobre desenvolvimento sustentável e impacto social.",
+        "category": "eventos",
+        "duration": "42:55",
+        "date": "2024-03-10",
+        "views": "2.9K",
+        "youtubeId": "dQw4w9WgXcQ",
+      "thumbnail": "https://img.youtube.com/vi/dQw4w9WgXcQ/maxresdefault.jpg"
+      }
+    ],
+    "stats": {
+      "totalVideos": 12,
+      "totalViews": "32.5K",
+      "totalHours": "4.2",
+      "subscribers": "1.8K"
+    }
+  }
+  

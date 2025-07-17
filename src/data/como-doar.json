@@ -1,0 +1,105 @@
+{
+  "hero": {
+    "title": "COMO DOAR",
+    "subtitle": "Pratique o bem, faça alguém feliz!",
+    "description": "Sua contribuição faz a diferença na vida de milhares de pessoas. Escolha a forma mais conveniente para você doar e transformar vidas."
+  },
+  "donationMethods": [
+    {
+      "id": "bank",
+      "name": "Transferência Bancária",
+      "icon": "building",
+      "description": "Depósito ou transferência tradicional",
+      "details": {
+        "bank": "Coordenadas para doações",
+        
+        "account": "12345-6",
+        "iban": "0051.0000.1878.1184.1010.8",
+        "accountNumber": "218781184100001"
+      }
+    },
+    {
+      "id": "mcx",
+      "name": "MCX Express",
+      "icon": "credit-card",
+      "description": "Pagamento rápido e seguro com cartão",
+      "details": {
+        "merchantId": "GM_DONATIONS",
+        "apiKey": "mcx_express_api_key"
+      }
+    }
+  ],
+  "impactLevels": [
+    {
+      "amount": 5000,
+      "title": "Apoiador",
+      "description": "Ajuda a custear material educativo para 1 pessoa",
+      "impact": "1 pessoa capacitada",
+      "icon": "book"
+    },
+    {
+      "amount": 10000,
+      "title": "Colaborador",
+      "description": "Financia um workshop de desenvolvimento pessoal",
+      "impact": "5 pessoas beneficiadas",
+      "icon": "users"
+    },
+    {
+      "amount": 25000,
+      "title": "Parceiro",
+      "description": "Patrocina um curso completo de capacitação",
+      "impact": "10 pessoas transformadas",
+      "icon": "award"
+    },
+    {
+      "amount": 50000,
+      "title": "Transformador",
+      "description": "Viabiliza um programa de mentoria empresarial",
+      "impact": "25 pessoas impactadas",
+      "icon": "star"
+    }
+  ],
+  "contact": {
+    "title": "Nossos Canais de Contato",
+    "departments": [
+      {
+        "name": "Secretaria Geral",
+        "phones": ["+244 923 806 943", "+244 926 171 604"],
+        "email": "secretariageral@geracao-milionaria.com",
+        "whatsapp": "+244923806943"
+      },
+      {
+        "name": "Ação Social, Família e Minoria Éticas",
+        "phones": ["+244 944 667 209"],
+        "email": "acaosocial@geracao-milionaria.com",
+        "whatsapp": "+244944667209"
+      },
+      {
+        "name": "Comunicação e Imagem",
+        "phones": ["+244 929 913 922"],
+        "email": "comunicacao@geracao-milionaria.com",
+        "whatsapp": "+244929913922"
+      }
+    ]
+  },
+  "bankingInfo": {
+    "title": "Coordenadas para Doações",
+    "iban": "0051.0000.1878.1184.1010.8",
+    "account": "218781184100001",
+    "swift": "Associação Geração Milionária"
+  },
+  "testimonials": [
+    {
+      "name": "Maria Fernandes",
+      "role": "Beneficiária do Programa",
+      "message": "Graças às doações, consegui me capacitar e hoje tenho meu próprio negócio em Luanda.",
+      "image": "/assets/2024/08/Design-sem-nome-4-2-150x150.webp"
+    },
+    {
+      "name": "João Mateus",
+      "role": "Doador Regular",
+      "message": "Doar para a Geração Milionária é investir no futuro de Angola e nossa juventude.",
+      "image": "/assets/2024/08/Design-sem-nome-4-2-150x150.webp"
+    }
+  ]
+}

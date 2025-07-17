@@ -15,6 +15,10 @@ export default {
         "custom-gradient": "linear-gradient(35deg, #ffffff 0%, rgba(128, 128, 128, 0.37) 50%, #f5f5dc 100%)"
       },
       keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-20px)' },
+        },
         wiggleY: {
           '0%, 100%': { transform: 'translateY(0)' },
           '25%': { transform: 'translateY(-4px)' },
@@ -44,6 +48,7 @@ export default {
       
       },
       animation: {
+        'float': 'float 6s ease-in-out infinite',
         wiggleY: 'wiggleY 0.4s ease-in-out infinite',
         'spin-slow': 'spin 4s linear infinite',
         'spin-fast': 'spin 0.5s linear infinite',

@@ -1,0 +1,180 @@
+{
+    "hero": {
+      "title": "GALERIA DE FOTOS",
+      "subtitle": "Momentos que Transformam Vidas",
+      "description": "Acompanhe os momentos mais marcantes da nossa jornada de transformação social e desenvolvimento comunitário."
+    },
+    "categories": [
+      {
+        "id": "eventos",
+        "name": "Eventos",
+        "description": "Principais eventos e cerimônias",
+        "color": "#D10A11"
+      },
+      {
+        "id": "workshops",
+        "name": "Workshops",
+        "description": "Sessões de capacitação e treinamento",
+        "color": "#F7B32B"
+      },
+      {
+        "id": "comunidade",
+        "name": "Comunidade",
+        "description": "Atividades com a comunidade",
+        "color": "#D10A11"
+      },
+      {
+        "id": "parcerias",
+        "name": "Parcerias",
+        "description": "Encontros com parceiros",
+        "color": "#F7B32B"
+      },
+      {
+        "id": "projetos",
+        "name": "Projetos",
+        "description": "Execução de projetos sociais",
+        "color": "#D10A11"
+      }
+    ],
+  "photos": [
+  {
+    "id": 1,
+    "title": "Cerimônia de Abertura 2024",
+    "description": "Evento de abertura das atividades do ano 2024 com a presença de autoridades locais e membros da comunidade.",
+    "category": "eventos",
+    "date": "2024-01-15",
+    "location": "Luanda, Angola",
+    "photographer": "Equipe GM",
+    "image": "/assets/2024/09/17.webp",
+    "thumbnail": "/assets/2024/09/17-300x225.webp"
+  },
+  {
+    "id": 2,
+    "title": "Workshop de Empreendedorismo",
+    "description": "Sessão de capacitação em empreendedorismo para jovens da comunidade local.",
+    "category": "workshops",
+    "date": "2024-01-20",
+    "location": "Centro de Formação GM",
+    "photographer": "Maria Santos",
+    "image": "/assets/2024/09/12.webp",
+    "thumbnail": "/assets/2024/09/12-300x225.webp"
+  },
+  {
+    "id": 3,
+    "title": "Reunião Comunitária",
+    "description": "Encontro com líderes comunitários para discussão de novos projetos sociais.",
+    "category": "comunidade",
+    "date": "2024-01-25",
+    "location": "Bairro Sambizanga",
+    "photographer": "João Mateus",
+    "image": "/assets/2024/09/14.webp",
+    "thumbnail": "/assets/2024/09/14-300x225.webp"
+  },
+  {
+    "id": 4,
+    "title": "Assinatura de Parceria",
+    "description": "Cerimônia de assinatura de acordo de parceria com empresa local.",
+    "category": "parcerias",
+    "date": "2024-02-01",
+    "location": "Escritório Central",
+    "photographer": "Ana Costa",
+    "image": "/assets/2024/09/1.webp",
+    "thumbnail": "/assets/2024/09/1-300x225.webp"
+  },
+  {
+    "id": 5,
+    "title": "Projeto Educação Digital",
+    "description": "Implementação do projeto de educação digital nas escolas locais.",
+    "category": "projetos",
+    "date": "2024-02-05",
+    "location": "Escola Primária Agostinho Neto",
+    "photographer": "Pedro Silva",
+    "image": "/assets/2024/09/2.webp",
+    "thumbnail": "/assets/2024/09/2-300x225.webp"
+  },
+  {
+    "id": 6,
+    "title": "Formação em Liderança",
+    "description": "Programa de formação em liderança para jovens talentos.",
+    "category": "workshops",
+    "date": "2024-02-10",
+    "location": "Auditório GM",
+    "photographer": "Carlos Mendes",
+    "image": "/assets/2024/09/10.webp",
+    "thumbnail": "/assets/2024/09/10-300x225.webp"
+  },
+  {
+    "id": 7,
+    "title": "Festival Cultural",
+    "description": "Evento cultural com apresentações artísticas da comunidade.",
+    "category": "eventos",
+    "date": "2024-02-15",
+    "location": "Praça da Independência",
+    "photographer": "Luisa Fernandes",
+    "image": "/assets/2024/09/18.webp",
+    "thumbnail": "/assets/2024/09/18-300x225.webp"
+  },
+  {
+    "id": 8,
+    "title": "Ação Social no Bairro",
+    "description": "Distribuição de materiais escolares para crianças carentes.",
+    "category": "comunidade",
+    "date": "2024-02-20",
+    "location": "Bairro Cazenga",
+    "photographer": "Miguel Torres",
+    "image": "/assets/2024/09/23.webp",
+    "thumbnail": "/assets/2024/09/23-300x225.webp"
+  },
+  {
+    "id": 9,
+    "title": "Conferência de Desenvolvimento",
+    "description": "Conferência sobre desenvolvimento sustentável e impacto social.",
+    "category": "eventos",
+    "date": "2024-02-25",
+    "location": "Hotel Presidente",
+    "photographer": "Sofia Rodrigues",
+    "image": "/assets/2024/09/19.webp",
+    "thumbnail": "/assets/2024/09/19-300x225.webp"
+  },
+  {
+    "id": 10,
+    "title": "Capacitação Tecnológica",
+    "description": "Treinamento em tecnologias digitais para adultos.",
+    "category": "workshops",
+    "date": "2024-03-01",
+    "location": "Centro Tecnológico",
+    "photographer": "Ricardo Alves",
+    "image": "/assets/2024/09/16.webp",
+    "thumbnail": "/assets/2024/09/16-300x225.webp"
+  },
+  {
+    "id": 11,
+    "title": "Parceria Internacional",
+    "description": "Encontro com representantes de organizações internacionais.",
+    "category": "parcerias",
+    "date": "2024-03-05",
+    "location": "Embaixada de Portugal",
+    "photographer": "Teresa Gomes",
+    "image": "/assets/2024/09/13.webp",
+    "thumbnail": "/assets/2024/09/13-300x225.webp"
+  },
+  {
+    "id": 12,
+    "title": "Projeto Saúde Comunitária",
+    "description": "Implementação de programa de saúde preventiva na comunidade.",
+    "category": "projetos",
+    "date": "2024-03-10",
+    "location": "Centro de Saúde Local",
+    "photographer": "Mário Santos",
+    "image": "/assets/2024/09/11.webp",
+    "thumbnail": "/assets/2024/09/11-300x225.webp"
+  }
+],
+  "stats": {
+      "totalPhotos": 113,
+      "totalEvents": 25,
+      "totalWorkshops": 18,
+      "totalProjects": 12
+    }
+  }
+  

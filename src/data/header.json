@@ -1,0 +1,17 @@
+{
+    "header": {
+    "topBanner": "Seja membro da Geração Milionária, com as suas iniciativas para construir um futuro melhor.",
+    "logo": {
+      "text": "Geração Milionária",
+      "subtitle": "Transformando Vidas"
+    },
+    "navigation": [
+      { "label": "Início", "link": "/" },
+      { "label": "Sobre Nós", "link": "/sobre" },
+      { "label": "Projetos", "link": "/projetos" },
+      { "label": "Notícias", "link": "/noticias" },
+      { "label": "Associe-se", "link": "/associe-se" },
+      { "label": "Contato", "link": "/contato" }
+    ]
+  }
+}

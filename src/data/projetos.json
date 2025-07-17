@@ -1,0 +1,57 @@
+[
+    {
+      "id": 1,
+      "title": "Programa de Capacitação Digital",
+      "description": "Curso completo de habilidades digitais para o mercado de trabalho moderno.",
+      "image": "/assets/2024/09/3.webp",
+      "status": "Ativo",
+      "participants": 500,
+      "startDate": "2024-01-15"
+    },
+    {
+      "id": 2,
+      "title": "Mentoria Empresarial",
+      "description": "Programa de mentoria para empreendedores e líderes empresariais.",
+      "image": "/assets/2024/09/7.webp",
+      "status": "Ativo",
+      "participants": 150,
+      "startDate": "2024-02-01"
+    },
+    {
+      "id": 3,
+      "title": "Workshop de Desenvolvimento Pessoal",
+      "description": "Série de workshops focados em crescimento pessoal e profissional.",
+      "image": "/assets/2024/09/12.webp",
+      "status": "Concluído",
+      "participants": 800,
+      "startDate": "2023-10-01"
+    },
+    {
+      "id": 4,
+      "title": "Programa de Inclusão Social",
+      "description": "Iniciativa para inclusão de jovens em situação de vulnerabilidade.",
+      "image": "/assets/2024/09/17.webp",
+      "status": "Ativo",
+      "participants": 200,
+      "startDate": "2024-03-01"
+    },
+    {
+      "id": 5,
+      "title": "Curso de Liderança",
+      "description": "Desenvolvimento de habilidades de liderança para gestores.",
+      "image": "/assets/2024/09/21.webp",
+      "status": "Em Breve",
+      "participants": 0,
+      "startDate": "2024-06-01"
+    },
+    {
+      "id": 6,
+      "title": "Programa de Inovação",
+      "description": "Fomento à inovação e criatividade no ambiente corporativo.",
+      "image": "/assets/2024/09/33.webp",
+      "status": "Planejamento",
+      "participants": 0,
+      "startDate": "2024-08-01"
+    }
+  ]
+  

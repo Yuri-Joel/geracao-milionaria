@@ -2,65 +2,19 @@ import type React from "react"
 import { ExternalLink, Calendar, Users } from "lucide-react"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
+import projetos from "../data/projetos.json" 
+
+type Projeto = {
+  id: number
+  title: string
+  description: string
+  image: string
+  status: string
+  participants: number
+  startDate: string
+}
 
 const Projetos: React.FC = () => {
-  const projetos = [
-    {
-      id: 1,
-      title: "Programa de Capacitação Digital",
-      description: "Curso completo de habilidades digitais para o mercado de trabalho moderno.",
-      image: "/placeholder.svg?height=300&width=400",
-      status: "Ativo",
-      participants: 500,
-      startDate: "2024-01-15",
-    },
-    {
-      id: 2,
-      title: "Mentoria Empresarial",
-      description: "Programa de mentoria para empreendedores e líderes empresariais.",
-      image: "/placeholder.svg?height=300&width=400",
-      status: "Ativo",
-      participants: 150,
-      startDate: "2024-02-01",
-    },
-    {
-      id: 3,
-      title: "Workshop de Desenvolvimento Pessoal",
-      description: "Série de workshops focados em crescimento pessoal e profissional.",
-      image: "/placeholder.svg?height=300&width=400",
-      status: "Concluído",
-      participants: 800,
-      startDate: "2023-10-01",
-    },
-    {
-      id: 4,
-      title: "Programa de Inclusão Social",
-      description: "Iniciativa para inclusão de jovens em situação de vulnerabilidade.",
-      image: "/placeholder.svg?height=300&width=400",
-      status: "Ativo",
-      participants: 200,
-      startDate: "2024-03-01",
-    },
-    {
-      id: 5,
-      title: "Curso de Liderança",
-      description: "Desenvolvimento de habilidades de liderança para gestores.",
-      image: "/placeholder.svg?height=300&width=400",
-      status: "Em Breve",
-      participants: 0,
-      startDate: "2024-06-01",
-    },
-    {
-      id: 6,
-      title: "Programa de Inovação",
-      description: "Fomento à inovação e criatividade no ambiente corporativo.",
-      image: "/placeholder.svg?height=300&width=400",
-      status: "Planejamento",
-      participants: 0,
-      startDate: "2024-08-01",
-    },
-  ]
-
   const getStatusColor = (status: string) => {
     switch (status) {
       case "Ativo":
@@ -79,6 +33,7 @@ const Projetos: React.FC = () => {
   return (
     <div className="pt-24">
       <Header />
+
       <section className="py-20 bg-gradient-to-r from-gray-50 to-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
@@ -90,17 +45,16 @@ const Projetos: React.FC = () => {
         </div>
       </section>
 
-      {/* Projects Grid */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projetos.map((projeto) => (
+            {(projetos as Projeto[]).map((projeto) => (
               <div
                 key={projeto.id}
                 className="bg-white rounded-xl shadow-sm border hover:shadow-md transition-shadow duration-200"
               >
                 <img
-                  src={projeto.image || "/placeholder.svg"}
+                  src={projeto.image}
                   alt={projeto.title}
                   className="w-full h-48 object-cover rounded-t-xl"
                 />
@@ -137,7 +91,6 @@ const Projetos: React.FC = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
@@ -151,6 +104,7 @@ const Projetos: React.FC = () => {
           </div>
         </div>
       </section>
+
       <Footer />
     </div>
   )
