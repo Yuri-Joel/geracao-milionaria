@@ -22,7 +22,7 @@
         ]
       },
       { "name": "DOCUMENTOS", "path": "/documentos" },
-      {"name": "Contactos", "path": "/contacto"},
+      {"name": "CONTACTOS", "path": "/contacto"},
       { "name": "COMO DOAR", "path": "/como-doar" }
     ]
   }

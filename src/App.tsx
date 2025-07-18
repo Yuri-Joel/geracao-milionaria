@@ -20,7 +20,7 @@ function App() {
     <SearchProvider>
     <Router>
     <ScrollToTop /> 
-    <DonationPrompt triggerMinutes={[1, 5, 10]} />
+    <DonationPrompt triggerMinutes={[1, 5, 10, 15]} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/sobre" element={<Sobre />} />
