@@ -16,25 +16,6 @@ const Header: React.FC = () => {
 const { setTerm } = useSearch()
 const navigate = useNavigate()
 const [searchInput, setSearchInput] = useState("")
-  const navItems = [
-    { name: "PÁGINA INICIAL", path: "/" },
-    { name: "SOBRE NÓS", path: "/sobre" },
-    {
-      name: "PROJETOS",
-      path: "/projetos",
-    
-    },
-    {
-      name: "GALERIA ",
-      path: "/galeria",
-      submenu: [
-        { name: "Fotos", path: "/galeria" },
-        { name: "Vídeos", path: "/galeria-de-videos" },
-      ],
-    },
-    { name: "DOCUMENTOS", path: "/documentos" },
-    { name: "COMO DOAR", path: "/como-doar" },
-  ]
   
   const [showSearchInput, setShowSearchInput] = useState(false)
 
@@ -53,7 +34,7 @@ const [searchInput, setSearchInput] = useState("")
         <div className="container mx-auto px-4 flex justify-between items-center">
           <p className="text-sm">{homeData.header.topBanner}</p>
           <div className="flex space-x-4">
-            <a href="https://web.facebook.com/p/Gera%C3%A7%C3%A3o-Milion%C3%A1ria-AGM-100082512764759/?_rdc=1&_rdr#" className="text-white hover:text-gray-300" aria-label="Facebook" target="_blank">
+            <a href="https://web.facebook.com/p/Gera%C3%A7%C3%A3o-Milion%C3%A1ria-AGM-100082512764759/?_rdc=1&_rdr#" className="text-white hover:text-gray-300" aria-label="Facebook" target="_blank" rel="noreferrer">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path
                   fillRule="evenodd"
@@ -62,7 +43,7 @@ const [searchInput, setSearchInput] = useState("")
                 ></path>
               </svg>
             </a>
-            <a href="https://www.instagram.com/associacaogeracaomilionaria/?igsh=YzljYTk1ODg3Zg%3D%3D#" target="_blank" className="text-white hover:text-gray-300" aria-label="Instagram">
+            <a href="https://www.instagram.com/associacaogeracaomilionaria/?igsh=YzljYTk1ODg3Zg%3D%3D#" target="_blank" rel="noreferrer" className="text-white hover:text-gray-300" aria-label="Instagram">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path
                   fillRule="evenodd"
@@ -71,18 +52,13 @@ const [searchInput, setSearchInput] = useState("")
                 ></path>
               </svg>
             </a>
-            <a href="https://www.youtube.com/@Gera%C3%A7%C3%A3oMilion%C3%A1ria2" target="_blank" className="text-white hover:text-gray-300" aria-label="YouTube">
+            <a href="https://www.youtube.com/@Gera%C3%A7%C3%A3oMilion%C3%A1ria2" rel="noreferrer" target="_blank" className="text-white hover:text-gray-300" aria-label="YouTube">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path
                   fillRule="evenodd"
                   d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z"
                   clipRule="evenodd"
                 ></path>
-              </svg>
-            </a>
-            <a href="#" className="text-white hover:text-gray-300" aria-label="Blog">
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"></path>
               </svg>
             </a>
           </div>
@@ -116,7 +92,7 @@ const [searchInput, setSearchInput] = useState("")
 
 
             <nav className="hidden md:flex space-x-6 relative">
-  {navItems.map((item, index) => (
+  {homeData.header.navItems.map((item, index) => (
     <div key={index} className="relative group">
       <Link
   to={item.path}
@@ -234,7 +210,7 @@ const [searchInput, setSearchInput] = useState("")
         {isMenuOpen && (
           <div className="md:hidden bg-white border-t">
             <nav className="container mx-auto px-4 py-4 space-y-4">
-              {navItems.map((item) => (
+              {homeData.header.navItems.map((item) => (
                 <Link
                   key={item.name}
                   to={item.path}

@@ -18,7 +18,7 @@ const Home: React.FC = () => {
   const animTestimonials = useScrollAnimation("animate-slide-up");
   const animCTA = useScrollAnimation("animate-fade-in-up");
   const animPartners = useScrollAnimation("animate-fade-in-up");
-  
+
 
   const enhancedSlides = carousel.slides.map((slide, index) => ({
     ...slide,
@@ -53,9 +53,9 @@ const Home: React.FC = () => {
       <EnhancedCarousel slides={enhancedSlides} autoplay={carousel.autoplay} delay={carousel.delay} />
 
       <section
-      data-animate="animate-slide-up"
-  className={`relative mt-10 z-30 transition-all duration-700 ease-out ${animTestimonials} `}
->
+        data-animate="animate-slide-up"
+        className={`relative mt-10 z-30 transition-all duration-700 ease-out ${animTestimonials} `}
+      >
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {stats.map((stat, index) => (
@@ -77,7 +77,7 @@ const Home: React.FC = () => {
           </div>
         </div>
       </section>
-   
+
       <section data-animate="animate-zoom-in" className={`py-10 bg-gradient-to-br from-gray-50 via-white to-gray-50 relative overflow-hidden transition-all duration-700 ${animFeatures}`}>
         <div className="absolute top-0 left-0 w-full h-full">
           <div className="absolute top-20 left-10 w-72 h-72 bg-[#D10A11]/5 rounded-full blur-3xl animate-float"></div>
@@ -161,7 +161,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <section ata-animate="animate-fade-in-up" className={`transition-all duration-700 ${animCTA} py-32 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden`}>
+      <section data-animate="animate-fade-in-up" className={`transition-all duration-700 ${animCTA} py-32 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden`}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-20 animate-fade-in-up">
             <h2 className="text-4xl md:text-6xl font-bold text-[#D10A11] mb-6">{testimonials.title}</h2>
@@ -185,10 +185,14 @@ const Home: React.FC = () => {
                   </svg>
                 </div>
 
-                <div className="flex items-center mb-6">
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#D10A11] to-[#F7B32B] p-0.5">
-                    <div className="w-full h-full rounded-full bg-gray-300"></div>
-                  </div>
+                <div className="flex items-center mb-6"><div className="w-16 h-16 rounded-full bg-gradient-to-r from-[#D10A11] to-[#F7B32B] p-0.5">
+                  <img
+                    src={testimonial.image}
+                    alt={testimonial.name}
+                    className="w-full h-full object-cover rounded-full"
+                  />
+                </div>
+
                   <div className="ml-4">
                     <h4 className="font-semibold text-gray-900">{testimonial.name}</h4>
                     <p className="text-sm text-gray-500">{testimonial.profession}</p>
@@ -261,15 +265,26 @@ const Home: React.FC = () => {
             <p className="text-gray-600 max-w-2xl mx-auto">{partners.subtitle}</p>
           </div>
 
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60 hover:opacity-100 transition-opacity duration-500">
-            {partners.items.map((partner, index) => (
-              <div
-                key={index}
-                className="w-32 h-20 bg-gray-100 rounded-lg shadow-sm flex items-center justify-center hover:shadow-md transition-all duration-300 transform hover:scale-105"
-              >
-                <div className="text-gray-400 font-semibold">{partner.name}</div>
-              </div>
-            ))}
+          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 ">
+          {partners.items.map((partner, index) => (
+  <div
+  key={index}
+  className="w-48 h-56 bg-gray-100 rounded-lg shadow-sm flex flex-col items-center justify-center hover:shadow-md transition-all duration-300 transform hover:scale-105"
+>
+  <figure className="flex flex-col items-center justify-center">
+    <img
+      src={partner.logo}
+      alt={partner.name}
+      className="w-40 h-40 object-contain mb-2"
+    />
+    <figcaption className="text-gray-600 text-base font-medium text-center">
+      {partner.name}
+    </figcaption>
+  </figure>
+</div>
+
+))}
+
           </div>
         </div>
       </section>

@@ -1,0 +1,328 @@
+{
+    "hero": {
+      "title": "SOBRE NÓS",
+      "subtitle": "Conheça nossa história, missão e os valores que nos guiam na transformação de vidas",
+      "description": "Somos uma organização dedicada ao desenvolvimento pessoal e profissional, criando pontes para o sucesso através de programas inovadores."
+    },
+    "mission": {
+      "title": "Nossa Missão",
+      "content": [
+        "A Geração Milionária nasceu com o propósito de democratizar o acesso ao conhecimento e às oportunidades de crescimento pessoal e profissional. Acreditamos que todos merecem ter a chance de alcançar seus sonhos e objetivos.",
+        "Através de programas inovadores, mentorias especializadas e uma comunidade engajada, criamos um ecossistema completo para o desenvolvimento humano e profissional."
+      ],
+      "image": "/assets/2024/09/30.webp",
+      "highlights": [
+        "Democratização do conhecimento",
+        "Oportunidades de crescimento",
+        "Programas inovadores",
+        "Comunidade engajada"
+      ]
+    },
+    "vision": {
+      "title": "Nossa Visão",
+      "description": "Ser a principal referência em Angola no desenvolvimento de talentos e transformação de vidas, criando um impacto positivo duradouro na sociedade.",
+      "goals": [
+        "Impactar 100.000 vidas até 2030",
+        "Expandir para todas as províncias de Angola",
+        "Criar 10.000 empregos diretos e indiretos",
+        "Estabelecer parcerias internacionais"
+      ]
+    },
+    "values": [
+      {
+        "icon": "users",
+        "title": "Comunidade",
+        "description": "Acreditamos no poder da união e colaboração para alcançar objetivos maiores.",
+        "color": "#D10A11"
+      },
+      {
+        "icon": "target",
+        "title": "Foco",
+        "description": "Mantemos o foco nos resultados e no que realmente importa para o sucesso.",
+        "color": "#F7B32B"
+      },
+      {
+        "icon": "heart",
+        "title": "Paixão",
+        "description": "Fazemos tudo com paixão e dedicação, buscando sempre a excelência.",
+        "color": "#D10A11"
+      },
+      {
+        "icon": "award",
+        "title": "Excelência",
+        "description": "Buscamos constantemente a melhoria e a entrega de valor excepcional.",
+        "color": "#F7B32B"
+      },
+      {
+        "icon": "shield",
+        "title": "Integridade",
+        "description": "Agimos com transparência, honestidade e responsabilidade em todas as nossas ações.",
+        "color": "#D10A11"
+      },
+      {
+        "icon": "globe",
+        "title": "Impacto Social",
+        "description": "Comprometemo-nos com a transformação positiva da sociedade angolana.",
+        "color": "#F7B32B"
+      }
+    ],
+    "team": {
+      "title": "Nossa Equipe",
+      "subtitle": "Profissionais experientes e apaixonados por transformar vidas",
+      "departments": [
+        {
+          "name": "Direção Executiva",
+          "description": "Liderança estratégica e visão organizacional",
+          "members": [
+            {
+              "id": 1,
+              "name": "António Lunguela",
+              "position": "Diretor Executivo",
+              "department": "Direção Executiva",
+              "image": "/assets/2024/07/1-1-1536x1490.webp",
+              "bio": "Mais de 15 anos de experiência em gestão organizacional e desenvolvimento social.",
+              "specialties": ["Gestão Estratégica", "Liderança", "Desenvolvimento Social"],
+              "education": "-",
+              "contact": {
+                "email": "antonio.lunguela@geracao-milionaria.com",
+                "phone": "-"
+              }
+            },
+            {
+              "id": 2,
+              "name": "Angelina Pereira",
+              "position": "Secretaria Geral",
+              "department": "Direção Executiva",
+              "image": "/assets/2024/07/2-1-1536x1490.webp",
+              "bio": "Especialista em desenvolvimento de programas educacionais e capacitação profissional.",
+              "specialties": ["Educação", "Capacitação", "Gestão de Projetos"],
+              "education": "-",
+              "contact": {
+                "email": "-",
+                "phone": "-"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Área de Comunicação",
+          "description": "Responsável pela comunicação interna e externa, marketing e relações públicas",
+          "members": [
+            {
+              "id": 3,
+              "name": "Carlos Mendes",
+              "position": "Diretor de Comunicação",
+              "department": "Comunicação",
+              "image": "/assets/2024/08/Design-sem-nome-4-2-150x150.webp",
+              "bio": "Especialista em comunicação estratégica e marketing digital com foco em impacto social.",
+              "specialties": ["Marketing Digital", "Comunicação Estratégica", "Relações Públicas"],
+              "education": "Licenciatura em Comunicação Social",
+              "contact": {
+                "email": "carlos.mendes@geracao-milionaria.com",
+                "phone": "+244 929 913 922"
+              }
+            },
+            {
+              "id": 4,
+              "name": "Ana Costa",
+              "position": "Coordenadora de Marketing",
+              "department": "Comunicação",
+              "image": "/assets/2024/08/Design-sem-nome-4-2-150x150.webp",
+              "bio": "Profissional criativa com experiência em campanhas de marketing e gestão de redes sociais.",
+              "specialties": ["Marketing Digital", "Redes Sociais", "Design Gráfico"],
+              "education": "Licenciatura em Marketing",
+              "contact": {
+                "email": "ana.costa@geracao-milionaria.com",
+                "phone": "+244 923 456 791"
+              }
+            },
+            {
+              "id": 5,
+              "name": "Pedro Silva",
+              "position": "Jornalista e Editor",
+              "department": "Comunicação",
+              "image": "/assets/2024/08/Design-sem-nome-4-2-150x150.webp",
+              "bio": "Jornalista experiente responsável pela produção de conteúdo e cobertura de eventos.",
+              "specialties": ["Jornalismo", "Produção de Conteúdo", "Fotografia"],
+              "education": "Licenciatura em Jornalismo",
+              "contact": {
+                "email": "pedro.silva@geracao-milionaria.com",
+                "phone": "+244 923 456 792"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Desenvolvimento e Projetos",
+          "description": "Equipe responsável pelo desenvolvimento e execução de projetos sociais",
+          "members": [
+            {
+              "id": 6,
+              "name": "Yuri Gomes",
+              "position": "Desenvolvedor Web",
+              "department": "Projetos",
+              "image": "/assets/Yuri.jpg",
+              "bio": "Desenvolvedor WEB - ",
+              "specialties": ["Gestão de Projetos", "Aplicações Mobile", "Monitoramento"],
+              "education": "estudante do 2 ano de Eng. Civil",
+              "contact": {
+                "email": "yuri.gomes@geracao-milionaria.com",
+                "phone": "+244 935 699 190"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "communication": {
+      "title": "Área de Comunicação",
+      "subtitle": "Nossa equipe de comunicação trabalha para amplificar o impacto das nossas ações",
+      "description": "A área de comunicação da Geração Milionária é responsável por contar nossas histórias, divulgar nossos projetos e manter a comunidade informada sobre todas as nossas atividades.",
+      "services": [
+        {
+          "icon": "megaphone",
+          "title": "Comunicação Estratégica",
+          "description": "Desenvolvimento de estratégias de comunicação alinhadas com os objetivos organizacionais."
+        },
+        {
+          "icon": "camera",
+          "title": "Produção de Conteúdo",
+          "description": "Criação de conteúdo visual e textual para diferentes plataformas e públicos."
+        },
+        {
+          "icon": "share-2",
+          "title": "Gestão de Redes Sociais",
+          "description": "Administração e criação de conteúdo para todas as plataformas digitais."
+        },
+        {
+          "icon": "newspaper",
+          "title": "Assessoria de Imprensa",
+          "description": "Relacionamento com a mídia e produção de material jornalístico."
+        },
+        {
+          "icon": "users",
+          "title": "Eventos e Relações Públicas",
+          "description": "Organização de eventos e gestão de relacionamentos institucionais."
+        },
+        {
+          "icon": "monitor",
+          "title": "Marketing Digital",
+          "description": "Campanhas digitais e análise de performance nas plataformas online."
+        }
+      ],
+      "contact": {
+        "email": "comunicacao@geracao-milionaria.com",
+        "phone": "+244 923 806 943",
+        "social": {
+          "facebook": "https://web.facebook.com/p/Gera%C3%A7%C3%A3o-Milion%C3%A1ria-AGM-100082512764759/?_rdc=1&_rdr#",
+          "instagram": "https://www.instagram.com/associacaogeracaomilionaria/?igsh=YzljYTk1ODg3Zg%3D%3D#",
+          "youtube": "https://www.youtube.com/@Gera%C3%A7%C3%A3oMilion%C3%A1ria2"
+        }
+      }
+    },
+    "history": {
+      "title": "Nossa História",
+      "subtitle": "Conheça a trajetória da Geração Milionária ao longo dos anos",
+      "timeline": [
+        {
+          "year": "2019",
+          "title": "Fundação",
+          "description": "Início das atividades da Geração Milionária com foco no desenvolvimento pessoal e profissional.",
+          "achievements": [
+            "Registro oficial da organização",
+            "Primeira equipe de 5 colaboradores",
+            "Definição da missão e valores"
+          ]
+        },
+        {
+          "year": "2020",
+          "title": "Primeiros Projetos",
+          "description": "Lançamento dos primeiros programas de capacitação e desenvolvimento comunitário.",
+          "achievements": ["500 pessoas capacitadas", "3 programas lançados", "Parcerias com 5 empresas locais"]
+        },
+        {
+          "year": "2021",
+          "title": "Expansão",
+          "description": "Ampliação das atividades para outras regiões de Angola.",
+          "achievements": ["Expansão para 3 províncias", "1.200 beneficiários diretos", "10 parcerias estratégicas"]
+        },
+        {
+          "year": "2022",
+          "title": "Reconhecimento",
+          "description": "Premiação como uma das melhores iniciativas de impacto social do país.",
+          "achievements": ["Prêmio de Impacto Social", "2.500 vidas transformadas", "Reconhecimento internacional"]
+        },
+        {
+          "year": "2023",
+          "title": "Parcerias Estratégicas",
+          "description": "Estabelecimento de parcerias com grandes empresas e instituições nacionais e internacionais.",
+          "achievements": ["25 parcerias ativas", "5.000 beneficiários", "Expansão para 5 províncias"]
+        },
+        {
+          "year": "2024",
+          "title": "Presente e Futuro",
+          "description": "Consolidação como referência em desenvolvimento pessoal e profissional em Angola.",
+          "achievements": ["10.000+ vidas impactadas", "50+ projetos realizados", "Presença nacional consolidada"]
+        }
+      ]
+    },
+    "stats": {
+      "title": "Nosso Impacto em Números",
+      "data": [
+        {
+          "number": "10.000+",
+          "label": "Vidas Transformadas",
+          "description": "Pessoas que participaram dos nossos programas"
+        },
+        {
+          "number": "50+",
+          "label": "Projetos Realizados",
+          "description": "Iniciativas implementadas com sucesso"
+        },
+        {
+          "number": "100+",
+          "label": "Parcerias Ativas",
+          "description": "Empresas e instituições parceiras"
+        },
+        {
+          "number": "21",
+          "label": "Províncias",
+          "description": "Presença em todo território nacional"
+        },
+        {
+          "number": "8",
+          "label": "Anos de Experiência",
+          "description": "Dedicados ao desenvolvimento social"
+        },
+        {
+          "number": "25",
+          "label": "Colaboradores",
+          "description": "Profissionais dedicados à nossa missão"
+        }
+      ]
+    },
+    "certifications": {
+      "title": "Certificações e Reconhecimentos",
+      "items": [
+        {
+          "name": "Certificação ISO 9001",
+          "description": "Sistema de gestão da qualidade",
+          "year": "2023",
+          "image": "/assets/2024/07/2.webp"
+        },
+        {
+          "name": "Prêmio Impacto Social Angola",
+          "description": "Melhor iniciativa de desenvolvimento social",
+          "year": "2022",
+          "image": "/assets/2024/07/2.webp"
+        },
+        {
+          "name": "Certificação ONU - ODS",
+          "description": "Contribuição para os Objetivos de Desenvolvimento Sustentável",
+          "year": "2023",
+          "image": "/assets/2024/07/2.webp"
+        }
+      ]
+    }
+  }
+  

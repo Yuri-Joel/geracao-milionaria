@@ -3,6 +3,8 @@
 import React from "react"
 import { Calendar, User, ArrowRight } from "lucide-react"
 import { Link } from "react-router-dom"
+import Header from "../components/Header"
+import Footer from "../components/Footer"
 
 const Noticias: React.FC = () => {
   const noticias = [
@@ -76,7 +78,7 @@ const Noticias: React.FC = () => {
 
   return (
     <div className="pt-24">
-      {/* Hero Section */}
+      <Header />
       <section className="py-20 bg-gradient-to-r from-blue-50 to-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
@@ -88,7 +90,6 @@ const Noticias: React.FC = () => {
         </div>
       </section>
 
-      {/* Filter Section */}
       <section className="py-8 bg-white border-b">
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap justify-center gap-4">
@@ -109,7 +110,7 @@ const Noticias: React.FC = () => {
         </div>
       </section>
 
-      {/* News Grid */}
+
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -159,7 +160,6 @@ const Noticias: React.FC = () => {
         </div>
       </section>
 
-      {/* Newsletter Section */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto text-center">
@@ -180,6 +180,8 @@ const Noticias: React.FC = () => {
           </div>
         </div>
       </section>
+
+      <Footer />
     </div>
   )
 }

@@ -103,6 +103,11 @@ const Footer: React.FC = () => {
                 <Phone size={16} className="text-[#F7B32B]" />
                 <span className="text-gray-300">{footerData.contact.phone}</span>
               </li>
+              
+              <li className="flex items-center space-x-3">
+                <Phone size={16} className="text-[#F7B32B]" />
+                <span className="text-gray-300">{footerData.contact.phone2}</span>
+              </li>
               <li className="flex items-start space-x-3">
                 <MapPin size={16} className="text-[#F7B32B] mt-1" />
                 <span className="text-gray-300 whitespace-pre-line">{footerData.contact.address}</span>

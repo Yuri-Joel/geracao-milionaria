@@ -42,7 +42,7 @@ const Videos: React.FC = () => {
   }
 
   const openYouTube = (youtubeId: string) => {
-    window.open(`${youtubeId}`, "_blank")
+    window.open(`https://www.youtube.com/watch?v=${youtubeId}`, "_blank")
   }
 
   return (

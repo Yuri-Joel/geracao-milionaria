@@ -11,12 +11,16 @@ import Galeria from './pages/Galeria';
 import Videos from './pages/Galeria-de-videos';
 import { SearchProvider } from './context/SearchContext';
 import Busca from './pages/Busca';
+import ScrollToTop from './components/ScrolllTop';
+import DonationPrompt from './components/DonationPrompt';
 
 function App() {
   return (
     <>
     <SearchProvider>
     <Router>
+    <ScrollToTop /> 
+    <DonationPrompt triggerMinutes={[1, 5, 10]} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/sobre" element={<Sobre />} />

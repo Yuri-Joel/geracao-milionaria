@@ -17,7 +17,6 @@ import {
   MessageCircle,
   ArrowRight,
   Shield,
-  Clock,
   Target,
 } from "lucide-react"
 import comoDoarData from "../data/como-doar.json"
@@ -26,8 +25,8 @@ import Header from "../components/Header"
 
 const ComoDoar: React.FC = () => {
   const [selectedMethod, setSelectedMethod] = useState("bank")
-  const [selectedAmount, setSelectedAmount] = useState(10000)
-  const [customAmount, setCustomAmount] = useState("")
+  const [selectedAmount] = useState(10000)
+  const [customAmount] = useState("")
   const [donorInfo, setDonorInfo] = useState({
     name: "",
     email: "",
@@ -93,7 +92,7 @@ const ComoDoar: React.FC = () => {
 
   return (
     <div className="pt-24 bg-gray-50">
-            <Header />
+      <Header />
       <section className="relative py-20 bg-gradient-to-r from-[#D10A11] to-[#b00a10] overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
@@ -169,18 +168,16 @@ const ComoDoar: React.FC = () => {
                   return (
                     <div
                       key={method.id}
-                      className={`p-6 rounded-2xl border-2 cursor-pointer transition-all duration-300 ${
-                        selectedMethod === method.id
+                      className={`p-6 rounded-2xl border-2 cursor-pointer transition-all duration-300 ${selectedMethod === method.id
                           ? "border-[#D10A11] bg-red-50"
                           : "border-gray-200 bg-white hover:border-[#D10A11]/50"
-                      }`}
+                        }`}
                       onClick={() => setSelectedMethod(method.id)}
                     >
                       <div className="flex items-center space-x-4">
                         <div
-                          className={`w-12 h-12 rounded-xl flex items-center justify-center ${
-                            selectedMethod === method.id ? "bg-[#D10A11]" : "bg-gray-100"
-                          }`}
+                          className={`w-12 h-12 rounded-xl flex items-center justify-center ${selectedMethod === method.id ? "bg-[#D10A11]" : "bg-gray-100"
+                            }`}
                         >
                           <IconComponent
                             className={`w-6 h-6 ${selectedMethod === method.id ? "text-white" : "text-gray-600"}`}
@@ -195,7 +192,7 @@ const ComoDoar: React.FC = () => {
                       {/* Method Details */}
                       {selectedMethod === method.id && (
                         <div className="mt-6 p-4 bg-white rounded-xl border border-gray-200">
-                   
+
 
                           {method.id === "bank" && (
                             <div className="space-y-3">
@@ -203,7 +200,7 @@ const ComoDoar: React.FC = () => {
                                 <div>
                                   <span className="text-gray-600">{method.details.bank}</span>
                                 </div>
-                                </div>
+                              </div>
                               <div className="flex items-center justify-between">
                                 <span className="font-medium">IBAN:</span>
                                 <div className="flex items-center space-x-2">
@@ -244,7 +241,7 @@ const ComoDoar: React.FC = () => {
                 <h3 className="text-2xl font-semibold text-gray-900 mb-6">Informações da Doação</h3>
 
                 <form onSubmit={handleDonationSubmit} className="space-y-6">
-                  
+
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">Nome Completo *</label>
@@ -279,6 +276,37 @@ const ComoDoar: React.FC = () => {
                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#D10A11] focus:border-transparent"
                       placeholder="+244 123 456 789"
                     />
+                  </div>
+                  <div className="flex flex-col items-start gap-2">
+                    <label
+                      htmlFor="comprovativo"
+                      className="text-sm font-medium text-gray-700"
+                    >
+                      Enviar comprovativo (imagem)
+                    </label>
+
+                    <label
+                      htmlFor="comprovativo"
+                      className="cursor-pointer px-4 py-2 bg-blue-800 text-white rounded-md shadow hover:bg-blue-700 transition-colors duration-300 text-sm font-medium"
+                    >
+                      Selecionar imagem
+                      <input
+                        type="file"
+                        id="comprovativo"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            console.log("Arquivo selecionado:", file.name);
+                          }
+                        }}
+                      />
+                    </label>
+
+                    <p className="text-xs text-gray-500">
+                      Apenas imagens (.jpg, .png, .jpeg). Tamanho máximo recomendado: 5MB.
+                    </p>
                   </div>
 
                   <div>

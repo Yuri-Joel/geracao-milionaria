@@ -3,6 +3,7 @@ import { ExternalLink, Calendar, Users } from "lucide-react"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import projetos from "../data/projetos.json" 
+import { Link } from "react-router-dom"
 
 type Projeto = {
   id: number
@@ -98,9 +99,9 @@ const Projetos: React.FC = () => {
             <p className="text-xl text-gray-600 mb-8">
               Entre em contato conosco e descubra como você pode fazer parte das nossas iniciativas
             </p>
-            <button className="inline-flex items-center px-8 py-4 bg-[#D10A11] hover:bg-[#b00a10] text-white font-semibold rounded-lg transition-colors duration-200">
+            <Link to={"/contacto"} className="inline-flex items-center px-8 py-4 bg-[#D10A11] hover:bg-[#b00a10] text-white font-semibold rounded-lg transition-colors duration-200">
               Entre em Contato
-            </button>
+            </Link>
           </div>
         </div>
       </section>

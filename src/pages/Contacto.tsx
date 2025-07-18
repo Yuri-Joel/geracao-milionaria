@@ -1,8 +1,8 @@
-"use client"
-
 import type React from "react"
 import { useState } from "react"
 import { Mail, Phone } from "lucide-react"
+import Header from "../components/Header"
+import Footer from "../components/Footer"
 
 const Contato: React.FC = () => {
     const [formData, setFormData] = useState({
@@ -36,7 +36,7 @@ const Contato: React.FC = () => {
 
     return (
         <div className="pt-24">
-            {/* Hero Section */}
+            <Header />
             <section className="py-20 bg-gradient-to-r from-gray-50 to-white">
                 <div className="container mx-auto px-4">
                     <div className="max-w-4xl mx-auto text-center">
@@ -83,6 +83,8 @@ const Contato: React.FC = () => {
                     </div>
                 </div>
             </section>
+
+            <Footer />
         </div>
 
     )
