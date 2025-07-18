@@ -100,7 +100,7 @@ const DonationPrompt: React.FC<DonationPromptProps> = ({
   const messageData = getMessageData()
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+    <div className="fixed inset-0 z-[80] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
       <div
         className={`bg-white rounded-3xl shadow-2xl max-w-lg w-full transform transition-all duration-300 ${
           isVisible ? "scale-100 opacity-100" : "scale-95 opacity-0"
