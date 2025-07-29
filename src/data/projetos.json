@@ -1,10 +1,10 @@
 [
     {
       "id": 1,
-      "title": "Programa de Capacitação Digital",
-      "description": "Curso completo de habilidades digitais para o mercado de trabalho moderno.",
+      "title": "Programa de Escolas Alternativas",
+      "description": "Programa de Escolas Alternativas: Uma Luz de Esperança para o Futuro de jovens Angolanos e Africanos. O Programa de Escolas Alternativas surge como um farol de esperança para crianças e adolescentes em situação de risco que, por diversas razões, encontram-se à margem do sistema educacional tradicional. Esta iniciativa pioneira não apenas oferece acesso à educação de forma gratuita, mas também se dedica a combater o atraso escolar, abrindo portas para um futuro mais promissor.",
       "image": "/assets/2024/09/3.webp",
-      "status": "Ativo",
+      "status": "Concluído",
       "participants": 500,
       "startDate": "2024-01-15"
     },
@@ -19,8 +19,8 @@
     },
     {
       "id": 3,
-      "title": "Workshop de Desenvolvimento Pessoal",
-      "description": "Série de workshops focados em crescimento pessoal e profissional.",
+      "title": "Programa de Reintegração dos jovens",
+      "description": "Lançamos em 2023 o Programa de Reintegração Social (PRS), uma iniciativa pioneira dedicada a proporcionar uma atenção especializada a crianças, jovens e mães jovens precoce desintegrados da sociedade devido a má decisões e ao envolvimento com substâncias ilícitas. O PRS é mais do que um programa – é um farol de esperança para aqueles que foram esquecidos pelas ruas, oferecendo-lhes formação profissional, mentoria e cursos técnicos que são a chave para um novo começo.",
       "image": "/assets/2024/09/12.webp",
       "status": "Concluído",
       "participants": 800,
@@ -28,8 +28,8 @@
     },
     {
       "id": 4,
-      "title": "Programa de Inclusão Social",
-      "description": "Iniciativa para inclusão de jovens em situação de vulnerabilidade.",
+      "title": "Programa de alfabetização e Literacia financeira",
+      "description": "Temos o nosso Programa de Empoderamento Feminino, Alfabetização e Literacia Financeira. Este programa semestral, que decorre de setembro a maio, é especialmente concebido para adultos que desejam fortalecer as suas competências em leitura, matemática e escrita. O nosso objetivo é proporcionar uma base sólida de conhecimento que não só enriqueça as habilidades individuais, mas também fomente o desenvolvimento de atividades empreendedoras.",
       "image": "/assets/2024/09/17.webp",
       "status": "Ativo",
       "participants": 200,

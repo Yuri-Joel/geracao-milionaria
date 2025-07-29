@@ -1,38 +1,10 @@
 import type React from "react"
-import { useState } from "react"
 import { Mail, Phone } from "lucide-react"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 
 const Contato: React.FC = () => {
-    const [formData, setFormData] = useState({
-        nome: "",
-        email: "",
-        telefone: "",
-        assunto: "",
-        mensagem: "",
-    })
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        setFormData({
-            ...formData,
-            [e.target.name]: e.target.value,
-        })
-    }
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault()
-        // Aqui você implementaria o envio do formulário
-        console.log("Formulário enviado:", formData)
-        alert("Mensagem enviada com sucesso! Entraremos em contato em breve.")
-        setFormData({
-            nome: "",
-            email: "",
-            telefone: "",
-            assunto: "",
-            mensagem: "",
-        })
-    }
+    
 
     return (
         <div className="pt-24">
@@ -63,8 +35,7 @@ const Contato: React.FC = () => {
                                     </div>
                                     <div>
                                         <h3 className="text-lg font-semibold text-gray-900 mb-1">E-mail</h3>
-                                        <p className="text-gray-600">contato@geracaomilionaria.com</p>
-                                        <p className="text-gray-600">suporte@geracaomilionaria.com</p>
+                                        <p className="text-gray-600">geral@geracao-milionaria.com</p>
                                     </div>
                                 </div>
 
@@ -74,8 +45,9 @@ const Contato: React.FC = () => {
                                     </div>
                                     <div>
                                         <h3 className="text-lg font-semibold text-gray-900 mb-1">Telefone</h3>
-                                        <p className="text-gray-600">(11) 99999-9999</p>
-                                        <p className="text-gray-600">(11) 3333-3333</p>
+                                        <p className="text-gray-600">+244 923 806 943
+                                        </p>
+                                        <p className="text-gray-600">+244 926 171 604</p>
                                     </div>
                                 </div>
                             </div>

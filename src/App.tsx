@@ -13,6 +13,8 @@ import { SearchProvider } from './context/SearchContext';
 import Busca from './pages/Busca';
 import ScrollToTop from './components/ScrolllTop';
 import DonationPrompt from './components/DonationPrompt';
+import { Inscricao } from './pages/inscricao';
+import Comunicado from './pages/Comunicado';
 
 function App() {
   return (
@@ -31,7 +33,9 @@ function App() {
         <Route path='/galeria' element={<Galeria />} />
         <Route path='/galeria-de-videos' element={<Videos/>} />
         <Route path='/busca' element={<Busca />} />
-
+        <Route path='/inscricao' element={<Inscricao />} />
+        <Route path='/comunicados' element={<Comunicado />} />
+      
     {/* Rota para páginas inexistentes */}
     <Route path="*" element={<NotFound />} />
       </Routes>

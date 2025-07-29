@@ -21,7 +21,7 @@
           { "name": "Vídeos", "path": "/galeria-de-videos" }
         ]
       },
-      { "name": "DOCUMENTOS", "path": "/documentos" },
+      { "name": "COMUNICADOS", "path": "/comunicados" },
       {"name": "CONTACTOS", "path": "/contacto"},
       { "name": "COMO DOAR", "path": "/como-doar" }
     ]

@@ -24,8 +24,7 @@
     { "label": "Sobre Nós", "link": "/sobre" },
     { "label": "Projetos", "link": "/projetos" },
     { "label": "Galeria", "link": "/galeria" },
-    { "label": "Comunicado", "link": "/comunicado" },
-    { "label": "Documentos", "link": "/documentos" },
+    { "label": "Comunicado", "link": "/comunicadoS" },
     { "label": "Como Doar", "link": "/como-doar" }
   ],
   "contact": {
@@ -33,11 +32,8 @@
     "phone": "+244 923 806 943",
     "phone2": "+244 926 171 604",
 
-    "address": "Estamos localizados\nno Camama."
+    "address": "Estamos localizados\n no Camama."
   },
-  "bottomLinks": [
-    { "label": "Política de Privacidade", "link": "/privacidade" },
-    { "label": "Termos de Uso", "link": "/termos" }
-  ],
+  
   "copyright": "© 2025 Geração Milionária. Todos os direitos reservados."
 }

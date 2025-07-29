@@ -13,11 +13,9 @@ const Home: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const { hero, stats, features, testimonials, cta, partners } = homeData.sections
   const { carousel } = homeData
-  const animHero = useScrollAnimation("animate-fade-in-up");
   const animFeatures = useScrollAnimation("animate-zoom-in");
   const animTestimonials = useScrollAnimation("animate-slide-up");
   const animCTA = useScrollAnimation("animate-fade-in-up");
-  const animPartners = useScrollAnimation("animate-fade-in-up");
 
 
   const enhancedSlides = carousel.slides.map((slide, index) => ({

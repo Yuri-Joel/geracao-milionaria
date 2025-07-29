@@ -70,7 +70,7 @@ const Busca: React.FC = () => {
           image: p.image,
           date: p.startDate,
           category: p.status,
-          link: `/projetos/${p.id}`,
+          link: `/projetos#${p.id}`,
         })),
         // Galeria
         ...galeria.photos.map((g: any) => ({
@@ -158,7 +158,7 @@ const Busca: React.FC = () => {
   }
 
   return (
-    <div className="pt-24 bg-gray-50 min-h-screen">
+    <div className="pt-24 bg-gray-50 min-h-screen overflow-y-auto">
 
     <Header />
       <section className="relative py-20 bg-gradient-to-r from-[#D10A11] to-[#b00a10] overflow-hidden">

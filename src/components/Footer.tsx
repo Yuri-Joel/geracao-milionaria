@@ -120,7 +120,7 @@ const Footer: React.FC = () => {
         <div className="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-400 text-sm">{footerData.copyright}</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            {footerData.bottomLinks.map((item, index) => (
+          {/*   {footerData.bottomLinks.map((item, index) => (
               <Link
                 key={index}
                 to={item.link}
@@ -128,7 +128,7 @@ const Footer: React.FC = () => {
               >
                 {item.label}
               </Link>
-            ))}
+            ))} */}
           </div>
         </div>
       </div>
