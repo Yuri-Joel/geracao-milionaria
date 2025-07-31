@@ -92,7 +92,7 @@
               "name": "Angelina Pereira",
               "position": "Secretaria Geral",
               "department": "Direção Executiva",
-              "image": "/assets/2024/07/2-1-1536x1490.webp",
+              "image": "/assets/2024/08/1-6-300x300.webp",
               "bio": "Formada em Psicologia do Trabalho e das Organizações pela Universidade Católica de Angola, Angelina Pereira acumula mais de 4 anos de experiência nas áreas de Recursos Humanos, Secretariado Executivo, Gestão de Projetos e Consultoria.Com uma forte veia empreendedora, atua nas áreas de Moda, Beleza e Decoração, trazendo criatividade, visão estratégica e inovação aos seus projetos. É Co-Fundadora da Associação Geração Milionária, uma iniciativa voltada para o desenvolvimento pessoal e financeiro de jovens empreendedores, e também Mentora da Missão Sororidade, um movimento que promove o empoderamento feminino e a solidariedade entre mulheres. Comprometida com a transformação de vidas por meio do conhecimento, da ação e do apoio mútuo, acredita no poder das redes colaborativas para impulsionar o sucesso coletivo.",
               "specialties": ["Psicóloga" , "Consultora" ,"Empreendedora" , "Mentora de Mulheres"
             ],
@@ -111,10 +111,10 @@
               "bio": "Experiência como educadora infantil, bartende e professora na Escola Esperança. Empreendedora na área da moda, fundadora da Gracy Fashion.",
               "specialties": ["Psicóloga" , "Consultora" ,"Empreendedora" , "Mentora de Mulheres"
             ],
-              "education": "Psicologia do Trabalho",
+              "education": "1 ano no curso de Gestão hospitalar - ISPOCA",
               "contact": {
-                "email": "angelina.pereira@agmi.ao",
-                "phone": "+244 926 171 604"
+                "email": "-",
+                "phone": "+244 935 409 351"
               }
             },
             {
@@ -237,7 +237,7 @@
       "subtitle": "Conheça a trajetória da Geração Milionária ao longo dos anos",
       "timeline": [
         {
-          "year": "2019",
+          "year": "2021",
           "title": "Fundação",
           "description": "Início das atividades da Geração Milionária com foco no desenvolvimento pessoal e profissional.",
           "achievements": [
@@ -247,36 +247,29 @@
           ]
         },
         {
-          "year": "2020",
+          "year": "2022",
           "title": "Primeiros Projetos",
           "description": "Lançamento dos primeiros programas de capacitação e desenvolvimento comunitário.",
-          "achievements": ["500 pessoas capacitadas", "3 programas lançados", "Parcerias com 5 empresas locais"]
+          "achievements": ["50 pessoas capacitadas", "3 programas lançados", "Parcerias com 5 empresas locais"]
         },
         {
-          "year": "2021",
+          "year": "2023",
           "title": "Expansão",
           "description": "Ampliação das atividades para outras regiões de Angola.",
           "achievements": ["Expansão para 3 províncias", "1.200 beneficiários diretos", "10 parcerias estratégicas"]
         },
         {
-          "year": "2022",
+          "year": "2024",
           "title": "Reconhecimento",
           "description": "Premiação como uma das melhores iniciativas de impacto social do país.",
           "achievements": ["Prêmio de Impacto Social", "2.500 vidas transformadas", "Reconhecimento internacional"]
         },
         {
-          "year": "2023",
+          "year": "2025",
           "title": "Parcerias Estratégicas",
           "description": "Estabelecimento de parcerias com grandes empresas e instituições nacionais e internacionais.",
           "achievements": ["25 parcerias ativas", "5.000 beneficiários", "Expansão para 5 províncias"]
-        },
-        {
-          "year": "2024",
-          "title": "Presente e Futuro",
-          "description": "Consolidação como referência em desenvolvimento pessoal e profissional em Angola.",
-          "achievements": ["10.000+ vidas impactadas", "50+ projetos realizados", "Presença nacional consolidada"]
-        }
-      ]
+        }      ]
     },
     "stats": {
       "title": "Nosso Impacto em Números",
@@ -292,12 +285,12 @@
           "description": "Iniciativas implementadas com sucesso"
         },
         {
-          "number": "100+",
+          "number": "20+",
           "label": "Parcerias Ativas",
           "description": "Empresas e instituições parceiras"
         },
         {
-          "number": "21",
+          "number": "13",
           "label": "Províncias",
           "description": "Presença em todo território nacional"
         },
@@ -317,7 +310,7 @@
       "title": "Certificações e Reconhecimentos",
       "items": [
         {
-          "name": "-",
+          "name": "Certificado de admissibilidade",
           "description": "-",
           "year": "-",
           "image": "/assets/2024/07/2.webp"

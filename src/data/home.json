@@ -8,22 +8,37 @@
         "title": "Transformando Vidas Através da Educação",
         "description": "Oferecemos programas inovadores de capacitação profissional e desenvolvimento pessoal para criar oportunidades reais de crescimento.",
         "image": "/assets/2024/09/7.webp",
-        "link": "/projetos#educacao"
+        "link": "#"
       },
       {
         "id": 2,
         "title": "Construindo Pontes para o Sucesso",
         "description": "Conectamos pessoas a oportunidades através de parcerias estratégicas com empresas e instituições de renome.",
         "image": "/assets/2024/09/48.webp",
-        "link": "/projetos#parcerias"
+        "link": "#"
       },
       {
         "id": 3,
         "title": "Impacto Social que Transforma",
         "description": "Mais de 10.000 vidas já foram impactadas positivamente através de nossos programas e iniciativas sociais.",
         "image": "/assets/2024/08/11-1536x520.webp",
-        "link": "/sobre#impacto"
+        "link": "#"
+      },
+      {
+        "id": 4,
+        "title": "Construindo Pontes para o Sucesso",
+        "description": "Conectamos pessoas a oportunidades através de parcerias estratégicas com empresas e instituições de renome.",
+        "link": "#",
+        "image": "/assets/2024/08/6-1.webp"
+      },
+      {
+        "id": 5,
+        "title": "Ligando Talentos a Grandes Oportunidades",
+        "description": "Promovemos conexões valiosas por meio de colaborações com empresas e instituições que fazem a diferença.",
+        "link": "#",
+        "image": "/assets/2025/uige-1.jpg"
       }
+      
     ]
   },
   "sections": {
@@ -36,10 +51,22 @@
       }
     },
     "stats": [
-      { "number": "10.000+", "label": "Vidas Transformadas" },
-      { "number": "56+", "label": "Projetos Realizados" },
-      { "number": "366+", "label": "Parcerias Ativas" },
-      { "number": "8", "label": "Anos de Experiência" }
+      {
+        "number": "10.000+",
+        "label": "Vidas Transformadas"
+      },
+      {
+        "number": "50+",
+        "label": "Projetos Realizados"
+      },
+      {
+        "number": "20+",
+        "label": "Parcerias Ativas"
+      },
+      {
+        "number": "8",
+        "label": "Anos de Experiência"
+      }
     ],
     "features": [
       {
@@ -76,7 +103,7 @@
           "profession": "Desenvolvedor Web",
           "text": "A Geração Milionária transformou completamente minha visão sobre finanças e desenvolvimento pessoal. Hoje tenho mais clareza sobre meus objetivos e estou no caminho certo para alcançá-los.",
           "rating": 5,
-          "image": "/assets/Yuri.jpg" 
+          "image": "/assets/Yuri.jpg"
         },
         {
           "name": "João Manuel",
@@ -92,7 +119,7 @@
           "rating": 5,
           "image": "/assets/2024/08/1-6-300x300.webp"
         }
-            ]
+      ]
     },
     "cta": {
       "title": "Pronto para transformar sua vida?",
@@ -108,13 +135,28 @@
     },
     "partners": {
       "title": "Nossos Parceiros",
-  "subtitle": "Empresas e instituições que acreditam no nosso trabalho",
-  "items": [
-    { "name": "SANABEL", "logo": "/assets/2024/07/5.webp" },
-    { "name": "Governo de Angola", "logo": "/assets/2024/07/6.webp" },
-    { "name": "ANETAI", "logo": "/assets/2024/08/Design-sem-nome-4-3-300x225.webp" },
-    { "name": "Genesses", "logo": "/assets/2024/07/2-3.webp" },
-    { "name": "Conexão Estúdio", "logo": "/assets/2024/07/3.webp" }
+      "subtitle": "Empresas e instituições que acreditam no nosso trabalho",
+      "items": [
+        {
+          "name": "SANABEL",
+          "logo": "/assets/2024/07/5.webp"
+        },
+        {
+          "name": "Governo de Angola",
+          "logo": "/assets/2024/07/6.webp"
+        },
+        {
+          "name": "ANETAI",
+          "logo": "/assets/2024/08/Design-sem-nome-4-3-300x225.webp"
+        },
+        {
+          "name": "Genesses",
+          "logo": "/assets/2024/07/2-3.webp"
+        },
+        {
+          "name": "Conexão Estúdio",
+          "logo": "/assets/2024/07/3.webp"
+        }
       ]
     }
   }

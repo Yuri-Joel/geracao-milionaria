@@ -2,8 +2,9 @@ import type React from "react"
 import { ExternalLink, Calendar, Users } from "lucide-react"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
-import projetos from "../data/projetos.json" 
+import projetos from "../data/projetos.json"
 import { Link } from "react-router-dom"
+import { useEffect, useState } from "react"
 
 type Projeto = {
   id: number
@@ -31,6 +32,29 @@ const Projetos: React.FC = () => {
     }
   }
 
+    const [loading, setLoading] = useState(true);
+  
+    useEffect(() => {
+      const timer = setTimeout(() => setLoading(false), 1000);
+      return () => clearTimeout(timer);
+    }, []);
+  
+    if (loading) {
+      return (
+        <div className="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center">
+          {/* Barra no topo */}
+          <div className="w-full h-2 bg-[#D10A11] absolute top-0" />
+  
+          {/* Logo com animação */}
+          <img
+            src="/assets/2024/07/2-100x100.webp"
+            alt="Logo"
+            className="w-24 h-24 animate-spin-slow"
+          />
+        </div>
+      );
+    }
+  
   return (
     <div className="pt-24">
       <Header />
@@ -57,8 +81,9 @@ const Projetos: React.FC = () => {
                 <img
                   src={projeto.image}
                   alt={projeto.title}
-                  className="w-full h-48 object-cover rounded-t-xl"
+                  className="w-full aspect-square object-cover object-center rounded-t-xl"
                 />
+
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
                     <span className={`px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(projeto.status)}`}>

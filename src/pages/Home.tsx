@@ -10,7 +10,6 @@ import { useScrollAnimation } from "../hooks/useAnimation"
 
 
 const Home: React.FC = () => {
-  const [loading, setLoading] = useState(true);
   const { hero, stats, features, testimonials, cta, partners } = homeData.sections
   const { carousel } = homeData
   const animFeatures = useScrollAnimation("animate-zoom-in");
@@ -22,6 +21,8 @@ const Home: React.FC = () => {
     ...slide,
     category: ["IMPACTO SOCIAL", "TRANSFORMAÇÃO", "OPORTUNIDADES"][index % 3],
   }))
+
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1000);

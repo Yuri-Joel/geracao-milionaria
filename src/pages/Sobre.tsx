@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import {
   Users,
   Target,
@@ -16,7 +16,6 @@ import {
   Monitor,
   Mail,
   Phone,
-  ExternalLink,
   ChevronDown,
   ChevronUp,
   Calendar,
@@ -47,6 +46,29 @@ const Sobre: React.FC = () => {
     return icons[iconName as keyof typeof icons] || Users
   }
 
+    const [loading, setLoading] = useState(true);
+  
+    useEffect(() => {
+      const timer = setTimeout(() => setLoading(false), 1000);
+      return () => clearTimeout(timer);
+    }, []);
+  
+    if (loading) {
+      return (
+        <div className="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center">
+          {/* Barra no topo */}
+          <div className="w-full h-2 bg-[#D10A11] absolute top-0" />
+  
+          {/* Logo com animação */}
+          <img
+            src="/assets/2024/07/2-100x100.webp"
+            alt="Logo"
+            className="w-24 h-24 animate-spin-slow"
+          />
+        </div>
+      );
+    }
+  
   return (
     <div className="pt-24">
 <Header />

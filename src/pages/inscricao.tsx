@@ -1,5 +1,5 @@
 import type React from "react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Upload, FileText, User, Building, Phone, Mail, Globe } from "lucide-react"
 import Footer from "../components/Footer"
 import Header from "../components/Header"
@@ -129,6 +129,30 @@ export const Inscricao: React.FC = () => {
     "Profissional Liberal",
     "Funcionário Público",
   ]
+
+    const [loading, setLoading] = useState(true);
+  
+    useEffect(() => {
+      const timer = setTimeout(() => setLoading(false), 1000);
+      return () => clearTimeout(timer);
+    }, []);
+  
+    if (loading) {
+      return (
+        <div className="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center">
+          {/* Barra no topo */}
+          <div className="w-full h-2 bg-[#D10A11] absolute top-0" />
+  
+          {/* Logo com animação */}
+          <img
+            src="/assets/2024/07/2-100x100.webp"
+            alt="Logo"
+            className="w-24 h-24 animate-spin-slow"
+          />
+        </div>
+      );
+    }
+  
 
   return (
     <div className="pt-24 bg-gray-50 min-h-screen">

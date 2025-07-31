@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Calendar, User, ArrowRight } from "lucide-react"
 import { Link } from "react-router-dom"
 import Header from "../components/Header"
@@ -74,7 +74,31 @@ const Noticias: React.FC = () => {
   const [categoriaAtiva, setCategoriaAtiva] = React.useState("Todas")
 
   const noticiasFiltradas =
-    categoriaAtiva === "Todas" ? noticias : noticias.filter((noticia) => noticia.category === categoriaAtiva)
+    categoriaAtiva === "Todas" ? noticias : noticias.filter((noticia) => noticia.category === categoriaAtiva);
+
+      const [loading, setLoading] = useState(true);
+    
+      useEffect(() => {
+        const timer = setTimeout(() => setLoading(false), 1000);
+        return () => clearTimeout(timer);
+      }, []);
+    
+      if (loading) {
+        return (
+          <div className="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center">
+            {/* Barra no topo */}
+            <div className="w-full h-2 bg-[#D10A11] absolute top-0" />
+    
+            {/* Logo com animação */}
+            <img
+              src="/assets/2024/07/2-100x100.webp"
+              alt="Logo"
+              className="w-24 h-24 animate-spin-slow"
+            />
+          </div>
+        );
+      }
+    
 
   return (
     <div className="pt-24">

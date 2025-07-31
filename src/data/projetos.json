@@ -3,19 +3,10 @@
       "id": 1,
       "title": "Programa de Escolas Alternativas",
       "description": "Programa de Escolas Alternativas: Uma Luz de Esperança para o Futuro de jovens Angolanos e Africanos. O Programa de Escolas Alternativas surge como um farol de esperança para crianças e adolescentes em situação de risco que, por diversas razões, encontram-se à margem do sistema educacional tradicional. Esta iniciativa pioneira não apenas oferece acesso à educação de forma gratuita, mas também se dedica a combater o atraso escolar, abrindo portas para um futuro mais promissor.",
-      "image": "/assets/2024/09/3.webp",
+      "image": "/assets/2024/08/1-5.webp",
       "status": "Concluído",
-      "participants": 500,
-      "startDate": "2024-01-15"
-    },
-    {
-      "id": 2,
-      "title": "Mentoria Empresarial",
-      "description": "Programa de mentoria para empreendedores e líderes empresariais.",
-      "image": "/assets/2024/09/7.webp",
-      "status": "Ativo",
-      "participants": 150,
-      "startDate": "2024-02-01"
+      "participants": 100,
+      "startDate": "2024-08-11"
     },
     {
       "id": 3,
@@ -23,35 +14,26 @@
       "description": "Lançamos em 2023 o Programa de Reintegração Social (PRS), uma iniciativa pioneira dedicada a proporcionar uma atenção especializada a crianças, jovens e mães jovens precoce desintegrados da sociedade devido a má decisões e ao envolvimento com substâncias ilícitas. O PRS é mais do que um programa – é um farol de esperança para aqueles que foram esquecidos pelas ruas, oferecendo-lhes formação profissional, mentoria e cursos técnicos que são a chave para um novo começo.",
       "image": "/assets/2024/09/12.webp",
       "status": "Concluído",
-      "participants": 800,
-      "startDate": "2023-10-01"
+      "participants": 100,
+      "startDate": "2023-01-10"
     },
     {
       "id": 4,
       "title": "Programa de alfabetização e Literacia financeira",
       "description": "Temos o nosso Programa de Empoderamento Feminino, Alfabetização e Literacia Financeira. Este programa semestral, que decorre de setembro a maio, é especialmente concebido para adultos que desejam fortalecer as suas competências em leitura, matemática e escrita. O nosso objetivo é proporcionar uma base sólida de conhecimento que não só enriqueça as habilidades individuais, mas também fomente o desenvolvimento de atividades empreendedoras.",
-      "image": "/assets/2024/09/17.webp",
+      "image": "/assets/2024/08/4-5-225x300.webp",
       "status": "Ativo",
       "participants": 200,
-      "startDate": "2024-03-01"
+      "startDate": "2024-005-01"
     },
     {
       "id": 5,
-      "title": "Curso de Liderança",
-      "description": "Desenvolvimento de habilidades de liderança para gestores.",
-      "image": "/assets/2024/09/21.webp",
-      "status": "Em Breve",
-      "participants": 0,
-      "startDate": "2024-06-01"
-    },
-    {
-      "id": 6,
-      "title": "Programa de Inovação",
-      "description": "Fomento à inovação e criatividade no ambiente corporativo.",
-      "image": "/assets/2024/09/33.webp",
-      "status": "Planejamento",
-      "participants": 0,
-      "startDate": "2024-08-01"
+      "title": "Forum nacional empreededorismo Uíge",
+      "description": "Localizada no norte de Angola, a província do Uíge destaca-se pela sua rica tradição cultural e pelo seu potencial agrícola. Durante a nossa visita, tivemos a oportunidade de conhecer de perto uma grande fazenda modelo que ilustra o poder transformador do investimento no campo, combinando práticas sustentáveis com inovação local. O Fórum Nacional de Empreendedorismo no Uíge reuniu jovens, gestores e líderes comunitários numa troca inspiradora de ideias e experiências, com foco no fortalecimento das capacidades de liderança e no estímulo ao desenvolvimento económico regional.",
+      "image": "/assets/2025/uige-1.jpg",
+      "status": "Concluído",
+      "participants": 50,
+      "startDate": "2025-07-23"
     }
   ]
   
