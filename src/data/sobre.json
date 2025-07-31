@@ -7,9 +7,14 @@
     "mission": {
       "title": "Nossa Missão",
       "content": [
-        "A Geração Milionária nasceu com o propósito de democratizar o acesso ao conhecimento e às oportunidades de crescimento pessoal e profissional. Acreditamos que todos merecem ter a chance de alcançar seus sonhos e objetivos.",
-        "Através de programas inovadores, mentorias especializadas e uma comunidade engajada, criamos um ecossistema completo para o desenvolvimento humano e profissional."
-      ],
+        "A Geração Milionária nasceu com o propósito de democratizar o acesso ao conhecimento e às oportunidades de crescimento pessoal e profissional. Acreditamos que todos merecem ter a chance de alcançar seus sonhos e objetivos. Somos uma entidade filantrópica de âmbito nacional e internacional, que agrega jovens talentosos, inovadores e estudantes empenhados em fomentar o autoemprego através do desenvolvimento comunitário e da competência individual.",
+        "O nosso propósito é edificar uma nova geração de jovens com uma mentalidade progressista, empenhados na procura de soluções sustentáveis para a empregabilidade, por meio do exercício de profissões liberais.",
+        "A Associação Geração Milionária, foi fundada em 2021, está representada através de secretários provinciais em nove províncias de Angola e no estrangeiro, em Portugal. A nossa associação está plenamente reconhecida pelas instituições do Estado angolano, conforme a legislação exige. No âmbito das nossas atividades, projetos e ações no dinâmico setor empresarial e no associativismo, temos vindo a implementar uma série de projetos sociais de relevo.",
+        "Entre eles, destaca-se o nosso programa de escolas alternativas destinadas a crianças órfãs e famílias desfavorecidas, bem como iniciativas de alfabetização e literacia financeira nas comunidades, desde 2022. Atualmente, este projeto abrange três turmas, totalizando cerca de 370 alunos, dos quais 249 são crianças e 121 são adultos, apenas neste ano letivo.",
+        "A educação que proporcionamos é inteiramente gratuita e é sustentada pelo generoso patrocínio dos membros associados à nossa causa. Para além destes projetos, marcamos uma presença ativa e solidária junto das comunidades mais desfavorecidas nas nove províncias onde estamos representados. A nossa assistência social estende-se à distribuição de bens alimentares, vestuário e outros itens essenciais como capacitação administrativa e técnico profissional, bolsas de estudos.",
+        "Adicionalmente, temos vindo a desenvolver projetos inovadores focados no empreendedorismo feminino, contribuindo assim para o fortalecimento da autonomia e da capacidade empreendedora das mulheres na nossa sociedade. Através de programas inovadores, mentorias especializadas e uma comunidade engajada, criamos um ecossistema completo para o desenvolvimento humano e profissional."
+      ]
+      ,
       "image": "/assets/2024/09/30.webp",
       "highlights": [
         "Democratização do conhecimento",
@@ -48,12 +53,6 @@
         "color": "#D10A11"
       },
       {
-        "icon": "award",
-        "title": "Excelência",
-        "description": "Buscamos constantemente a melhoria e a entrega de valor excepcional.",
-        "color": "#F7B32B"
-      },
-      {
         "icon": "shield",
         "title": "Integridade",
         "description": "Agimos com transparência, honestidade e responsabilidade em todas as nossas ações.",
@@ -77,12 +76,12 @@
             {
               "id": 1,
               "name": "António Lunguela",
-              "position": "Diretor Executivo",
+              "position": "Presidente",
               "department": "Direção Executiva",
               "image": "/assets/2024/07/1-1-1536x1490.webp",
-              "bio": "Mais de 15 anos de experiência em gestão organizacional e desenvolvimento social.",
-              "specialties": ["Gestão Estratégica", "Liderança", "Desenvolvimento Social"],
-              "education": "-",
+              "bio": "Líder juvenil e Presidente da Associação Geração Milionária, uma iniciativa que promove o auto-emprego através da valorização das profissões liberais. Iniciei o meu percurso no empreendedorismo aos 17 anos, motivado por desafios pessoais e pela vontade de ultrapassar os limites impostos pela vida.  Ao longo dos anos, tenho conciliado os estudos em Engenharia e Direito com formação militar especializada na EFFE – Escola de Formação de Forças Especiais, tendo cumprido o serviço militar obrigatório em Cabo Ledo. Esta diversidade formativa fortaleceu a minha resiliência, capacidade de liderança e espírito estratégico. Desde 2016, desenvolvo actividade na área da inovação tecnológica, liderando duas empresas: uma centrada em marketing, estratégia e comunicação institucional; e outra focada em projectos de Tecnologias de Informação.",
+              "specialties": ["Gestor de projectos", "Liderança", "Desenvolvimento Social"],
+              "education": "Formação militar especializada na EFFE – Escola de Formação de Forças Especiais",
               "contact": {
                 "email": "antonio.lunguela@geracao-milionaria.com",
                 "phone": "-"
@@ -94,12 +93,70 @@
               "position": "Secretaria Geral",
               "department": "Direção Executiva",
               "image": "/assets/2024/07/2-1-1536x1490.webp",
-              "bio": "Especialista em desenvolvimento de programas educacionais e capacitação profissional.",
-              "specialties": ["Educação", "Capacitação", "Gestão de Projetos"],
-              "education": "-",
+              "bio": "Formada em Psicologia do Trabalho e das Organizações pela Universidade Católica de Angola, Angelina Pereira acumula mais de 4 anos de experiência nas áreas de Recursos Humanos, Secretariado Executivo, Gestão de Projetos e Consultoria.Com uma forte veia empreendedora, atua nas áreas de Moda, Beleza e Decoração, trazendo criatividade, visão estratégica e inovação aos seus projetos. É Co-Fundadora da Associação Geração Milionária, uma iniciativa voltada para o desenvolvimento pessoal e financeiro de jovens empreendedores, e também Mentora da Missão Sororidade, um movimento que promove o empoderamento feminino e a solidariedade entre mulheres. Comprometida com a transformação de vidas por meio do conhecimento, da ação e do apoio mútuo, acredita no poder das redes colaborativas para impulsionar o sucesso coletivo.",
+              "specialties": ["Psicóloga" , "Consultora" ,"Empreendedora" , "Mentora de Mulheres"
+            ],
+              "education": "Psicologia do Trabalho",
               "contact": {
-                "email": "-",
-                "phone": "-"
+                "email": "angelina.pereira@agmi.ao",
+                "phone": "+244 926 171 604"
+              }
+            },
+            {
+              "id": 3,
+              "name": "Ingrácia Gaspar Manuel",
+              "position": " Secretária Para Intercâmbio e cooperação",
+              "department": "Direção Executiva",
+              "image": "/assets/placeholder.svg",
+              "bio": "Experiência como educadora infantil, bartende e professora na Escola Esperança. Empreendedora na área da moda, fundadora da Gracy Fashion.",
+              "specialties": ["Psicóloga" , "Consultora" ,"Empreendedora" , "Mentora de Mulheres"
+            ],
+              "education": "Psicologia do Trabalho",
+              "contact": {
+                "email": "angelina.pereira@agmi.ao",
+                "phone": "+244 926 171 604"
+              }
+            },
+            {
+              "id": 7,
+              "name": "Lucrécia de Oliveira",
+              "position": "Secretária para Administração, Logística, Protocolo e Finanças",
+              "department": "Direção Executiva",
+              "image": "/assets/placeholder.svg",
+              "bio": "",
+              "specialties": [],
+              "education": "",
+              "contact": {
+                "email": "",
+                "phone": ""
+              }
+            },
+            {
+              "id": 9,
+              "name": "Elisabeth Dos Reis",
+              "position": "Secretária para Marketing, Comunicação e Imagem",
+              "department": "Direção Executiva",
+              "image": "/assets/placeholder.svg",
+              "bio": "",
+              "specialties": [],
+              "education": "",
+              "contact": {
+                "email": "",
+                "phone": ""
+              }
+            },
+            {
+              "id": 10,
+              "name": "João Manuel",
+              "position": "Secretário para Ação Social, Família e Minorias Étnicas",
+              "department": "Direção Executiva",
+              "image": "/assets/joao.png",
+              "bio": "",
+              "specialties": [],
+              "education": "",
+              "contact": {
+                "email": "",
+                "phone": ""
               }
             }
           ]
@@ -110,44 +167,44 @@
           "members": [
             {
               "id": 3,
-              "name": "Carlos Mendes",
-              "position": "Diretor de Comunicação",
+              "name": "-",
+              "position": "-",
               "department": "Comunicação",
-              "image": "/assets/2024/08/Design-sem-nome-4-2-150x150.webp",
-              "bio": "Especialista em comunicação estratégica e marketing digital com foco em impacto social.",
-              "specialties": ["Marketing Digital", "Comunicação Estratégica", "Relações Públicas"],
-              "education": "Licenciatura em Comunicação Social",
+              "image": "/assets/placeholder.svg",
+              "bio": "-",
+              "specialties": ["-"],
+              "education": "-",
               "contact": {
-                "email": "carlos.mendes@geracao-milionaria.com",
-                "phone": "+244 929 913 922"
+                "email": "-",
+                "phone": "-"
               }
             },
             {
               "id": 4,
-              "name": "Ana Costa",
-              "position": "Coordenadora de Marketing",
+              "name": "-",
+              "position": "-",
               "department": "Comunicação",
-              "image": "/assets/2024/08/Design-sem-nome-4-2-150x150.webp",
-              "bio": "Profissional criativa com experiência em campanhas de marketing e gestão de redes sociais.",
-              "specialties": ["Marketing Digital", "Redes Sociais", "Design Gráfico"],
-              "education": "Licenciatura em Marketing",
+              "image": "/assets/placeholder.svg",
+              "bio": "-",
+              "specialties": ["-"],
+              "education": "-",
               "contact": {
-                "email": "ana.costa@geracao-milionaria.com",
-                "phone": "+244 923 456 791"
+                "email": "-",
+                "phone": "-"
               }
             },
             {
               "id": 5,
-              "name": "Pedro Silva",
-              "position": "Jornalista e Editor",
+              "name": "-",
+              "position": "-",
               "department": "Comunicação",
-              "image": "/assets/2024/08/Design-sem-nome-4-2-150x150.webp",
-              "bio": "Jornalista experiente responsável pela produção de conteúdo e cobertura de eventos.",
-              "specialties": ["Jornalismo", "Produção de Conteúdo", "Fotografia"],
-              "education": "Licenciatura em Jornalismo",
+              "image": "/assets/placeholder.svg",
+              "bio": "-",
+              "specialties": ["-"],
+              "education": "-",
               "contact": {
-                "email": "pedro.silva@geracao-milionaria.com",
-                "phone": "+244 923 456 792"
+                "email": "-",
+                "phone": "-"
               }
             }
           ]
@@ -174,52 +231,7 @@
         }
       ]
     },
-    "communication": {
-      "title": "Área de Comunicação",
-      "subtitle": "Nossa equipe de comunicação trabalha para amplificar o impacto das nossas ações",
-      "description": "A área de comunicação da Geração Milionária é responsável por contar nossas histórias, divulgar nossos projetos e manter a comunidade informada sobre todas as nossas atividades.",
-      "services": [
-        {
-          "icon": "megaphone",
-          "title": "Comunicação Estratégica",
-          "description": "Desenvolvimento de estratégias de comunicação alinhadas com os objetivos organizacionais."
-        },
-        {
-          "icon": "camera",
-          "title": "Produção de Conteúdo",
-          "description": "Criação de conteúdo visual e textual para diferentes plataformas e públicos."
-        },
-        {
-          "icon": "share-2",
-          "title": "Gestão de Redes Sociais",
-          "description": "Administração e criação de conteúdo para todas as plataformas digitais."
-        },
-        {
-          "icon": "newspaper",
-          "title": "Assessoria de Imprensa",
-          "description": "Relacionamento com a mídia e produção de material jornalístico."
-        },
-        {
-          "icon": "users",
-          "title": "Eventos e Relações Públicas",
-          "description": "Organização de eventos e gestão de relacionamentos institucionais."
-        },
-        {
-          "icon": "monitor",
-          "title": "Marketing Digital",
-          "description": "Campanhas digitais e análise de performance nas plataformas online."
-        }
-      ],
-      "contact": {
-        "email": "comunicacao@geracao-milionaria.com",
-        "phone": "+244 923 806 943",
-        "social": {
-          "facebook": "https://web.facebook.com/p/Gera%C3%A7%C3%A3o-Milion%C3%A1ria-AGM-100082512764759/?_rdc=1&_rdr#",
-          "instagram": "https://www.instagram.com/associacaogeracaomilionaria/?igsh=YzljYTk1ODg3Zg%3D%3D#",
-          "youtube": "https://www.youtube.com/@Gera%C3%A7%C3%A3oMilion%C3%A1ria2"
-        }
-      }
-    },
+ 
     "history": {
       "title": "Nossa História",
       "subtitle": "Conheça a trajetória da Geração Milionária ao longo dos anos",
@@ -305,21 +317,9 @@
       "title": "Certificações e Reconhecimentos",
       "items": [
         {
-          "name": "Certificação ISO 9001",
-          "description": "Sistema de gestão da qualidade",
-          "year": "2023",
-          "image": "/assets/2024/07/2.webp"
-        },
-        {
-          "name": "Prêmio Impacto Social Angola",
-          "description": "Melhor iniciativa de desenvolvimento social",
-          "year": "2022",
-          "image": "/assets/2024/07/2.webp"
-        },
-        {
-          "name": "Certificação ONU - ODS",
-          "description": "Contribuição para os Objetivos de Desenvolvimento Sustentável",
-          "year": "2023",
+          "name": "-",
+          "description": "-",
+          "year": "-",
           "image": "/assets/2024/07/2.webp"
         }
       ]

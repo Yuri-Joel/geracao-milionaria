@@ -89,36 +89,38 @@ const Sobre: React.FC = () => {
 
       {/* Mission Section */}
       <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="animate-fade-in-up">
-              <h2 className="text-4xl md:text-5xl font-bold text-[#D10A11] mb-6">{sobreData.mission.title}</h2>
-              {sobreData.mission.content.map((paragraph, index) => (
-                <p key={index} className="text-lg text-gray-600 mb-6">
-                  {paragraph}
-                </p>
-              ))}
-              <div className="grid grid-cols-2 gap-4 mt-8">
-                {sobreData.mission.highlights.map((highlight, index) => (
-                  <div key={index} className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-[#F7B32B] rounded-full"></div>
-                    <span className="text-gray-700 font-medium">{highlight}</span>
-                  </div>
-                ))}
-              </div>
+  <div className="container mx-auto px-4">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="animate-fade-in-up max-w-3xl mx-auto lg:mx-0">
+        <h2 className="text-4xl md:text-5xl font-bold text-[#D10A11] mb-6">
+          {sobreData.mission.title}
+        </h2>
+        {sobreData.mission.content.map((paragraph, index) => (
+          <p key={index} className="text-lg text-gray-600 mb-4 text-justify leading-relaxed">
+            {paragraph}
+          </p>
+        ))}
+        <div className="grid grid-cols-2 gap-4 mt-8">
+          {sobreData.mission.highlights.map((highlight, index) => (
+            <div key={index} className="flex items-center space-x-2">
+              <div className="w-2 h-2 bg-[#F7B32B] rounded-full"></div>
+              <span className="text-gray-700 font-medium">{highlight}</span>
             </div>
-            <div className="relative animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-              <img
-                src={sobreData.mission.image || "/placeholder.svg"}
-                alt="Nossa missão"
-                className="rounded-2xl shadow-2xl w-full transform hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-[#F7B32B] rounded-2xl z-[-1] animate-float"></div>
-              <div className="absolute -top-6 -right-6 w-32 h-32 bg-[#D10A11] rounded-2xl z-[-1] animate-float-delayed"></div>
-            </div>
-          </div>
+          ))}
         </div>
-      </section>
+      </div>
+      <div className="relative animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+        <img
+          src={sobreData.mission.image || "/placeholder.svg"}
+          alt="Nossa missão"
+          className="rounded-2xl shadow-2xl w-full transform hover:scale-105 transition-transform duration-500"
+        />
+        <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-[#F7B32B] rounded-2xl z-[-1] animate-float"></div>
+        <div className="absolute -top-6 -right-6 w-32 h-32 bg-[#D10A11] rounded-2xl z-[-1] animate-float-delayed"></div>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Vision Section */}
       <section className="py-20 bg-gray-50">
@@ -231,7 +233,7 @@ const Sobre: React.FC = () => {
                     </div>
                     <h4 className="text-xl font-semibold text-gray-900 mb-2">{member.name}</h4>
                     <p className="text-[#D10A11] font-medium mb-4">{member.position}</p>
-                    <p className="text-gray-600 mb-6">{member.bio}</p>
+                    <p className="text-gray-600 mb-6 text-justify">{member.bio}</p>
 
                     <button
                       onClick={() => setExpandedMember(expandedMember === member.id ? null : member.id)}
@@ -299,88 +301,7 @@ const Sobre: React.FC = () => {
         </div>
       </section>
 
-      {/* Communication Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold text-[#D10A11] mb-4">{sobreData.communication.title}</h2>
-              <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-6">{sobreData.communication.subtitle}</p>
-              <p className="text-gray-600 max-w-3xl mx-auto">{sobreData.communication.description}</p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-              {sobreData.communication.services.map((service, index) => {
-                const IconComponent = getIcon(service.icon)
-                return (
-                  <div
-                    key={index}
-                    className="group bg-gradient-to-br from-gray-50 to-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 hover:border-[#D10A11]/20"
-                  >
-                    <div className="w-16 h-16 bg-gradient-to-r from-[#D10A11] to-[#F7B32B] rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                      <IconComponent className="w-8 h-8 text-white" />
-                    </div>
-                    <h3 className="text-xl font-semibold text-gray-900 mb-4">{service.title}</h3>
-                    <p className="text-gray-600 leading-relaxed">{service.description}</p>
-                  </div>
-                )
-              })}
-            </div>
-
-            {/* Communication Contact */}
-            <div className="bg-gradient-to-r from-[#D10A11] to-[#b00a10] rounded-3xl p-8 text-white">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                <div>
-                  <h3 className="text-2xl font-bold mb-4">Entre em Contato com Nossa Equipe</h3>
-                  <p className="text-red-100 mb-6">
-                    Nossa equipe de comunicação está sempre disponível para atender a imprensa, parceiros e
-                    interessados.
-                  </p>
-                  <div className="space-y-3">
-                    <div className="flex items-center space-x-3">
-                      <Mail className="w-5 h-5" />
-                      <a
-                        href={`mailto:${sobreData.communication.contact.email}`}
-                        className="hover:text-[#F7B32B] transition-colors"
-                      >
-                        {sobreData.communication.contact.email}
-                      </a>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      <Phone className="w-5 h-5" />
-                      <a
-                        href={`tel:${sobreData.communication.contact.phone}`}
-                        className="hover:text-[#F7B32B] transition-colors"
-                      >
-                        {sobreData.communication.contact.phone}
-                      </a>
-                    </div>
-                    
-                  </div>
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold mb-4">Siga-nos nas Redes Sociais</h4>
-                  <div className="grid grid-cols-2 gap-4">
-                    {Object.entries(sobreData.communication.contact.social).map(([platform, url]) => (
-                      <a
-                        key={platform}
-                        href={url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center space-x-2 bg-white/10 hover:bg-white/20 p-3 rounded-xl transition-colors"
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                        <span className="capitalize">{platform}</span>
-                      </a>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
+      
       {/* History Timeline */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
