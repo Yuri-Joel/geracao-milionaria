@@ -1,10 +1,11 @@
 import type React from "react"
-import { ExternalLink, Calendar, Users } from "lucide-react"
+import { Calendar, Users } from "lucide-react"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import projetos from "../data/projetos.json"
 import { Link } from "react-router-dom"
 import { useEffect, useState } from "react"
+import { LoadingPage } from "../components/Loading"
 
 type Projeto = {
   id: number
@@ -41,17 +42,8 @@ const Projetos: React.FC = () => {
   
     if (loading) {
       return (
-        <div className="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center">
-          {/* Barra no topo */}
-          <div className="w-full h-2 bg-[#D10A11] absolute top-0" />
-  
-          {/* Logo com animação */}
-          <img
-            src="/assets/2024/07/2-100x100.webp"
-            alt="Logo"
-            className="w-24 h-24 animate-spin-slow"
-          />
-        </div>
+              <LoadingPage />
+       
       );
     }
   
@@ -106,10 +98,7 @@ const Projetos: React.FC = () => {
                     </div>
                   </div>
 
-                  <button className="w-full flex items-center justify-center space-x-2 px-4 py-2 bg-[#D10A11] hover:bg-[#b00a10] text-white font-medium rounded-lg transition-colors duration-200">
-                    <span>Saiba Mais</span>
-                    <ExternalLink className="w-4 h-4" />
-                  </button>
+                
                 </div>
               </div>
             ))}

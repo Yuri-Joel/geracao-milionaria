@@ -5,6 +5,7 @@ import { Calendar, User, ArrowRight } from "lucide-react"
 import { Link } from "react-router-dom"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
+import { LoadingPage } from "../components/Loading"
 
 const Noticias: React.FC = () => {
   const noticias = [
@@ -85,17 +86,8 @@ const Noticias: React.FC = () => {
     
       if (loading) {
         return (
-          <div className="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center">
-            {/* Barra no topo */}
-            <div className="w-full h-2 bg-[#D10A11] absolute top-0" />
-    
-            {/* Logo com animação */}
-            <img
-              src="/assets/2024/07/2-100x100.webp"
-              alt="Logo"
-              className="w-24 h-24 animate-spin-slow"
-            />
-          </div>
+               <LoadingPage />
+        
         );
       }
     

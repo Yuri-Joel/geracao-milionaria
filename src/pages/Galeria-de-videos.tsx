@@ -1,18 +1,17 @@
 import type React from "react"
 import { useEffect, useState } from "react"
-import { Play, Clock, Eye, Calendar, X, ExternalLink, Search, Grid3X3, List, Youtube } from "lucide-react"
+import { Play, Calendar, X, ExternalLink, Search, Grid3X3, List, Youtube } from "lucide-react"
 import videosData from "../data/videos.json"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
+import { LoadingPage } from "../components/Loading"
 
 interface Video {
   id: number
   title: string
   description: string
   category: string
-  duration: string
   date: string
-  views: string
   youtubeId: string
   thumbnail: string
 }
@@ -54,17 +53,8 @@ const Videos: React.FC = () => {
   
     if (loading) {
       return (
-        <div className="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center">
-          {/* Barra no topo */}
-          <div className="w-full h-2 bg-[#D10A11] absolute top-0" />
-  
-          {/* Logo com animação */}
-          <img
-            src="/assets/2024/07/2-100x100.webp"
-            alt="Logo"
-            className="w-24 h-24 animate-spin-slow"
-          />
-        </div>
+              <LoadingPage />
+       
       );
     }
   
@@ -106,7 +96,7 @@ const Videos: React.FC = () => {
               <div className="text-gray-600 font-medium">Visualizações</div>
             </div>
             <div className="bg-white/95 backdrop-blur-md p-6 rounded-2xl shadow-xl text-center transform hover:-translate-y-2 transition-all duration-300">
-              <div className="text-3xl font-bold text-[#D10A11] mb-2">{videosData.stats.totalHours}h</div>
+              <div className="text-3xl font-bold text-[#D10A11] mb-2">{videosData.stats.totalHours}min</div>
               <div className="text-gray-600 font-medium">Conteúdo</div>
             </div>
             <div className="bg-white/95 backdrop-blur-md p-6 rounded-2xl shadow-xl text-center transform hover:-translate-y-2 transition-all duration-300">
@@ -210,10 +200,7 @@ const Videos: React.FC = () => {
                     </div>
 
                     {/* Duration Badge */}
-                    <div className="absolute bottom-2 right-2 bg-black/80 text-white px-2 py-1 rounded text-xs font-medium">
-                      {video.duration}
-                    </div>
-
+                   
                     {/* Category Badge */}
                     <div className="absolute top-2 left-2">
                       <span
@@ -235,10 +222,7 @@ const Videos: React.FC = () => {
 
                     <div className="flex items-center justify-between text-xs text-gray-500">
                       <div className="flex items-center space-x-3">
-                        <div className="flex items-center space-x-1">
-                          <Eye className="w-3 h-3" />
-                          <span>{video.views}</span>
-                        </div>
+                       
                         <div className="flex items-center space-x-1">
                           <Calendar className="w-3 h-3" />
                           <span>{new Date(video.date).toLocaleDateString("pt-BR")}</span>
@@ -278,9 +262,7 @@ const Videos: React.FC = () => {
                           <Play className="w-8 h-8 text-[#D10A11] ml-1" />
                         </div>
                       </div>
-                      <div className="absolute bottom-2 right-2 bg-black/80 text-white px-2 py-1 rounded text-xs font-medium">
-                        {video.duration}
-                      </div>
+                    
                     </div>
 
                     <div className="flex-1 p-6">
@@ -307,14 +289,8 @@ const Videos: React.FC = () => {
                       <p className="text-gray-600 mb-4">{video.description}</p>
 
                       <div className="flex items-center space-x-4 text-sm text-gray-500">
-                        <div className="flex items-center space-x-1">
-                          <Eye className="w-4 h-4" />
-                          <span>{video.views} visualizações</span>
-                        </div>
-                        <div className="flex items-center space-x-1">
-                          <Clock className="w-4 h-4" />
-                          <span>{video.duration}</span>
-                        </div>
+                        
+                       
                         <div className="flex items-center space-x-1">
                           <Calendar className="w-4 h-4" />
                           <span>{new Date(video.date).toLocaleDateString("pt-BR")}</span>
@@ -383,14 +359,6 @@ const Videos: React.FC = () => {
                 <p className="text-gray-300 mb-4">{selectedVideo.description}</p>
               </div>
               <div className="space-y-2 text-sm">
-                <div className="flex items-center space-x-2">
-                  <Eye className="w-4 h-4" />
-                  <span>{selectedVideo.views} visualizações</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Clock className="w-4 h-4" />
-                  <span>{selectedVideo.duration}</span>
-                </div>
                 <div className="flex items-center space-x-2">
                   <Calendar className="w-4 h-4" />
                   <span>{new Date(selectedVideo.date).toLocaleDateString("pt-BR")}</span>

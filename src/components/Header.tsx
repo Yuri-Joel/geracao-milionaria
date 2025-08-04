@@ -45,7 +45,7 @@ const Header: React.FC = () => {
         {/* Top Banner */}
         <div className="bg-[#222222] text-white py-2">
           <div className="container mx-auto px-4 flex justify-between items-center">
-            <p className="text-sm">{homeData.header.topBanner}</p>
+            <p className="text-sm">A sua ajuda faz toda a diferença. Seja <Link to={"/inscricao"} className="text-[#CB0A34] underline">Membro</Link></p>
             <div className="flex space-x-4">
               <a
                 href="https://web.facebook.com/p/Gera%C3%A7%C3%A3o-Milion%C3%A1ria-AGM-100082512764759/?_rdc=1&_rdr#"
@@ -102,16 +102,17 @@ const Header: React.FC = () => {
             <div className="flex items-center justify-between h-16">
               {/* Logo */}
               <Link to="/" className="flex items-center space-x-3">
-                {/* Logo Container */}
-                <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
-                  <img src="/assets/2024/07/2-100x100.webp" alt="Logo" className="w-full h-full object-cover" />
-                </div>
-                {/* Text Content */}
-                <div className="leading-tight">
-                  <h1 className="text-lg font-bold text-[#D10A11]">{homeData.header.logo.text}</h1>
-                  <p className="text-xs text-gray-600">{homeData.header.logo.subtitle}</p>
-                </div>
-              </Link>
+  {/* Logo Container */}
+  <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
+    <img src="/assets/2024/07/2-100x100.webp" alt="Logo" className="w-full h-full object-cover" />
+  </div>
+  {/* Text Content */}
+  <div className="leading-tight mt-1">
+    <h1 className="text-lg font-bold text-[#D10A11]">{homeData.header.logo.text}</h1>
+    <p className="text-xs text-gray-600">{homeData.header.logo.subtitle}</p>
+  </div>
+</Link>
+
 
               {/* Desktop Navigation */}
               <nav className="hidden md:flex space-x-6 relative">
@@ -144,7 +145,7 @@ const Header: React.FC = () => {
               </nav>
 
               {/* Desktop Actions */}
-              <div className="hidden md:flex items-center space-x-4">
+              <div className="hidden md:flex space-x-6 relative">
                 <button
                   className="p-2 hover:bg-gray-100 rounded-full transition-colors"
                   onClick={openSearchModal}
@@ -154,10 +155,11 @@ const Header: React.FC = () => {
                 </button>
                 <Link
                   to="/inscricao"
-                  className="px-4 py-2 bg-[#D10A11] text-white rounded-full hover:bg-[#b00a10] transition-colors duration-200"
+                  className="ml-2 px-4 py-2 bg-[#D10A11] text-white rounded-full hover:bg-[#b00a10] transition-colors duration-200 whitespace-nowrap"
                 >
                   Ficha de Inscrição
                 </Link>
+
               </div>
 
               {/* Mobile Actions */}

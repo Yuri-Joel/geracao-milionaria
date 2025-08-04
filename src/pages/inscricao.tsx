@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { Upload, FileText, User, Building, Phone, Mail, Globe } from "lucide-react"
 import Footer from "../components/Footer"
 import Header from "../components/Header"
+import { LoadingPage } from "../components/Loading"
 
 export const Inscricao: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -139,17 +140,8 @@ export const Inscricao: React.FC = () => {
   
     if (loading) {
       return (
-        <div className="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center">
-          {/* Barra no topo */}
-          <div className="w-full h-2 bg-[#D10A11] absolute top-0" />
-  
-          {/* Logo com animação */}
-          <img
-            src="/assets/2024/07/2-100x100.webp"
-            alt="Logo"
-            className="w-24 h-24 animate-spin-slow"
-          />
-        </div>
+             <LoadingPage />
+      
       );
     }
   

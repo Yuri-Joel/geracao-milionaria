@@ -24,6 +24,7 @@ import {
 import sobreData from "../data/sobre.json"
 import Footer from "../components/Footer"
 import Header from "../components/Header"
+import { LoadingPage } from "../components/Loading"
 
 const Sobre: React.FC = () => {
   const [activeTeamTab, setActiveTeamTab] = useState(0)
@@ -55,17 +56,8 @@ const Sobre: React.FC = () => {
   
     if (loading) {
       return (
-        <div className="fixed inset-0 bg-white z-50 flex flex-col items-center justify-center">
-          {/* Barra no topo */}
-          <div className="w-full h-2 bg-[#D10A11] absolute top-0" />
-  
-          {/* Logo com animação */}
-          <img
-            src="/assets/2024/07/2-100x100.webp"
-            alt="Logo"
-            className="w-24 h-24 animate-spin-slow"
-          />
-        </div>
+             <LoadingPage />
+      
       );
     }
   
