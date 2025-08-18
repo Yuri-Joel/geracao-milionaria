@@ -98,20 +98,20 @@ const Header: React.FC = () => {
 
         {/* Main Header */}
         <div className="bg-white border-b">
-          <div className="container mx-auto px-4">
+          <div className="container mx-auto px-1">
             <div className="flex items-center justify-between h-16">
               {/* Logo */}
-              <Link to="/" className="flex items-center space-x-3">
-  {/* Logo Container */}
-  <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
-    <img src="/assets/2024/07/2-100x100.webp" alt="Logo" className="w-full h-full object-cover" />
-  </div>
-  {/* Text Content */}
-  <div className="leading-tight mt-1">
-    <h1 className="text-lg font-bold text-[#D10A11]">{homeData.header.logo.text}</h1>
-    <p className="text-xs text-gray-600">{homeData.header.logo.subtitle}</p>
-  </div>
-</Link>
+              <Link to="/" className="flex items-center">
+                {/* Logo Container */}
+                <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
+                  <img src="/assets/2024/07/2-100x100.webp" alt="Logo" className="w-full h-full object-cover" />
+                </div>
+                {/* Text Content */}
+                <div className="">
+                  <h1 className="text-lg font-bold text-[#D10A11]">{homeData.header.logo.text}</h1>
+                  <p className="text-xs text-gray-600">{homeData.header.logo.subtitle}</p>
+                </div>
+              </Link>
 
 
               {/* Desktop Navigation */}

@@ -13,7 +13,6 @@ import {
   Share2,
   Heart,
   Calendar,
-  MapPin,
   Camera,
   Grid3X3,
   List,

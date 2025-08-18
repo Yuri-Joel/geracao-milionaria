@@ -8,23 +8,24 @@ import { useEffect, useState } from "react"
 import { LoadingPage } from "../components/Loading"
 
 const Comunicado: React.FC = () => {
-    const [loading, setLoading] = useState(true);
-  
-    useEffect(() => {
-      const timer = setTimeout(() => setLoading(false), 1000);
-      return () => clearTimeout(timer);
-    }, []);
-  
-    if (loading) {
-      return (
-              <LoadingPage />
-       
-      );
-    }
-  
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return (
+      <LoadingPage />
+
+    );
+  }
+
   return (
     <div className="pt-24 bg-gray-50 min-h-screen">
-<Header />      <section className="relative py-20 bg-gradient-to-r from-[#D10A11] to-[#b00a10] overflow-hidden">
+      <Header />
+      <section className="relative py-20 bg-gradient-to-r from-[#D10A11] to-[#b00a10] overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-float"></div>
           <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#F7B32B]/20 rounded-full blur-3xl animate-float-delayed"></div>
@@ -180,7 +181,7 @@ const Comunicado: React.FC = () => {
         </div>
       </section>
 
-    
+
       <Footer />
     </div>
   )

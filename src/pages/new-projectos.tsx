@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Building2, User, Lock, } from "lucide-react"
+import { Building2, User, Lock, Megaphone, } from "lucide-react"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import { LoadingPage } from "../components/Loading"
@@ -33,6 +33,27 @@ export default function CadastroPage() {
         <div className="pt-24 bg-gray-50 min-h-screen">
             {/* Header */}
             <Header />
+
+            <section className="relative py-20 bg-gradient-to-r from-[#D10A11] to-[#b00a10] overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-float"></div>
+          <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#F7B32B]/20 rounded-full blur-3xl animate-float-delayed"></div>
+        </div>
+
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="max-w-4xl mx-auto text-center text-white">
+            <div className="flex items-center justify-center mb-6">
+              <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-md">
+                <Megaphone className="w-10 h-10 text-white" />
+              </div>
+            </div>
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in-up">Empresas</h1>
+            <p className="text-xl opacity-90 max-w-2xl mx-auto animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
+              Parceiros unidos para criar impacto e gerar valor para pessoas e empresas.
+            </p>
+          </div>
+        </div>
+      </section>
 
             {/* Progress Steps */}
             <div className="bg-white border-b">

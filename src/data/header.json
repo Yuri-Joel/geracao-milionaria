@@ -22,6 +22,8 @@
       },
       { "name": "COMUNICADOS", "path": "/comunicados" },
       {"name": "CONTACTOS", "path": "/contacto"},
+      {"name": "EMPRESAS", "path": "/register"},
+
       { "name": "COMO DOAR", "path": "/como-doar" }
     ]
   }
