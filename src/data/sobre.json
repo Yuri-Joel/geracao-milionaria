@@ -79,9 +79,23 @@
               "position": "Presidente",
               "department": "Direção Executiva",
               "image": "/assets/2024/07/1-1-1536x1490.webp",
-              "bio": "Líder juvenil e Presidente da Associação Geração Milionária, uma iniciativa que promove o auto-emprego através da valorização das profissões liberais. Iniciei o meu percurso no empreendedorismo aos 17 anos, motivado por desafios pessoais e pela vontade de ultrapassar os limites impostos pela vida.  Ao longo dos anos, tenho conciliado os estudos em Engenharia e Direito com formação militar especializada na EFFE – Escola de Formação de Forças Especiais, tendo cumprido o serviço militar obrigatório em Cabo Ledo. Esta diversidade formativa fortaleceu a minha resiliência, capacidade de liderança e espírito estratégico. Desde 2016, desenvolvo actividade na área da inovação tecnológica, liderando duas empresas: uma centrada em marketing, estratégia e comunicação institucional; e outra focada em projectos de Tecnologias de Informação.",
+              "bio": "António Lunguela, cidadão de nacionalidade angolana, nasceu a 3 de Agosto na província do Bungo. É cristão, pertencente ao corpo da Assembleia de Deus Pentecostal. Empreendedor à 12 anos no sector da inovação tecnológica, cumpriu o serviço militar obrigatório em Cabo Ledo, na Escola de Formação de Forças Especiais. É cofundador da AGM — Associação Geração Milionária, e estudante nas áreas de Engenharia e Direito.",
               "specialties": ["Gestor de projectos", "Liderança", "Desenvolvimento Social"],
               "education": "Formação militar especializada na EFFE – Escola de Formação de Forças Especiais",
+              "contact": {
+                "email": "antonio.lunguela@geracao-milionaria.com",
+                "phone": "-"
+              }
+            },
+            {
+              "id": 11,
+              "name": "Maria Monteiro",
+              "position": "Vice-presidente",
+              "department": "Direção Executiva",
+              "image": "/assets/maria-monteiro.jpg",
+              "bio": "cidadã de nacionalidade Angolana. Data de Nascimento 21/09/63,kuanza Norte,Comuna do Dondo. Cristã, pentecostal. Técnica Media, na Republica de Cuba-Havana escola 57,na lha da Juventude.Luanda onde concluiu o curso superior  de Gestão. Trabalhei:Secretária da Solidariedade e aconselhamento Jurídico, organização famílias na  Namibia, estado unidos, SWAPO. Efetuo diversas actividade no domínio social sobretudo com as mulheres vulneráveis e as famílias no Geral da comunidade no Norte e Sul de Angola, empreendedora, hoje da AGM. Obrigada",
+              "specialties": ["Gestor de projectos", "Liderança", "Desenvolvimento Social"],
+              "education": "Curso superior de Gestão, SWAPO",
               "contact": {
                 "email": "antonio.lunguela@geracao-milionaria.com",
                 "phone": "-"

@@ -15,6 +15,7 @@ import ScrollToTop from './components/ScrolllTop';
 import DonationPrompt from './components/DonationPrompt';
 import { Inscricao } from './pages/inscricao';
 import Comunicado from './pages/Comunicado';
+import CadastroPage from './pages/new-projectos';
 
 function App() {
   return (
@@ -35,6 +36,8 @@ function App() {
         <Route path='/busca' element={<Busca />} />
         <Route path='/inscricao' element={<Inscricao />} />
         <Route path='/comunicados' element={<Comunicado />} />
+        
+        <Route path='/register' element={<CadastroPage />} />
       
     {/* Rota para páginas inexistentes */}
     <Route path="*" element={<NotFound />} />

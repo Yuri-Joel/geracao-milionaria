@@ -387,8 +387,8 @@ const Galeria: React.FC = () => {
                 {currentIndex + 1} / {filteredPhotos.length}
               </span>
               <div className="hidden md:block">
-                <h3 className="text-xl font-semibold">{selectedPhoto.title}</h3>
-              </div>
+             {/*    <h3 className="text-xl font-semibold">{selectedPhoto.title}</h3>
+              */} </div>
             </div>
 
             <div className="flex items-center space-x-2">
@@ -470,22 +470,22 @@ const Galeria: React.FC = () => {
           {/* Bottom Info */}
           <div className="absolute bottom-4 left-4 right-4 bg-black/50 backdrop-blur-md rounded-2xl p-6 text-white z-20">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
+        {/*       <div>
                 <h3 className="text-2xl font-semibold mb-2">{selectedPhoto.title}</h3>
                 <p className="text-gray-300 mb-4">{selectedPhoto.description}</p>
               </div>
-              <div className="space-y-2 text-sm">
+         */}      <div className="space-y-2 text-sm">
                 <div className="flex items-center space-x-2">
                   <Calendar className="w-4 h-4" />
                   <span>{new Date(selectedPhoto.date).toLocaleDateString("pt-BR")}</span>
-                </div>
+                </div>{/* 
                 <div className="flex items-center space-x-2">
                   <MapPin className="w-4 h-4" />
-                  <span>{selectedPhoto.location}</span>
-                </div>
+                  <span>{"selectedPhoto.location"}</span>
+                </div> */}
                 <div className="flex items-center space-x-2">
                   <Camera className="w-4 h-4" />
-                  <span>{selectedPhoto.photographer}</span>
+                  <span>{"Equipe AGM"}</span>
                 </div>
               </div>
             </div>

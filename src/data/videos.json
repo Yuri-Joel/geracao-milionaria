@@ -44,7 +44,7 @@
         "category": "depoimentos",
         "date": "2024-09-09",
      "youtubeId": "90dq_LJS3bg",
-      "thumbnail": "https://i.ytimg.com/an_webp/90dq_LJS3bg/mqdefault_6s.webp?du=3000&sqp=CNCcw8QG&rs=AOn4CLCL1Ou7pF38_yysdqsv7wNqy0C9Bw"
+      "thumbnail": "/assets/video-1.png"
       },
       {
         "id": 12,
@@ -53,7 +53,7 @@
         "category": "eventos",
         "date": "2024-08-31",
         "youtubeId": "IQYcLzzjSeE",
-      "thumbnail": "https://i.ytimg.com/an_webp/IQYcLzzjSeE/mqdefault_6s.webp?du=3000&sqp=CM2Qw8QG&rs=AOn4CLDfH-dLgouXmPPUAOR9bq7bgBWWfg"
+      "thumbnail": "/assets/video-2.png"
       }
     ],
     "stats": {
