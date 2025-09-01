@@ -181,10 +181,10 @@
           "members": [
             {
               "id": 3,
-              "name": "-",
-              "position": "-",
+              "name": "Augusto Simão",
+              "position": "Secretário para Marketing, Comunicação e Imagem",
               "department": "Comunicação",
-              "image": "/assets/placeholder.svg",
+              "image": "/assets/venancio.jpg",
               "bio": "-",
               "specialties": ["-"],
               "education": "-",
@@ -195,8 +195,8 @@
             },
             {
               "id": 4,
-              "name": "-",
-              "position": "-",
+              "name": "Mateus Venâncio",
+              "position": "Director para o Marketing e comunicação institucional",
               "department": "Comunicação",
               "image": "/assets/placeholder.svg",
               "bio": "-",
@@ -233,12 +233,40 @@
               "position": "Desenvolvedor Web",
               "department": "Projetos",
               "image": "/assets/Yuri.jpg",
-              "bio": "Desenvolvedor WEB - ",
+              "bio": "Yuri Gomes, Formado como Técnico de Informática pelo IPIL Industrial de Luanda, no curso de Gestão de Sistemas Informáticos. Actualmente estuda na Universidade Oscar Ribas, onde continua a aprofundar os seus conhecimentos. A sua caminhada é marcada pela paixão pela tecnologia, dedicação ao aprendizado e compromisso em criar soluções digitais inovadoras.",
               "specialties": ["Gestão de Projetos", "Aplicações Mobile", "Desenvolvimento WEB"],
               "education": "Estudante do 2 ano do curso de Eng. Civil",
               "contact": {
-                "email": "yuri.gomes@geracao-milionaria.com",
+                "email": "yurijooel04@gmail.com",
                 "phone": "+244 935 699 190"
+              }
+            },
+            {
+              "id": 8,
+              "name": "Flavio Fernando",
+              "position": "Secretário para formação e empreendedorismo",
+              "department": "Projetos",
+              "image": "/assets/flavio fernando.jpg",
+              "bio": "Flavio Fernando, cidadão de nacionalidade angolana, nasceu a 18 de Novembro na província do K.Sul. É cristão, pertencente a Catedral de Adoração e Promessa Morro Bento. Empreendedor à 4 anos. Gestor de profissão e Secretario para formação e promoção do empreendedorismo  da AGM — Associação Geração Milionária, e estudante na área de Contabilidade e Gestão",
+              "specialties": ["-"],
+              "education": "-",
+              "contact": {
+                "email": "-",
+                "phone": "-"
+              }
+            },
+            {
+              "id": 12,
+              "name": "Alfredo Bumba",
+              "position": "Unidade de acompanhamento de Projetos",
+              "department": "Projetos",
+              "image": "/assets/Alfredo Bumba.jpg",
+              "bio": "Jurista, escritor, consultor e orientador jurídico para criação de empresas. Formado em liderança pelo instituto John Maxwel ICAN LEADERSHIP FOR 'ÁFRICA' Em 2018.",
+              "specialties": ["-"],
+              "education": "-",
+              "contact": {
+                "email": "-",
+                "phone": "-"
               }
             }
           ]
