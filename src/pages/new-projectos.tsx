@@ -1,15 +1,31 @@
 
-import { useEffect, useState } from "react"
-import { Building2, User, Lock, Megaphone } from "lucide-react"
+import { useEffect, useRef, useState } from "react"
+import { Building2, User, Lock, Megaphone, AlertCircle, CheckCircle } from "lucide-react"
 import Header from "../components/Header"
 import Footer from "../components/Footer"
 import { LoadingPage } from "../components/Loading"
+import { submitCadastro, validateStep1, validateStep2, validateStep3, validateField } from "../services/cadastro"
+import type { CadastroFormData, ValidationError } from "../services/cadastro"
 
 export default function CadastroPage() {
+  const errorSectionRef = useRef<HTMLDivElement>(null)
+  const statusMessageRef = useRef<HTMLDivElement>(null)
+
   const [currentStep, setCurrentStep] = useState(1)
   const [userType, setUserType] = useState<"empresa" | "singular" | null>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: "success" | "error" | null;
+    message: string;
+  }>({
+    type: null,
+    message: "",
+  });
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<CadastroFormData>({
+    // User Type
+    userType: "empresa",
+
     // Step 1 - User data
     nome: "",
     telefone: "",
@@ -49,65 +65,100 @@ export default function CadastroPage() {
     acceptTerms: false,
   })
 
-  const [errors, setErrors] = useState<Record<string, string>>({})
+  const [validationErrors, setValidationErrors] = useState<ValidationError[]>([])
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({})
+  const [touchedFields, setTouchedFields] = useState<Record<string, boolean>>({})
 
-  const validateStep1 = () => {
-    const newErrors: Record<string, string> = {}
-
-    if (!formData.nome.trim()) newErrors.nome = "Nome é obrigatório"
-    if (!formData.telefone.trim()) newErrors.telefone = "Telemóvel é obrigatório"
-    if (!formData.confirmaTelefone.trim()) newErrors.confirmaTelefone = "Confirmação de telemóvel é obrigatória"
-    if (formData.telefone !== formData.confirmaTelefone) newErrors.confirmaTelefone = "Telemóveis não coincidem"
-    if (formData.email && formData.email !== formData.confirmaEmail) newErrors.confirmaEmail = "E-mails não coincidem"
-
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
+  const validateStep1Local = () => {
+    const newErrors = validateStep1(formData)
+    setValidationErrors(newErrors)
+    const fieldErrorsMap = newErrors.reduce((acc, err) => ({ ...acc, [err.field]: err.message }), {})
+    setFieldErrors(fieldErrorsMap)
+    return newErrors.every(e => e.type === "warning")
   }
 
-  const validateStep2 = () => {
-    const newErrors: Record<string, string> = {}
-
-    if (userType === "empresa") {
-      if (!formData.nomeEmpresa.trim()) newErrors.nomeEmpresa = "Nome da empresa é obrigatório"
-      if (!formData.nif.trim()) newErrors.nif = "NIF é obrigatório"
-      if (!formData.setorEconomico.trim()) newErrors.setorEconomico = "Sector económico é obrigatório"
-      if (!formData.codigoAlvara.trim()) newErrors.codigoAlvara = "Código do alvará é obrigatório"
-      if (!formData.dataValidadeAlvara.trim()) newErrors.dataValidadeAlvara = "Data de validade do alvará é obrigatória"
-      if (!formData.provincia.trim()) newErrors.provincia = "Província é obrigatória"
-      if (!formData.municipio.trim()) newErrors.municipio = "Município é obrigatório"
-      if (!formData.endereco.trim()) newErrors.endereco = "Endereço é obrigatório"
-      if (!formData.emailEmpresa.trim()) newErrors.emailEmpresa = "Email da empresa é obrigatório"
-      if (!formData.telefoneEmpresa.trim()) newErrors.telefoneEmpresa = "Telefone da empresa é obrigatório"
-    } else {
-      if (!formData.bi.trim()) newErrors.bi = "Número do BI é obrigatório"
-      if (!formData.dataNascimento.trim()) newErrors.dataNascimento = "Data de nascimento é obrigatória"
-      if (!formData.enderecoPessoal.trim()) newErrors.enderecoPessoal = "Endereço é obrigatório"
-      if (!formData.cidadePessoal.trim()) newErrors.cidadePessoal = "Cidade é obrigatória"
-      if (!formData.profissao.trim()) newErrors.profissao = "Profissão é obrigatória"
-    }
-
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
+  const validateStep2Local = () => {
+    const newErrors = validateStep2(formData, userType)
+    setValidationErrors(newErrors)
+    const fieldErrorsMap = newErrors.reduce((acc, err) => ({ ...acc, [err.field]: err.message }), {})
+    setFieldErrors(fieldErrorsMap)
+    return newErrors.every(e => e.type === "warning")
   }
 
-  const validateStep3 = () => {
-    const newErrors: Record<string, string> = {}
+  const validateStep3Local = () => {
+    const newErrors = validateStep3(formData)
+    setValidationErrors(newErrors)
+    const fieldErrorsMap = newErrors.reduce((acc, err) => ({ ...acc, [err.field]: err.message }), {})
+    setFieldErrors(fieldErrorsMap)
+    return newErrors.every(e => e.type === "warning")
+  }
 
-    if (!formData.password.trim()) newErrors.password = "Palavra-passe é obrigatória"
-    if (formData.password.length < 8) newErrors.password = "Palavra-passe deve ter pelo menos 8 caracteres"
-    if (!formData.confirmPassword.trim()) newErrors.confirmPassword = "Confirmação de palavra-passe é obrigatória"
-    if (formData.password !== formData.confirmPassword) newErrors.confirmPassword = "Palavras-passe não coincidem"
-    if (!formData.acceptTerms) newErrors.acceptTerms = "Deve aceitar os termos e condições"
+  const getFieldError = (fieldName: string): string => {
+    return fieldErrors[fieldName] || ""
+  }
 
-    setErrors(newErrors)
-    return Object.keys(newErrors).length === 0
+  const getFieldErrorType = (fieldName: string): "error" | "warning" | null => {
+    const error = validationErrors.find(e => e.field === fieldName)
+    return error?.type || null
+  }
+
+  const getFieldClassName = (fieldName: string): string => {
+    const errorType = getFieldErrorType(fieldName)
+    if (errorType === "error") return "border-red-500"
+    if (errorType === "warning") return "border-yellow-500"
+    return "border-gray-300"
   }
 
   const handleInputChange = (field: string, value: string | boolean) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
     // Clear error when user starts typing
-    if (errors[field]) {
-      setErrors((prev) => ({ ...prev, [field]: "" }))
+    if (fieldErrors[field]) {
+      setFieldErrors((prev) => ({ ...prev, [field]: "" }))
+      setValidationErrors((prev) => prev.filter(e => e.field !== field))
+    }
+  }
+
+  const handleFieldBlur = (field: string) => {
+    setTouchedFields(prev => ({ ...prev, [field]: true }))
+    const err = validateField(field, formData, userType)
+    if (err) {
+      setFieldErrors(prev => ({ ...prev, [field]: err.message }))
+      setValidationErrors(prev => {
+        const others = prev.filter(e => e.field !== field)
+        return [...others, err]
+      })
+    } else {
+      setFieldErrors(prev => ({ ...prev, [field]: "" }))
+      setValidationErrors(prev => prev.filter(e => e.field !== field))
+    }
+  }
+
+  const fieldToElementId = (field: string) => {
+    if (field === "acceptTerms") return "terms"
+    if (field === "confirmaTelefone") return "confirma-telefone"
+    if (field === "confirmaEmail") return "confirma-email"
+    if (field === "nomeEmpresa") return "nome-empresa"
+    if (field === "codigoAlvara") return "codigo-alvara"
+    if (field === "dataValidadeAlvara") return "data-validade-alvara"
+    if (field === "emailEmpresa") return "email-empresa"
+    if (field === "telefoneEmpresa") return "telefone-empresa"
+    if (field === "enderecoPessoal") return "endereco-pessoal"
+    if (field === "cidadePessoal") return "cidade-pessoal"
+    if (field === "confirmPassword") return "confirm-password"
+    // default camelCase to kebab-case
+    return field.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase()
+  }
+
+  const focusFirstError = () => {
+    const first = validationErrors.find(e => e.type === "error") || validationErrors[0]
+    if (!first) return
+    const id = fieldToElementId(first.field)
+    const el = document.getElementById(id) as HTMLElement | null
+    if (el) {
+      el.focus()
+      el.scrollIntoView({ behavior: "smooth", block: "center" })
+    } else if (errorSectionRef.current) {
+      errorSectionRef.current.scrollIntoView({ behavior: "smooth", block: "center" })
     }
   }
 
@@ -115,11 +166,11 @@ export default function CadastroPage() {
     let isValid = false
 
     if (currentStep === 1) {
-      isValid = validateStep1()
+      isValid = validateStep1Local()
     } else if (currentStep === 2) {
-      isValid = validateStep2()
+      isValid = validateStep2Local()
     } else if (currentStep === 3) {
-      isValid = validateStep3()
+      isValid = validateStep3Local()
     }
 
     if (isValid) {
@@ -127,9 +178,85 @@ export default function CadastroPage() {
         setCurrentStep(currentStep + 1)
       } else {
         // Handle form submission
-        console.log("Form submitted:", formData)
-        alert("Cadastro realizado com sucesso!")
+        handleSubmit()
       }
+    } else {
+      // Focus and scroll to first invalid field
+      focusFirstError()
+    }
+  }
+
+  const handleSubmit = async () => {
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: "" });
+
+    try {
+      const dataToSubmit = {
+        ...formData,
+        userType: userType as "empresa" | "singular",
+      };
+
+      const response = await submitCadastro(dataToSubmit);
+
+      setSubmitStatus({
+        type: "success",
+        message: "Cadastro realizado com sucesso! Bem-vindo à plataforma.",
+      });
+
+      // Limpar formulário após sucesso
+      setFormData({
+        userType: userType as "empresa" | "singular",
+        nome: "",
+        telefone: "",
+        confirmaTelefone: "",
+        telefoneAlt: "",
+        email: "",
+        confirmaEmail: "",
+        nomeEmpresa: "",
+        nif: "",
+        setorEconomico: "",
+        codigoAlvara: "",
+        dataValidadeAlvara: "",
+        provincia: "",
+        municipio: "",
+        bairro: "",
+        endereco: "",
+        emailEmpresa: "",
+        telefoneEmpresa: "",
+        tipoPropriedade: "",
+        filial: "",
+        caixaPostalFilial: "",
+        actividadeFilial: "",
+        bi: "",
+        dataNascimento: "",
+        enderecoPessoal: "",
+        cidadePessoal: "",
+        profissao: "",
+        escolaridade: "",
+        password: "",
+        confirmPassword: "",
+        acceptTerms: false,
+      });
+
+      setUserType(null);
+      setCurrentStep(1);
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : "Erro ao processar cadastro";
+      setSubmitStatus({
+        type: "error",
+        message: errorMessage,
+      });
+      console.error("Erro ao enviar cadastro:", error);
+      // Scroll to error message
+      setTimeout(() => {
+        if (statusMessageRef.current) {
+          statusMessageRef.current.scrollIntoView({ behavior: "smooth", block: "center" })
+        }
+      }, 150);
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
@@ -188,20 +315,18 @@ export default function CadastroPage() {
                 <div key={step.number} className="flex items-center">
                   <div className="flex flex-col items-center">
                     <div
-                      className={`w-12 h-12 rounded-full flex items-center justify-center font-semibold ${
-                        isActive
-                          ? "bg-[#D10A11] text-white"
-                          : isCompleted
-                            ? "bg-green-500 text-white"
-                            : "bg-gray-300 text-gray-600"
-                      }`}
+                      className={`w-12 h-12 rounded-full flex items-center justify-center font-semibold ${isActive
+                        ? "bg-[#D10A11] text-white"
+                        : isCompleted
+                          ? "bg-green-500 text-white"
+                          : "bg-gray-300 text-gray-600"
+                        }`}
                     >
                       {step.number}
                     </div>
                     <div
-                      className={`mt-2 px-3 py-1 rounded-full text-xs font-medium ${
-                        isActive ? "bg-[#D10A11] text-white" : "bg-gray-200 text-gray-700"
-                      }`}
+                      className={`mt-2 px-3 py-1 rounded-full text-xs font-medium ${isActive ? "bg-[#D10A11] text-white" : "bg-gray-200 text-gray-700"
+                        }`}
                     >
                       {step.title}
                     </div>
@@ -216,9 +341,45 @@ export default function CadastroPage() {
         </div>
       </div>
 
-      {/* Main Content */}
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
+          {/* Mensagem de Status */}
+          {submitStatus.type && (
+            <div
+              ref={statusMessageRef}
+              className={`mb-8 p-6 rounded-2xl flex items-start space-x-4 ${submitStatus.type === "success"
+                ? "bg-green-50 border border-green-200"
+                : "bg-red-50 border border-red-200"
+                }`}
+            >
+              {submitStatus.type === "success" ? (
+                <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5" />
+              ) : (
+                <AlertCircle className="w-6 h-6 text-red-600 flex-shrink-0 mt-0.5" />
+              )}
+              <div>
+                <h3
+                  className={`font-semibold mb-1 ${submitStatus.type === "success"
+                    ? "text-green-900"
+                    : "text-red-900"
+                    }`}
+                >
+                  {submitStatus.type === "success"
+                    ? "Sucesso!"
+                    : "Erro no Cadastro"}
+                </h3>
+                <p
+                  className={`text-sm ${submitStatus.type === "success"
+                    ? "text-green-700"
+                    : "text-red-700"
+                    }`}
+                >
+                  {submitStatus.message}
+                </p>
+              </div>
+            </div>
+          )}
+
           {/* User Type Selection */}
           {!userType && (
             <div className="bg-white rounded-lg shadow-md border mb-8">
@@ -231,7 +392,10 @@ export default function CadastroPage() {
                     className="h-40 md:h-32 flex flex-col items-center justify-center space-y-3 
     border-2 border-gray-200 rounded-lg hover:bg-blue-50 hover:border-blue-300 
     transition-colors bg-transparent w-full"
-                    onClick={() => setUserType("empresa")}
+                    onClick={() => {
+                      setUserType("empresa")
+                      setFormData(prev => ({ ...prev, userType: "empresa" }))
+                    }}
                   >
                     <Building2 className="w-12 h-12 text-[#D10A11]" />
                     <span className="text-lg font-semibold">Empresa</span>
@@ -240,7 +404,10 @@ export default function CadastroPage() {
                     className="h-40 md:h-32 flex flex-col items-center justify-center space-y-3 
     border-2 border-gray-200 rounded-lg hover:bg-blue-50 hover:border-blue-300 
     transition-colors bg-transparent w-full"
-                    onClick={() => setUserType("singular")}
+                    onClick={() => {
+                      setUserType("singular")
+                      setFormData(prev => ({ ...prev, userType: "singular" }))
+                    }}
                   >
                     <User className="w-12 h-12 text-[#D10A11]" />
                     <span className="text-lg font-semibold">Pessoa Singular</span>
@@ -252,7 +419,27 @@ export default function CadastroPage() {
 
           {/* Step 1: User Data */}
           {userType && currentStep === 1 && (
-            <div className="bg-white rounded-lg shadow-md border">
+            <div ref={errorSectionRef} className="bg-white rounded-lg shadow-md border">
+              {validationErrors.length > 0 && (
+                <div className="bg-red-50 border-b border-red-200 p-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {validationErrors.map((error, idx) => (
+                      <div key={idx} className={`flex items-start space-x-2 p-2 rounded ${error.type === "error" ? "bg-red-100/50" : "bg-yellow-100/50"}`}>
+                        {error.type === "error" ? (
+                          <AlertCircle className="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" />
+                        ) : (
+                          <AlertCircle className="w-4 h-4 text-yellow-600 flex-shrink-0 mt-0.5" />
+                        )}
+                        <div>
+                          <p className={`text-sm font-medium ${error.type === "error" ? "text-red-800" : "text-yellow-800"}`}>
+                            {error.field}: {error.message}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
               <div className="bg-[#D10A11] text-white p-4 rounded-t-lg">
                 <h2 className="text-xl font-semibold">Dados Utilizador</h2>
               </div>
@@ -266,10 +453,11 @@ export default function CadastroPage() {
                       id="nome"
                       value={formData.nome}
                       onChange={(e) => handleInputChange("nome", e.target.value)}
-                      className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.nome ? "border-red-500" : "border-gray-300"}`}
+                      onBlur={() => handleFieldBlur("nome")}
+                      className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${getFieldClassName("nome")}`}
                       placeholder="Digite o nome completo"
                     />
-                    {errors.nome && <p className="text-red-500 text-sm">{errors.nome}</p>}
+                    {getFieldError("nome") && <p className={`text-sm ${getFieldErrorType("nome") === "error" ? "text-red-500" : "text-yellow-600"}`}>{getFieldError("nome")}</p>}
                   </div>
                   <div className="space-y-2">
                     <label htmlFor="telefone" className="block text-sm font-medium text-gray-700">
@@ -279,10 +467,11 @@ export default function CadastroPage() {
                       id="telefone"
                       value={formData.telefone}
                       onChange={(e) => handleInputChange("telefone", e.target.value)}
-                      className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.telefone ? "border-red-500" : "border-gray-300"}`}
+                      onBlur={() => handleFieldBlur("telefone")}
+                      className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${getFieldClassName("telefone")}`}
                       placeholder="Digite o número de telemóvel"
                     />
-                    {errors.telefone && <p className="text-red-500 text-sm">{errors.telefone}</p>}
+                    {getFieldError("telefone") && <p className={`text-sm ${getFieldErrorType("telefone") === "error" ? "text-red-500" : "text-yellow-600"}`}>{getFieldError("telefone")}</p>}
                   </div>
                   <div className="space-y-2">
                     <label htmlFor="confirma-telefone" className="block text-sm font-medium text-gray-700">
@@ -292,10 +481,11 @@ export default function CadastroPage() {
                       id="confirma-telefone"
                       value={formData.confirmaTelefone}
                       onChange={(e) => handleInputChange("confirmaTelefone", e.target.value)}
-                      className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.confirmaTelefone ? "border-red-500" : "border-gray-300"}`}
+                      onBlur={() => handleFieldBlur("confirmaTelefone")}
+                      className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${getFieldClassName("confirmaTelefone")}`}
                       placeholder="Confirme o número de telemóvel"
                     />
-                    {errors.confirmaTelefone && <p className="text-red-500 text-sm">{errors.confirmaTelefone}</p>}
+                    {getFieldError("confirmaTelefone") && <p className={`text-sm ${getFieldErrorType("confirmaTelefone") === "error" ? "text-red-500" : "text-yellow-600"}`}>{getFieldError("confirmaTelefone")}</p>}
                   </div>
                   <div className="space-y-2">
                     <label htmlFor="telefone-alt" className="block text-sm font-medium text-gray-700">
@@ -305,6 +495,7 @@ export default function CadastroPage() {
                       id="telefone-alt"
                       value={formData.telefoneAlt}
                       onChange={(e) => handleInputChange("telefoneAlt", e.target.value)}
+                      onBlur={() => handleFieldBlur("telefoneAlt")}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       placeholder="Digite o número alternativo"
                     />
@@ -318,9 +509,11 @@ export default function CadastroPage() {
                       type="email"
                       value={formData.email}
                       onChange={(e) => handleInputChange("email", e.target.value)}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      onBlur={() => handleFieldBlur("email")}
+                      className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${getFieldClassName("email")}`}
                       placeholder="Digite o e-mail"
                     />
+                    {getFieldError("email") && <p className={`text-sm ${getFieldErrorType("email") === "error" ? "text-red-500" : "text-yellow-600"}`}>{getFieldError("email")}</p>}
                   </div>
                   <div className="space-y-2">
                     <label htmlFor="confirma-email" className="block text-sm font-medium text-gray-700">
@@ -331,19 +524,22 @@ export default function CadastroPage() {
                       type="email"
                       value={formData.confirmaEmail}
                       onChange={(e) => handleInputChange("confirmaEmail", e.target.value)}
-                      className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.confirmaEmail ? "border-red-500" : "border-gray-300"}`}
+                      onBlur={() => handleFieldBlur("confirmaEmail")}
+                      className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${getFieldClassName("confirmaEmail")}`}
                       placeholder="Confirme o e-mail"
                     />
-                    {errors.confirmaEmail && <p className="text-red-500 text-sm">{errors.confirmaEmail}</p>}
+                    {getFieldError("confirmaEmail") && <p className={`text-sm ${getFieldErrorType("confirmaEmail") === "error" ? "text-red-500" : "text-yellow-600"}`}>{getFieldError("confirmaEmail")}</p>}
                   </div>
                 </div>
 
                 <div className="flex justify-end pt-6">
                   <button
                     onClick={handleNext}
-                    className="bg-[#D10A11] hover:bg-blue-700 text-white px-6 py-2 rounded-md font-medium transition-colors"
+                    disabled={isSubmitting}
+                    className={`bg-[#D10A11] hover:bg-[#b00a10] text-white px-6 py-2 rounded-md font-medium transition-colors ${isSubmitting ? "opacity-70 cursor-not-allowed" : ""
+                      }`}
                   >
-                    Próximo
+                    {isSubmitting ? "Processando..." : "Próximo"}
                   </button>
                 </div>
               </div>
@@ -352,7 +548,27 @@ export default function CadastroPage() {
 
           {/* Step 2: Company Data */}
           {userType && currentStep === 2 && (
-            <div className="bg-white rounded-lg shadow-md border">
+            <div ref={errorSectionRef} className="bg-white rounded-lg shadow-md border">
+              {validationErrors.length > 0 && (
+                <div className="bg-red-50 border-b border-red-200 p-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {validationErrors.map((error, idx) => (
+                      <div key={idx} className={`flex items-start space-x-2 p-2 rounded ${error.type === "error" ? "bg-red-100/50" : "bg-yellow-100/50"}`}>
+                        {error.type === "error" ? (
+                          <AlertCircle className="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" />
+                        ) : (
+                          <AlertCircle className="w-4 h-4 text-yellow-600 flex-shrink-0 mt-0.5" />
+                        )}
+                        <div>
+                          <p className={`text-sm font-medium ${error.type === "error" ? "text-red-800" : "text-yellow-800"}`}>
+                            {error.field}: {error.message}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
               <div className="bg-[#D10A11] text-white p-4 rounded-t-lg">
                 <h2 className="text-xl font-semibold">{userType === "empresa" ? "Dados Empresa" : "Dados Pessoais"}</h2>
               </div>
@@ -367,10 +583,11 @@ export default function CadastroPage() {
                         id="nome-empresa"
                         value={formData.nomeEmpresa}
                         onChange={(e) => handleInputChange("nomeEmpresa", e.target.value)}
-                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.nomeEmpresa ? "border-red-500" : "border-gray-300"}`}
+                        onBlur={() => handleFieldBlur("nomeEmpresa")}
+                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
                         placeholder="Digite o nome da empresa"
                       />
-                      {errors.nomeEmpresa && <p className="text-red-500 text-sm">{errors.nomeEmpresa}</p>}
+
                     </div>
 
                     <div className="space-y-2">
@@ -381,14 +598,14 @@ export default function CadastroPage() {
                         id="setor-economico"
                         value={formData.setorEconomico}
                         onChange={(e) => handleInputChange("setorEconomico", e.target.value)}
-                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.setorEconomico ? "border-red-500" : "border-gray-300"}`}
+                        onBlur={() => handleFieldBlur("setorEconomico")}
+                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent `}
                       >
                         <option value="">Seleccione opção</option>
                         <option value="primario">Sector Primário (Agricultura, Pecuária e Extracção)</option>
                         <option value="secundario">Sector Secundário (Indústria e Construção)</option>
                         <option value="terciario">Sector Terciário (Serviços)</option>
                       </select>
-                      {errors.setorEconomico && <p className="text-red-500 text-sm">{errors.setorEconomico}</p>}
                     </div>
 
                     <div className="space-y-2">
@@ -399,10 +616,11 @@ export default function CadastroPage() {
                         id="nif"
                         value={formData.nif}
                         onChange={(e) => handleInputChange("nif", e.target.value)}
-                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.nif ? "border-red-500" : "border-gray-300"}`}
+                        onBlur={() => handleFieldBlur("nif")}
+                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
                         placeholder="Digite o NIF da empresa"
                       />
-                      {errors.nif && <p className="text-red-500 text-sm">{errors.nif}</p>}
+
                     </div>
 
                     <div className="space-y-2">
@@ -413,10 +631,11 @@ export default function CadastroPage() {
                         id="codigo-alvara"
                         value={formData.codigoAlvara}
                         onChange={(e) => handleInputChange("codigoAlvara", e.target.value)}
-                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.codigoAlvara ? "border-red-500" : "border-gray-300"}`}
+                        onBlur={() => handleFieldBlur("codigoAlvara")}
+                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${getFieldClassName("codigoAlvara")}`}
                         placeholder="Digite o código do alvará"
                       />
-                      {errors.codigoAlvara && <p className="text-red-500 text-sm">{errors.codigoAlvara}</p>}
+                      {getFieldError("codigoAlvara") && <p className={`text-sm ${getFieldErrorType("codigoAlvara") === "error" ? "text-red-500" : "text-yellow-600"}`}>{getFieldError("codigoAlvara")}</p>}
                     </div>
 
                     <div className="space-y-2">
@@ -428,9 +647,10 @@ export default function CadastroPage() {
                         type="date"
                         value={formData.dataValidadeAlvara}
                         onChange={(e) => handleInputChange("dataValidadeAlvara", e.target.value)}
-                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.dataValidadeAlvara ? "border-red-500" : "border-gray-300"}`}
+                        onBlur={() => handleFieldBlur("dataValidadeAlvara")}
+                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${getFieldClassName("dataValidadeAlvara")}`}
                       />
-                      {errors.dataValidadeAlvara && <p className="text-red-500 text-sm">{errors.dataValidadeAlvara}</p>}
+                      {getFieldError("dataValidadeAlvara") && <p className={`text-sm ${getFieldErrorType("dataValidadeAlvara") === "error" ? "text-red-500" : "text-yellow-600"}`}>{getFieldError("dataValidadeAlvara")}</p>}
                     </div>
 
                     <div className="space-y-2">
@@ -441,7 +661,8 @@ export default function CadastroPage() {
                         id="provincia"
                         value={formData.provincia}
                         onChange={(e) => handleInputChange("provincia", e.target.value)}
-                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.provincia ? "border-red-500" : "border-gray-300"}`}
+                        onBlur={() => handleFieldBlur("provincia")}
+                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${getFieldClassName("provincia")}`}
                       >
                         <option value="">Seleccione opção</option>
                         <option value="benguela">BENGUELA</option>
@@ -449,7 +670,7 @@ export default function CadastroPage() {
                         <option value="huambo">HUAMBO</option>
                         <option value="lobito">LOBITO</option>
                       </select>
-                      {errors.provincia && <p className="text-red-500 text-sm">{errors.provincia}</p>}
+                      {getFieldError("provincia") && <p className={`text-sm ${getFieldErrorType("provincia") === "error" ? "text-red-500" : "text-yellow-600"}`}>{getFieldError("provincia")}</p>}
                     </div>
 
                     <div className="space-y-2">
@@ -460,14 +681,15 @@ export default function CadastroPage() {
                         id="municipio"
                         value={formData.municipio}
                         onChange={(e) => handleInputChange("municipio", e.target.value)}
-                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.municipio ? "border-red-500" : "border-gray-300"}`}
+                        onBlur={() => handleFieldBlur("municipio")}
+                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${getFieldClassName("municipio")}`}
                       >
                         <option value="">Seleccione opção</option>
                         <option value="balombo">BALOMBO</option>
                         <option value="benguela">BENGUELA</option>
                         <option value="lobito">LOBITO</option>
                       </select>
-                      {errors.municipio && <p className="text-red-500 text-sm">{errors.municipio}</p>}
+                      {getFieldError("municipio") && <p className={`text-sm ${getFieldErrorType("municipio") === "error" ? "text-red-500" : "text-yellow-600"}`}>{getFieldError("municipio")}</p>}
                     </div>
 
                     <div className="space-y-2">
@@ -478,6 +700,7 @@ export default function CadastroPage() {
                         id="bairro"
                         value={formData.bairro}
                         onChange={(e) => handleInputChange("bairro", e.target.value)}
+                        onBlur={() => handleFieldBlur("bairro")}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         placeholder="Digite o bairro"
                       />
@@ -491,10 +714,11 @@ export default function CadastroPage() {
                         id="endereco"
                         value={formData.endereco}
                         onChange={(e) => handleInputChange("endereco", e.target.value)}
-                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.endereco ? "border-red-500" : "border-gray-300"}`}
+                        onBlur={() => handleFieldBlur("endereco")}
+                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${getFieldClassName("endereco")}`}
                         placeholder="Digite o endereço"
                       />
-                      {errors.endereco && <p className="text-red-500 text-sm">{errors.endereco}</p>}
+                      {getFieldError("endereco") && <p className={`text-sm ${getFieldErrorType("endereco") === "error" ? "text-red-500" : "text-yellow-600"}`}>{getFieldError("endereco")}</p>}
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="email-empresa" className="block text-sm font-medium text-gray-700">
@@ -505,10 +729,11 @@ export default function CadastroPage() {
                         type="email"
                         value={formData.emailEmpresa}
                         onChange={(e) => handleInputChange("emailEmpresa", e.target.value)}
-                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.emailEmpresa ? "border-red-500" : "border-gray-300"}`}
+                        onBlur={() => handleFieldBlur("emailEmpresa")}
+                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${getFieldClassName("emailEmpresa")}`}
                         placeholder="Digite o email da empresa"
                       />
-                      {errors.emailEmpresa && <p className="text-red-500 text-sm">{errors.emailEmpresa}</p>}
+                      {getFieldError("emailEmpresa") && <p className={`text-sm ${getFieldErrorType("emailEmpresa") === "error" ? "text-red-500" : "text-yellow-600"}`}>{getFieldError("emailEmpresa")}</p>}
                     </div>
 
                     <div className="space-y-2">
@@ -519,10 +744,11 @@ export default function CadastroPage() {
                         id="telefone-empresa"
                         value={formData.telefoneEmpresa}
                         onChange={(e) => handleInputChange("telefoneEmpresa", e.target.value)}
-                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.telefoneEmpresa ? "border-red-500" : "border-gray-300"}`}
+                        onBlur={() => handleFieldBlur("telefoneEmpresa")}
+                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${getFieldClassName("telefoneEmpresa")}`}
                         placeholder="Digite o telefone da empresa"
                       />
-                      {errors.telefoneEmpresa && <p className="text-red-500 text-sm">{errors.telefoneEmpresa}</p>}
+                      {getFieldError("telefoneEmpresa") && <p className={`text-sm ${getFieldErrorType("telefoneEmpresa") === "error" ? "text-red-500" : "text-yellow-600"}`}>{getFieldError("telefoneEmpresa")}</p>}
                     </div>
 
                     <div className="space-y-2">
@@ -533,6 +759,7 @@ export default function CadastroPage() {
                         id="tipo-propriedade"
                         value={formData.tipoPropriedade}
                         onChange={(e) => handleInputChange("tipoPropriedade", e.target.value)}
+                        onBlur={() => handleFieldBlur("tipoPropriedade")}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       >
                         <option value="">Seleccione opção</option>
@@ -550,6 +777,7 @@ export default function CadastroPage() {
                         id="filial"
                         value={formData.filial}
                         onChange={(e) => handleInputChange("filial", e.target.value)}
+                        onBlur={() => handleFieldBlur("filial")}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         placeholder="Digite o nome da filial"
                       />
@@ -563,6 +791,7 @@ export default function CadastroPage() {
                         id="caixa-postal-filial"
                         value={formData.caixaPostalFilial}
                         onChange={(e) => handleInputChange("caixaPostalFilial", e.target.value)}
+                        onBlur={() => handleFieldBlur("caixaPostalFilial")}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         placeholder="Digite a caixa postal"
                       />
@@ -576,13 +805,14 @@ export default function CadastroPage() {
                         id="actividade-filial"
                         value={formData.actividadeFilial}
                         onChange={(e) => handleInputChange("actividadeFilial", e.target.value)}
+                        onBlur={() => handleFieldBlur("actividadeFilial")}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         placeholder="Digite a actividade da filial"
                       />
                     </div>
 
 
-                   
+
                   </div>
                 ) : (
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -594,10 +824,11 @@ export default function CadastroPage() {
                         id="bi"
                         value={formData.bi}
                         onChange={(e) => handleInputChange("bi", e.target.value)}
-                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.bi ? "border-red-500" : "border-gray-300"}`}
+                        onBlur={() => handleFieldBlur("bi")}
+                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${getFieldClassName("bi")}`}
                         placeholder="Digite o número do BI"
                       />
-                      {errors.bi && <p className="text-red-500 text-sm">{errors.bi}</p>}
+                      {getFieldError("bi") && <p className={`text-sm ${getFieldErrorType("bi") === "error" ? "text-red-500" : "text-yellow-600"}`}>{getFieldError("bi")}</p>}
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="data-nascimento" className="block text-sm font-medium text-gray-700">
@@ -608,9 +839,10 @@ export default function CadastroPage() {
                         type="date"
                         value={formData.dataNascimento}
                         onChange={(e) => handleInputChange("dataNascimento", e.target.value)}
-                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.dataNascimento ? "border-red-500" : "border-gray-300"}`}
+                        onBlur={() => handleFieldBlur("dataNascimento")}
+                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${getFieldClassName("dataNascimento")}`}
                       />
-                      {errors.dataNascimento && <p className="text-red-500 text-sm">{errors.dataNascimento}</p>}
+                      {getFieldError("dataNascimento") && <p className={`text-sm ${getFieldErrorType("dataNascimento") === "error" ? "text-red-500" : "text-yellow-600"}`}>{getFieldError("dataNascimento")}</p>}
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="endereco-pessoal" className="block text-sm font-medium text-gray-700">
@@ -620,10 +852,11 @@ export default function CadastroPage() {
                         id="endereco-pessoal"
                         value={formData.enderecoPessoal}
                         onChange={(e) => handleInputChange("enderecoPessoal", e.target.value)}
-                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.enderecoPessoal ? "border-red-500" : "border-gray-300"}`}
+                        onBlur={() => handleFieldBlur("enderecoPessoal")}
+                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${getFieldClassName("enderecoPessoal")}`}
                         placeholder="Digite o endereço"
                       />
-                      {errors.enderecoPessoal && <p className="text-red-500 text-sm">{errors.enderecoPessoal}</p>}
+                      {getFieldError("enderecoPessoal") && <p className={`text-sm ${getFieldErrorType("enderecoPessoal") === "error" ? "text-red-500" : "text-yellow-600"}`}>{getFieldError("enderecoPessoal")}</p>}
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="cidade-pessoal" className="block text-sm font-medium text-gray-700">
@@ -633,10 +866,11 @@ export default function CadastroPage() {
                         id="cidade-pessoal"
                         value={formData.cidadePessoal}
                         onChange={(e) => handleInputChange("cidadePessoal", e.target.value)}
-                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.cidadePessoal ? "border-red-500" : "border-gray-300"}`}
+                        onBlur={() => handleFieldBlur("cidadePessoal")}
+                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${getFieldClassName("cidadePessoal")}`}
                         placeholder="Digite a cidade"
                       />
-                      {errors.cidadePessoal && <p className="text-red-500 text-sm">{errors.cidadePessoal}</p>}
+                      {getFieldError("cidadePessoal") && <p className={`text-sm ${getFieldErrorType("cidadePessoal") === "error" ? "text-red-500" : "text-yellow-600"}`}>{getFieldError("cidadePessoal")}</p>}
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="profissao" className="block text-sm font-medium text-gray-700">
@@ -646,10 +880,11 @@ export default function CadastroPage() {
                         id="profissao"
                         value={formData.profissao}
                         onChange={(e) => handleInputChange("profissao", e.target.value)}
-                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.profissao ? "border-red-500" : "border-gray-300"}`}
+                        onBlur={() => handleFieldBlur("profissao")}
+                        className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${getFieldClassName("profissao")}`}
                         placeholder="Digite a profissão"
                       />
-                      {errors.profissao && <p className="text-red-500 text-sm">{errors.profissao}</p>}
+                      {getFieldError("profissao") && <p className={`text-sm ${getFieldErrorType("profissao") === "error" ? "text-red-500" : "text-yellow-600"}`}>{getFieldError("profissao")}</p>}
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="escolaridade" className="block text-sm font-medium text-gray-700">
@@ -659,6 +894,7 @@ export default function CadastroPage() {
                         id="escolaridade"
                         value={formData.escolaridade}
                         onChange={(e) => handleInputChange("escolaridade", e.target.value)}
+                        onBlur={() => handleFieldBlur("escolaridade")}
                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                         placeholder="Digite a escolaridade"
                       />
@@ -675,9 +911,11 @@ export default function CadastroPage() {
                   </button>
                   <button
                     onClick={handleNext}
-                    className="bg-[#D10A11] hover:bg-blue-700 text-white px-6 py-2 rounded-md font-medium transition-colors"
+                    disabled={isSubmitting}
+                    className={`bg-[#D10A11] hover:bg-[#b00a10] text-white px-6 py-2 rounded-md font-medium transition-colors ${isSubmitting ? "opacity-70 cursor-not-allowed" : ""
+                      }`}
                   >
-                    Próximo
+                    {isSubmitting ? "Processando..." : "Próximo"}
                   </button>
                 </div>
               </div>
@@ -701,13 +939,14 @@ export default function CadastroPage() {
                       type="password"
                       value={formData.password}
                       onChange={(e) => handleInputChange("password", e.target.value)}
-                      className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.password ? "border-red-500" : "border-gray-300"}`}
+                      onBlur={() => handleFieldBlur("password")}
+                      className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
                       placeholder="Digite a palavra-passe"
                     />
                     <p className="text-sm text-gray-600">
                       Mínimo 8 caracteres, incluindo maiúsculas, minúsculas e números
                     </p>
-                    {errors.password && <p className="text-red-500 text-sm">{errors.password}</p>}
+
                   </div>
                   <div className="space-y-2">
                     <label htmlFor="confirm-password" className="block text-sm font-medium text-gray-700">
@@ -718,10 +957,10 @@ export default function CadastroPage() {
                       type="password"
                       value={formData.confirmPassword}
                       onChange={(e) => handleInputChange("confirmPassword", e.target.value)}
-                      className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent ${errors.confirmPassword ? "border-red-500" : "border-gray-300"}`}
+                      onBlur={() => handleFieldBlur("confirmPassword")}
+                      className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
                       placeholder="Confirme a palavra-passe"
                     />
-                    {errors.confirmPassword && <p className="text-red-500 text-sm">{errors.confirmPassword}</p>}
                   </div>
                 </div>
 
@@ -731,14 +970,13 @@ export default function CadastroPage() {
                     id="terms"
                     checked={formData.acceptTerms}
                     onChange={(e) => handleInputChange("acceptTerms", e.target.checked)}
+                    onBlur={() => handleFieldBlur("acceptTerms")}
                     className="w-4 h-4 text-[#D10A11] bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
                   />
                   <label htmlFor="terms" className="text-sm text-gray-700">
                     Aceito os termos e condições de uso da plataforma *
                   </label>
                 </div>
-                {errors.acceptTerms && <p className="text-red-500 text-sm">{errors.acceptTerms}</p>}
-
                 <div className="flex justify-between pt-6">
                   <button
                     onClick={() => setCurrentStep(2)}
@@ -748,9 +986,11 @@ export default function CadastroPage() {
                   </button>
                   <button
                     onClick={handleNext}
-                    className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-md font-medium transition-colors"
+                    disabled={isSubmitting}
+                    className={`bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-md font-medium transition-colors ${isSubmitting ? "opacity-70 cursor-not-allowed" : ""
+                      }`}
                   >
-                    Finalizar Cadastro
+                    {isSubmitting ? "Processando..." : "Finalizar Cadastro"}
                   </button>
                 </div>
               </div>

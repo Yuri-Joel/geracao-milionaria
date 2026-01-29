@@ -37,14 +37,13 @@ const Contato: React.FC = () => {
             </section>
 
             {/* Contact Section */}
-            <section className="py-20 bg-white">
-                <div className="container mx-auto px-4">
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+            <section className="pb-14 bg-white">
+               
                         {/* Contact Info */}
-                        <div>
+                        <div className="flex flex-col justify-center items-center">
                             <h2 className="text-3xl font-bold text-[#D10A11] mb-8">Fale Conosco</h2>
 
-                            <div className="space-y-6">
+                            <div className="flex justify-between md:space-x-8 max-w-3xl max-md:flex-col max-md:space-y-6">
                                 <div className="flex items-start space-x-4">
                                     <div className="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center flex-shrink-0">
                                         <Mail className="w-6 h-6 text-[#D10A11]" />
@@ -68,8 +67,6 @@ const Contato: React.FC = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
             </section>
 
             <Footer />

@@ -17,16 +17,6 @@
         "iban": "0051.0000.1878.1184.1010.8",
         "accountNumber": "218781184100001"
       }
-    },
-    {
-      "id": "mcx",
-      "name": "MCX Express",
-      "icon": "credit-card",
-      "description": "Pagamento rápido e seguro com cartão",
-      "details": {
-        "merchantId": "GM_DONATIONS",
-        "apiKey": "mcx_express_api_key"
-      }
     }
   ],
   "impactLevels": [

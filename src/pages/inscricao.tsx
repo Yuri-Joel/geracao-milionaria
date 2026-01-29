@@ -1,9 +1,11 @@
 import type React from "react"
 import { useEffect, useState } from "react"
-import { Upload, FileText, User, Building, Phone, Mail, Globe } from "lucide-react"
+import { Upload, FileText, User, Building, Phone, Mail, Globe, AlertCircle, CheckCircle, X } from "lucide-react"
 import Footer from "../components/Footer"
 import Header from "../components/Header"
 import { LoadingPage } from "../components/Loading"
+import { submitInscricao, validateInscricaoForm } from "../services/inscricao"
+import type { ValidationError } from "../services/inscricao"
 
 export const Inscricao: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -29,12 +31,33 @@ export const Inscricao: React.FC = () => {
     observacoes: "",
   })
 
+  const [loading, setLoading] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: "success" | "error" | null;
+    message: string;
+  }>({
+    type: null,
+    message: "",
+  });
+  const [validationErrors, setValidationErrors] = useState<ValidationError[]>([]);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, ValidationError>>({});
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }))
+
+    // Validação em tempo realir
+    if (fieldErrors[name]) {
+      setFieldErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors[name];
+        return newErrors;
+      });
+    }
   }
 
   const handleRadioChange = (name: string, value: string) => {
@@ -52,24 +75,116 @@ export const Inscricao: React.FC = () => {
     }))
   }
 
+  const resetFotoInput = () => {
+    const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement
+    if (fileInput) {
+      fileInput.value = ""
+    }
+  }
+
+  const getFieldError = (fieldName: string): ValidationError | null => {
+    return fieldErrors[fieldName] || null;
+  }
+
+  const getFieldClassName = (fieldName: string, baseClass: string): string => {
+    const error = getFieldError(fieldName);
+    if (!error) return baseClass;
+
+    if (error.type === "error") {
+      return baseClass.replace("border-gray-300", "border-red-500").replace("focus:ring-[#D10A11]", "focus:ring-red-500");
+    } else {
+      return baseClass.replace("border-gray-300", "border-yellow-500").replace("focus:ring-[#D10A11]", "focus:ring-yellow-500");
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
-  
-    try {
-      const res = await fetch("/send-email.php", {
-        method: "POST",
-        body: JSON.stringify(formData),
+
+    // Limpar erros anteriores
+    setValidationErrors([]);
+    setFieldErrors({});
+    setSubmitStatus({ type: null, message: "" });
+
+    // Validação completa
+    const errors = validateInscricaoForm(formData);
+
+    if (errors.length > 0) {
+      // Criar mapa de erros por campo
+      const errorMap: Record<string, ValidationError> = {};
+      const errorMessages: ValidationError[] = [];
+
+      errors.forEach((error) => {
+        errorMap[error.field] = error;
+        errorMessages.push(error);
       });
-  
-      const text = await res.text();
-      alert(text);
-    } catch (err) {
-      alert("Erro ao enviar o formulário.");
-      console.error(err);
+
+      setFieldErrors(errorMap);
+      setValidationErrors(errorMessages);
+      setSubmitStatus({
+        type: "error",
+        message: `Por favor, corrija ${errors.length} erro(s) no formulário`,
+      });
+
+      // Scroll para primeiro erro
+      const firstErrorField = document.querySelector(
+        `[name="${errors[0].field}"]`
+      ) as HTMLElement;
+      if (firstErrorField) {
+        firstErrorField.scrollIntoView({ behavior: "smooth", block: "center" });
+        firstErrorField.focus();
+      }
+
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await submitInscricao(formData);
+
+      setSubmitStatus({
+        type: "success",
+        message: "Inscrição enviada com sucesso! Entraremos em contacto em breve.",
+      });
+
+      setFormData({
+        nomeCompleto: "",
+        numeroContribuinte: "",
+        numeroBilhete: "",
+        possuiEmpresa: "",
+        nomeEmpresa: "",
+        empresaProcesso: "",
+        empresaConcluida: "",
+        numeroAlvara: "",
+        enderecoEmpresa: "",
+        municipio: "",
+        telefone: "",
+        possuiSite: "",
+        atividadeEconomica: "",
+        tipoSociedade: "",
+        setorAtividade: "",
+        provincia: "Luanda",
+        email: "",
+        classificacao: "",
+        foto: null,
+        observacoes: "",
+      });
+
+      resetFotoInput();
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : "Erro ao enviar inscrição";
+      setSubmitStatus({
+        type: "error",
+        message: errorMessage,
+      });
+      console.error("Erro ao enviar inscrição:", error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
-  
+
   const provinciasAngola = [
     "Luanda",
     "Bengo",
@@ -119,6 +234,7 @@ export const Inscricao: React.FC = () => {
   ]
 
   const classificacoes = [
+    "-- Selecione uma classificação --",
     "============EMPRESAS=========",
     "Micro Empresa",
     "Pequena Empresa",
@@ -131,24 +247,22 @@ export const Inscricao: React.FC = () => {
     "Funcionário Público",
   ]
 
-    const [loading, setLoading] = useState(true);
-  
-    useEffect(() => {
-      const timer = setTimeout(() => setLoading(false), 1000);
-      return () => clearTimeout(timer);
-    }, []);
-  
-    if (loading) {
-      return (
-             <LoadingPage />
-      
-      );
-    }
-  
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return (
+      <LoadingPage />
+
+    );
+  }
+
 
   return (
     <div className="pt-24 bg-gray-50 min-h-screen">
-<Header />
+      <Header />
       <section className="relative py-20 bg-gradient-to-r from-[#D10A11] to-[#b00a10] overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-float"></div>
@@ -171,6 +285,77 @@ export const Inscricao: React.FC = () => {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
+            {/* Mensagem de Status */}
+            {submitStatus.type && (
+              <div
+                className={`mb-8 p-6 rounded-2xl flex items-start space-x-4 animate-fade-in-down ${submitStatus.type === "success"
+                  ? "bg-green-50 border border-green-200"
+                  : "bg-red-50 border border-red-200"
+                  }`}
+              >
+                {submitStatus.type === "success" ? (
+                  <CheckCircle className="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5" />
+                ) : (
+                  <AlertCircle className="w-6 h-6 text-red-600 flex-shrink-0 mt-0.5" />
+                )}
+                <div>
+                  <h3
+                    className={`font-semibold mb-1 ${submitStatus.type === "success" ? "text-green-900" : "text-red-900"
+                      }`}
+                  >
+                    {submitStatus.type === "success" ? "Sucesso!" : "Erro na Inscrição"}
+                  </h3>
+                  <p
+                    className={`text-sm ${submitStatus.type === "success" ? "text-green-700" : "text-red-700"
+                      }`}
+                  >
+                    {submitStatus.message}
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* Erros de Validação */}
+            {validationErrors.length > 0 && (
+              <div className="mb-8 p-6 rounded-2xl bg-yellow-50 border border-yellow-200">
+                <div className="flex items-start space-x-4">
+                  <AlertCircle className="w-6 h-6 text-yellow-600 flex-shrink-0 mt-0.5" />
+                  <div className="flex-1">
+                    <h3 className="font-semibold text-yellow-900 mb-3">
+                      Encontrados {validationErrors.length} erro(s) - Por favor, corrija:
+                    </h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                      {validationErrors.map((error, index) => (
+                        <div
+                          key={index}
+                          className={`flex items-start space-x-2 p-2 rounded-lg ${error.type === "error"
+                              ? "bg-red-50"
+                              : "bg-yellow-50"
+                            }`}
+                        >
+                          <AlertCircle
+                            className={`w-4 h-4 flex-shrink-0 mt-0.5 ${error.type === "error"
+                                ? "text-red-600"
+                                : "text-yellow-600"
+                              }`}
+                          />
+                          <div className="flex-1">
+                            <p
+                              className={`text-sm font-medium ${error.type === "error"
+                                  ? "text-red-800"
+                                  : "text-yellow-800"
+                                }`}
+                            >
+                              {error.message}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
             <form onSubmit={handleSubmit} className="space-y-8">
               {/* Dados Pessoais */}
               <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100">
@@ -191,8 +376,16 @@ export const Inscricao: React.FC = () => {
                       onChange={handleInputChange}
                       required
                       placeholder="Nome completo"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#D10A11] focus:border-transparent"
+                      className={getFieldClassName(
+                        "nomeCompleto",
+                        "w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#D10A11] focus:border-transparent"
+                      )}
                     />
+                    {getFieldError("nomeCompleto") && (
+                      <p className={`text-sm mt-1 ${getFieldError("nomeCompleto")?.type === "error" ? "text-red-600" : "text-yellow-600"}`}>
+                        {getFieldError("nomeCompleto")?.message}
+                      </p>
+                    )}
                   </div>
 
                   <div>
@@ -204,8 +397,16 @@ export const Inscricao: React.FC = () => {
                       onChange={handleInputChange}
                       required
                       placeholder="Preencha seu número de contribuinte"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#D10A11] focus:border-transparent"
+                      className={getFieldClassName(
+                        "numeroContribuinte",
+                        "w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#D10A11] focus:border-transparent"
+                      )}
                     />
+                    {getFieldError("numeroContribuinte") && (
+                      <p className={`text-sm mt-1 ${getFieldError("numeroContribuinte")?.type === "error" ? "text-red-600" : "text-yellow-600"}`}>
+                        {getFieldError("numeroContribuinte")?.message}
+                      </p>
+                    )}
                   </div>
 
                   <div>
@@ -217,8 +418,16 @@ export const Inscricao: React.FC = () => {
                       onChange={handleInputChange}
                       required
                       placeholder="Preencha seu número do bilhete"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#D10A11] focus:border-transparent"
+                      className={getFieldClassName(
+                        "numeroBilhete",
+                        "w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#D10A11] focus:border-transparent"
+                      )}
                     />
+                    {getFieldError("numeroBilhete") && (
+                      <p className={`text-sm mt-1 ${getFieldError("numeroBilhete")?.type === "error" ? "text-red-600" : "text-yellow-600"}`}>
+                        {getFieldError("numeroBilhete")?.message}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -440,8 +649,16 @@ export const Inscricao: React.FC = () => {
                       onChange={handleInputChange}
                       required
                       placeholder="Telefone"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#D10A11] focus:border-transparent"
+                      className={getFieldClassName(
+                        "telefone",
+                        "w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#D10A11] focus:border-transparent"
+                      )}
                     />
+                    {getFieldError("telefone") && (
+                      <p className={`text-sm mt-1 ${getFieldError("telefone")?.type === "error" ? "text-red-600" : "text-yellow-600"}`}>
+                        {getFieldError("telefone")?.message}
+                      </p>
+                    )}
                   </div>
 
                   <div>
@@ -453,8 +670,16 @@ export const Inscricao: React.FC = () => {
                       onChange={handleInputChange}
                       required
                       placeholder="Email"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#D10A11] focus:border-transparent"
+                      className={getFieldClassName(
+                        "email",
+                        "w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#D10A11] focus:border-transparent"
+                      )}
                     />
+                    {getFieldError("email") && (
+                      <p className={`text-sm mt-1 ${getFieldError("email")?.type === "error" ? "text-red-600" : "text-yellow-600"}`}>
+                        {getFieldError("email")?.message}
+                      </p>
+                    )}
                   </div>
                 </div>
 
@@ -503,14 +728,26 @@ export const Inscricao: React.FC = () => {
                       name="classificacao"
                       value={formData.classificacao}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#D10A11] focus:border-transparent"
+                      className={getFieldClassName(
+                        "classificacao",
+                        "w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#D10A11] focus:border-transparent"
+                      )}
                     >
                       {classificacoes.map((classificacao) => (
-                        <option key={classificacao} value={classificacao}>
+                        <option
+                          key={classificacao}
+                          value={classificacao}
+                          disabled={classificacao.includes("===") || classificacao.includes("Selecione")}
+                        >
                           {classificacao}
                         </option>
                       ))}
                     </select>
+                    {getFieldError("classificacao") && (
+                      <p className={`text-sm mt-1 ${getFieldError("classificacao")?.type === "error" ? "text-red-600" : "text-yellow-600"}`}>
+                        {getFieldError("classificacao")?.message}
+                      </p>
+                    )}
                   </div>
 
                   <div>
@@ -525,7 +762,12 @@ export const Inscricao: React.FC = () => {
                       <Upload className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
                     </div>
                     {formData.foto && (
-                      <p className="text-sm text-green-600 mt-2">Arquivo selecionado: {formData.foto.name}</p>
+                      <p className="text-sm text-green-600 mt-2">✓ Arquivo selecionado: {formData.foto.name}</p>
+                    )}
+                    {getFieldError("foto") && (
+                      <p className={`text-sm mt-1 ${getFieldError("foto")?.type === "error" ? "text-red-600" : "text-yellow-600"}`}>
+                        {getFieldError("foto")?.message}
+                      </p>
                     )}
                   </div>
                 </div>
@@ -547,10 +789,23 @@ export const Inscricao: React.FC = () => {
               <div className="text-center">
                 <button
                   type="submit"
-                  className="inline-flex items-center space-x-3 px-12 py-4 bg-gradient-to-r from-[#D10A11] to-[#b00a10] text-white font-semibold rounded-xl hover:shadow-lg transform hover:scale-105 transition-all duration-300 text-lg"
+                  disabled={isSubmitting}
+                  className={`inline-flex items-center space-x-3 px-12 py-4 bg-gradient-to-r from-[#D10A11] to-[#b00a10] text-white font-semibold rounded-xl hover:shadow-lg transform hover:scale-105 transition-all duration-300 text-lg ${isSubmitting
+                    ? "opacity-70 cursor-not-allowed hover:scale-100"
+                    : "hover:shadow-lg hover:scale-105"
+                    }`}
                 >
-                  <FileText className="w-6 h-6" />
-                  <span>Enviar Ficha de Inscrição</span>
+                  {isSubmitting ? (
+                    <>
+                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                      <span>Enviando...</span>
+                    </>
+                  ) : (
+                    <>
+                      <FileText className="w-6 h-6" />
+                      <span>Enviar Ficha de Inscrição</span>
+                    </>
+                  )}
                 </button>
               </div>
             </form>
