@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HelmetProvider } from "react-helmet-async";
 import Sobre from './pages/Sobre';
 import Home from './pages/Home';
 import Projetos from './pages/Projetos';
@@ -16,14 +17,29 @@ import DonationPrompt from './components/DonationPrompt';
 import { Inscricao } from './pages/inscricao';
 import Comunicado from './pages/Comunicado';
 import CadastroPage from './pages/new-projectos';
+import { pagesData } from "./data/pagesData";
+import SEO from "./components/SEO";
+
+
+function DynamicSEO() {
+  const location = useLocation();
+  const path = location.pathname as keyof typeof pagesData;
+  if (pagesData[path]) {
+    const page = pagesData[path];
+    return <SEO title={page.title} description={page.description} />;
+  }
+  return null;
+}
 
 function App() {
   return (
     <>
-    <SearchProvider>
-    <Router>
-    <ScrollToTop /> 
-    <DonationPrompt triggerMinutes={[1, 5, 10, 15]} />
+      <SearchProvider>
+      <HelmetProvider>
+        <Router>
+          <ScrollToTop />
+          <DonationPrompt triggerMinutes={[1, 5, 10, 15]} />
+          <DynamicSEO />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/sobre" element={<Sobre />} />
@@ -43,6 +59,7 @@ function App() {
     <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
+    </HelmetProvider>
     </SearchProvider>
        <WhatsAppButton />
        </>
