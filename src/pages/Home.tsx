@@ -32,8 +32,8 @@ const Home: React.FC = () => {
 
   if (loading) {
     return (
-             <LoadingPage />
-      
+      <LoadingPage />
+
     );
   }
 
@@ -42,17 +42,16 @@ const Home: React.FC = () => {
 
       <Header />
       <EnhancedCarousel slides={enhancedSlides} autoplay={carousel.autoplay} delay={carousel.delay} />
-
       <section
         data-animate="animate-slide-up"
         className={`relative mt-10 z-30 transition-all duration-700 ease-out ${animTestimonials} `}
       >
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6">
             {stats.map((stat, index) => (
               <div
                 key={index}
-                className="bg-white/95 backdrop-blur-md p-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-white/20"
+                className="bg-white/95 backdrop-blur-md py-6 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-white/20 animate-slide-left"
                 style={{
                   animationDelay: `${index * 0.1}s`,
                 }}
@@ -69,7 +68,7 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <section data-animate="animate-zoom-in" className={`py-10 bg-gradient-to-br from-gray-50 via-white to-gray-50 relative overflow-hidden transition-all duration-700 ${animFeatures}`}>
+      <section data-animate="animate-zoom-in" className={`py-10 bg-gradient-to-br mt-20 from-gray-50 via-white to-gray-50 relative overflow-hidden transition-all duration-700 ${animFeatures}`}>
         <div className="absolute top-0 left-0 w-full h-full">
           <div className="absolute top-20 left-10 w-72 h-72 bg-[#D10A11]/5 rounded-full blur-3xl animate-float"></div>
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#F7B32B]/5 rounded-full blur-3xl animate-float-delayed"></div>
@@ -108,46 +107,58 @@ const Home: React.FC = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-20 animate-fade-in-up">
             <h2 className="text-4xl md:text-6xl font-bold text-[#D10A11] mb-6">
-              Por que escolher a Geração Milionária?
+              Conheça-Nos
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Oferecemos soluções completas para o seu desenvolvimento pessoal e profissional
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 animate-zoom-in">
-            {features.map((feature, index) => {
-              const Icon = {
-                Users,
-                Target,
-                Award,
-                TrendingUp,
-              }[feature.icon];
+          <div className="w-full flex justify-center">
+            <div className="flex flex-col md:flex-row w-full justify-center gap-8 animate-zoom-in max-w-[80rem]">
+              {features.map((feature, index) => {
+                const Icon = {
+                  Users,
+                  Target,
+                  Award,
+                  TrendingUp,
+                }[feature.icon];
 
-              return (
-                <div
-                  key={index}
-                  className="group bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border border-gray-100 hover:border-[#D10A11]/20 animate-fade-in-up"
-                  style={{ animationDelay: `${index * 0.1}s` }}
-                >
+                return (
                   <div
-                    className={`w-16 h-16 ${feature.color === "red" ? "bg-red-100" : "bg-amber-100"
-                      } rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
-                  >{Icon && (
-                    <Icon
-                      className={`w-8 h-8 ${feature.color === "red" ? "text-[#D10A11]" : "text-[#F7B32B]"
-                        }`}
-                    />
-                  )}
+                    key={index}
+                    className="group bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border border-gray-100 hover:border-[#D10A11]/20 animate-fade-in-up"
+                    style={{ animationDelay: `${index * 0.1}s` }}
+                  >
+                    <div className="relative w-full max-w-sm group cursor-pointer">
+                      <div className="absolute rounded-lg inset-0 w-full h-full bg-white border-[1px] border-gray-100 transition-all duration-300 ease-out group-hover:translate-x-2 group-hover:translate-y-2"></div>
+                      <div className={`relative rounded-lg z-10 w-full h-full min-h-[320px] ${'bg-[#FFFFFF]'} border-gray-100 p-8 flex flex-col justify-between transition-all duration-300 ease-out group-hover:-translate-x-2 group-hover:-translate-y-2`}>
+                        <div>
+                           <div
+                              className={`w-16 h-16 ${feature.color === "red" ? "bg-red-100" : "bg-amber-100"
+                                } rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
+                            >
+                          {Icon && (
+                            <Icon
+                              className={`w-8 h-8 ${feature.color === "red" ? "text-[#D10A11]" : "text-[#F7B32B]"
+                                }`}
+                            />
+                          )}
+                          </div>
+                          <h2 className="text-xl font-bold uppercase flex items-center text-black mb-4">
+                            {feature.title}
+                          </h2>
 
+                          <p className="text-black/80 font-medium leading-relaxed mb-8">
+                            {feature.description}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <h3 className="text-xl font-semibold text-gray-900 mb-4 group-hover:text-[#D10A11] transition-colors duration-300">
-                    {feature.title}
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">{feature.description}</p>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
@@ -257,24 +268,24 @@ const Home: React.FC = () => {
           </div>
 
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 ">
-          {partners.items.map((partner, index) => (
-  <div
-  key={index}
-  className="w-48 h-56 bg-gray-100 rounded-lg shadow-sm flex flex-col items-center justify-center hover:shadow-md transition-all duration-300 transform hover:scale-105"
->
-  <figure className="flex flex-col items-center justify-center">
-    <img
-      src={partner.logo}
-      alt={partner.name}
-      className="w-40 h-40 object-contain mb-2"
-    />
-    <figcaption className="text-gray-600 text-base font-medium text-center">
-      {partner.name}
-    </figcaption>
-  </figure>
-</div>
+            {partners.items.map((partner, index) => (
+              <div
+                key={index}
+                className="w-48 h-56 bg-gray-100 rounded-lg shadow-sm flex flex-col items-center justify-center hover:shadow-md transition-all duration-300 transform hover:scale-105"
+              >
+                <figure className="flex flex-col items-center justify-center">
+                  <img
+                    src={partner.logo}
+                    alt={partner.name}
+                    className="w-40 h-40 object-contain mb-2"
+                  />
+                  <figcaption className="text-gray-600 text-base font-medium text-center">
+                    {partner.name}
+                  </figcaption>
+                </figure>
+              </div>
 
-))}
+            ))}
 
           </div>
         </div>

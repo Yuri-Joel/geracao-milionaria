@@ -5,63 +5,60 @@
     "slides": [
       {
         "id": 1,
-        "title": "Transformando Vidas Através da Educação",
-        "description": "Oferecemos programas inovadores de capacitação profissional e desenvolvimento pessoal para criar oportunidades reais de crescimento.",
+        "title": "Altruísmo",
+        "description": "A capacidade de agir em benefício dos outros, colocando o bem coletivo acima dos interesses pessoais.",
         "image": "/assets/2024/09/7.webp",
         "link": "#"
       },
       {
         "id": 2,
-        "title": "Construindo Pontes para o Sucesso",
-        "description": "Conectamos pessoas a oportunidades através de parcerias estratégicas com empresas e instituições de renome.",
+        "title": "Solidariedade",
+        "description": "O compromisso de apoiar e unir forças com quem enfrenta dificuldades, promovendo cooperação e inclusão.",
         "image": "/assets/2024/09/48.webp",
         "link": "#"
       },
       {
         "id": 3,
-        "title": "Impacto Social que Transforma",
-        "description": "Mais de 10.000 vidas já foram impactadas positivamente através de nossos programas e iniciativas sociais.",
+        "title": "Empatia",
+        "description": "A habilidade de compreender e sentir as necessidades e emoções dos outros, criando relações humanas mais fortes e autênticas.",
         "image": "/assets/2024/08/11-1536x520.webp",
         "link": "#"
       },
       {
         "id": 4,
-        "title": "Construindo Pontes para o Sucesso",
-        "description": "Conectamos pessoas a oportunidades através de parcerias estratégicas com empresas e instituições de renome.",
+        "title": "Generosidade",
+        "description": "A disposição de partilhar recursos, tempo e conhecimento, contribuindo para o crescimento e bem-estar da comunidade.",
         "link": "#",
         "image": "/assets/2024/08/6-1.webp"
-      },
-      {
-        "id": 5,
-        "title": "Ligando Talentos a Grandes Oportunidades",
-        "description": "Promovemos conexões valiosas por meio de colaborações com empresas e instituições que fazem a diferença.",
-        "link": "#",
-        "image": "/assets/2025/uige-1.jpg"
       }
       
     ]
   },
   "sections": {
     "hero": {
-      "title": "Transformando Vidas, Criando Oportunidades",
-      "subtitle": "Somos uma organização dedicada ao desenvolvimento pessoal e profissional, criando pontes para o sucesso através de programas inovadores e uma comunidade engajada.",
+      "title": "Sobre Nós – Associação Geração Milionária (AGM)",
+      "subtitle": " A AGM – Associação Geração Milionária é uma organização filantrópica, sem fins lucrativos, que reúne jovens de diversos estratos sociais, em especial estudantes e empreendedores.O nosso objetivo principal é estimular iniciativas de autoemprego, através do desenvolvimento de competências nas profissões liberais e incentivo a autonomia económica dos  membros por via da economia partilhada.",
       "cta": {
         "text": "Conheça Nossos Projetos",
-        "link": "/projetos"
+        "link": "/projectos"
       }
     },
     "stats": [
       {
-        "number": "2,254",
-        "label": "Vidas Transformadas"
+        "number": "4.062",
+        "label": "Membros Associados"
       },
       {
-        "number": "417",
-        "label": "Empregos"
+        "number": "16",
+        "label": "Províncias"
       },
       {
-        "number": "20+",
-        "label": "Parcerias Ativas"
+        "number": "2.254",
+        "label": "Impacto social"
+      },
+      {
+        "number": "120",
+        "label": "Empreededores"
       },
       {
         "number": "8",
@@ -71,27 +68,21 @@
     "features": [
       {
         "icon": "Users",
-        "title": "Comunidade Ativa",
-        "description": "Faça parte de uma comunidade engajada de pessoas que buscam crescimento e sucesso.",
+        "title": "Nossa História ",
+        "description": "A Associação Geração Milionária (AGM) é uma organização juvenil angolana fundada para promover o autoemprego, a capacitação profissional e o apoio comunitário.",
         "color": "red"
       },
       {
         "icon": "Target",
-        "title": "Foco em Resultados",
-        "description": "Metodologias comprovadas e estratégias práticas para alcançar seus objetivos.",
+        "title": "Nossa Missão",
+        "description": "Estimular iniciativas de autoemprego e empreendedorismo juvenil, por via das profissões liberais.",
         "color": "amber"
       },
       {
         "icon": "Award",
-        "title": "Excelência",
-        "description": "Padrão de qualidade elevado em todos os nossos programas e serviços oferecidos.",
+        "title": "Nossa Visão: ",
+        "description": "Formar uma geração de jovens altruístas, empreendedores  sociais, criativos e inovadores, capazes de gerar soluções sustentáveis para  empregabilidade e inclusão social.",
         "color": "red"
-      },
-      {
-        "icon": "TrendingUp",
-        "title": "Crescimento",
-        "description": "Acompanhamento contínuo do seu progresso e evolução em todas as áreas da vida.",
-        "color": "amber"
       }
     ],
     "testimonials": {
@@ -136,7 +127,7 @@
     "partners": {
       "title": "Nossos Parceiros",
       "subtitle": "Empresas e instituições que acreditam no nosso trabalho",
-      "items": [
+        "items": [
         {
           "name": "SANABEL",
           "logo": "/assets/2024/07/5.webp"

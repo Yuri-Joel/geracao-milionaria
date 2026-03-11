@@ -68,7 +68,7 @@ const EnhancedCarousel: React.FC<EnhancedCarouselProps> = ({ slides, autoplay = 
   }
 
   return (
-    <div className="relative w-full h-[100vh] overflow-hidden">
+    <div className="relative md:w-full md:h-[100vh] w-[30rem] h-[20rem] overflow-hidden">
       <Swiper
         modules={[Navigation, Pagination, Autoplay, EffectFade, Parallax]}
         spaceBetween={0}
@@ -93,7 +93,7 @@ const EnhancedCarousel: React.FC<EnhancedCarouselProps> = ({ slides, autoplay = 
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={slide.id}>
-            <div className="relative w-full h-full">
+            <div className="relative md:w-full md:h-full w-[30rem] h-[20rem]">
               <div
                 className="absolute inset-0  bg-cover bg-center b bg-no-repeat"
                 style={{ backgroundImage: `url(${slide.image})` }}
@@ -119,7 +119,7 @@ const EnhancedCarousel: React.FC<EnhancedCarouselProps> = ({ slides, autoplay = 
                     )}
 
                     <h2
-                      className="text-4xl md:text-7xl font-bold text-white mb-6 leading-tight opacity-0 animate-fade-in-up"
+                      className="text-4xl md:text-7xl font-bold text-white mb-6 leading-tight opacity-0 animate-fade-in-up md:max-w-[40rem] max-w-[25rem]"
                       data-swiper-parallax="-200"
                       style={{ animationDelay: "0.5s", animationFillMode: "forwards" }}
                     >
@@ -128,7 +128,7 @@ const EnhancedCarousel: React.FC<EnhancedCarouselProps> = ({ slides, autoplay = 
 
 
                     <p
-                      className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl leading-relaxed opacity-0 animate-fade-in-up"
+                      className="text-xl md:text-2xl hidden md:block text-white/90 mb-8 max-w-2xl leading-relaxed opacity-0 animate-fade-in-up"
                       data-swiper-parallax="-300"
                       style={{ animationDelay: "0.7s", animationFillMode: "forwards" }}
                     >
@@ -159,19 +159,19 @@ const EnhancedCarousel: React.FC<EnhancedCarouselProps> = ({ slides, autoplay = 
         ))}
       </Swiper>
 
-      <div className="absolute left-8 top-1/2 transform -translate-y-1/2 z-20">
+      <div className="absolute hidden md:block left-8 top-1/2 transform -translate-y-1/2 z-20">
         <button className="swiper-button-prev-custom group w-16 h-16 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110">
           <ChevronLeft className="w-8 h-8 text-white group-hover:text-[#F7B32B] transition-colors duration-300" />
         </button>
       </div>
 
-      <div className="absolute right-8 top-1/2 transform -translate-y-1/2 z-20">
+      <div className="absolute hidden md:block right-8 top-1/2 transform -translate-y-1/2 z-20">
         <button className="swiper-button-next-custom group w-16 h-16 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110">
           <ChevronRight className="w-8 h-8 text-white group-hover:text-[#F7B32B] transition-colors duration-300" />
         </button>
       </div>
 
-      <div className="absolute bottom-8 left-8 z-20 flex items-center space-x-6">
+      <div className="absolute bottom-8 left-8 hidden md:flex z-20 items-center space-x-6">
         <button
           onClick={toggleAutoplay}
           className="group w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center transition-all duration-300"
@@ -190,7 +190,7 @@ const EnhancedCarousel: React.FC<EnhancedCarouselProps> = ({ slides, autoplay = 
         </div>
       </div>
 
-      <div className="absolute bottom-8 right-8 z-20 flex space-x-3">
+      <div className="absolute bottom-8 hidden md:flex right-8 z-20 space-x-3">
         {slides.map((_, index) => (
           <button
             key={index}
@@ -211,7 +211,7 @@ const EnhancedCarousel: React.FC<EnhancedCarouselProps> = ({ slides, autoplay = 
         ))}
       </div>
 
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
+      <div className="absolute bottom-8 left-1/2 hidden md:block transform -translate-x-1/2 z-20 animate-bounce">
         <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
           <div className="w-1 h-3 bg-white/70 rounded-full mt-2 animate-pulse"></div>
         </div>

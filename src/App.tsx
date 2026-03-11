@@ -35,34 +35,34 @@ function App() {
   return (
     <>
       <SearchProvider>
-      <HelmetProvider>
-        <Router>
-          <ScrollToTop />
-          <DonationPrompt triggerMinutes={[1, 5, 10, 15]} />
-          <DynamicSEO />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/sobre" element={<Sobre />} />
-        <Route path="/projectos" element={<Projetos />} />
-        <Route path="/noticias" element={<Noticias />} />
-        <Route path="/contacto" element={<Contato />} />
-        <Route path='/como-doar' element={<ComoDoar />} />
-        <Route path='/galeria' element={<Galeria />} />
-        <Route path='/galeria-de-videos' element={<Videos/>} />
-        <Route path='/busca' element={<Busca />} />
-        <Route path='/inscricao' element={<Inscricao />} />
-        <Route path='/comunicados' element={<Comunicado />} />
-        
-        <Route path='/register' element={<CadastroPage />} />
-      
-    {/* Rota para páginas inexistentes */}
-    <Route path="*" element={<NotFound />} />
-      </Routes>
-    </Router>
-    </HelmetProvider>
-    </SearchProvider>
-       <WhatsAppButton />
-       </>
+        <HelmetProvider>
+          <Router>
+            <ScrollToTop />
+            <DonationPrompt triggerMinutes={[1, 5, 10, 15]} />
+            <DynamicSEO />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/sobre" element={<Sobre />} />
+              <Route path="/projectos" element={<Projetos />} />
+              <Route path="/noticias" element={<Noticias />} />
+              <Route path="/contacto" element={<Contato />} />
+              <Route path='/como-doar' element={<ComoDoar />} />
+              <Route path='/galeria' element={<Galeria />} />
+              <Route path='/galeria-de-videos' element={<Videos />} />
+              <Route path='/busca' element={<Busca />} />
+              <Route path='/inscricao' element={<Inscricao />} />
+              <Route path='/comunicados' element={<Comunicado />} />
+
+              <Route path='/register' element={<CadastroPage />} />
+
+              {/* Rota para páginas inexistentes */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Router>
+        </HelmetProvider>
+      </SearchProvider>
+      <WhatsAppButton />
+    </>
   );
 }
 
