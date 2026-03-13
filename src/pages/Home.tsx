@@ -75,12 +75,12 @@ const Home: React.FC = () => {
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="animate-fade-in-up">
+          <div className="w-full mx-auto text-center">
+            <div className="animate-fade-in-up w-full">
               <h1 className="text-5xl md:text-7xl font-bold text-[#D10A11] mb-8 leading-tight">
                 {hero.title}
               </h1>
-              <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-xl md:text-2xl text-gray-600 mb-12 text-justify max-w-[70rem] mx-auto leading-relaxed">
                 {hero.subtitle}
               </p>
               <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">

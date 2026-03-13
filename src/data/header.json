@@ -5,26 +5,20 @@
       "subtitle": "O Processo é dinâmico e irreversível"
     },
    "navItems": [
-      { "name": "PÁGINA INICIAL", "path": "/" },
-      { "name": "SOBRE NÓS", "path": "/sobre" },
+      { "name": "Página Inicial", "path": "/" },
+      { "name": "Sobre Nós", "path": "/sobre" },
+      { "name": "Projectos", "path": "/projectos" },
       {
-        "name": "PROJETOS",
-        "path": "/projectos"
-      
-      },
-      {
-        "name": "GALERIA ",
+        "name": "Galeria ",
         "path": "/galeria",
         "submenu": [
           { "name": "Fotos", "path": "/galeria" },
           { "name": "Vídeos", "path": "/galeria-de-videos" }
         ]
       },
-      { "name": "COMUNICADOS", "path": "/comunicados" },
-      {"name": "CONTACTOS", "path": "/contacto"},
-      {"name": "EMPRESAS", "path": "/register"},
-
-      { "name": "COMO DOAR", "path": "/como-doar" }
+      { "name": "Comunicados", "path": "/comunicados" },
+      { "name": "Associados", "path": "/register"},
+      { "name": "Como Doar", "path": "/como-doar" }
     ]
   }
 }

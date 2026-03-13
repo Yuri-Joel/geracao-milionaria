@@ -6,6 +6,7 @@ import Footer from "../components/Footer"
 import { LoadingPage } from "../components/Loading"
 import { submitCadastro, validateStep1, validateStep2, validateStep3, validateField } from "../services/cadastro"
 import type { CadastroFormData, ValidationError } from "../services/cadastro"
+import sobreData from "../data/sobre.json"
 
 export default function CadastroPage() {
   const errorSectionRef = useRef<HTMLDivElement>(null)
@@ -295,16 +296,31 @@ export default function CadastroPage() {
                 <Megaphone className="w-10 h-10 text-white" />
               </div>
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in-up">Empresas</h1>
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in-up">Associados</h1>
             <p className="text-xl opacity-90 max-w-2xl mx-auto animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
               Parceiros unidos para criar impacto e gerar valor para pessoas e empresas.
             </p>
           </div>
         </div>
       </section>
-
+      <section className="relative -mt-16 z-30">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {sobreData.stats.data.map((stat, index) => (
+              <div
+                key={index}
+                className="bg-white/95 backdrop-blur-md p-6 rounded-2xl shadow-xl text-center transform hover:-translate-y-2 transition-all duration-300 animate-fade-in-up"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className="text-2xl md:text-3xl font-bold text-[#D10A11] mb-2">{stat.number}</div>
+                <div className="text-gray-600 font-medium text-sm">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
       {/* Progress Steps */}
-      <div className="bg-white border-b">
+      <div className="bg-white border-b mt-[5rem]">
         <div className="container mx-auto px-4 py-6">
           <div className="flex items-center justify-center space-x-8">
             {steps.map((step, index) => {

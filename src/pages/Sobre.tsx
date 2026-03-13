@@ -63,7 +63,7 @@ const Sobre: React.FC = () => {
   
   return (
     <div className="pt-24">
-<Header />
+  <Header />
       <section className="relative py-20 bg-gradient-to-r from-[#D10A11] to-[#b00a10] overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-float"></div>
