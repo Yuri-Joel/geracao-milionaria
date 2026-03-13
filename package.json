@@ -35,6 +35,11 @@
       "react-app/jest"
     ]
   },
+    "overrides": {
+    "react-helmet-async": {
+      "react": "$react"
+    }
+  },
   "browserslist": {
     "production": [
       ">0.2%",
