@@ -6,6 +6,7 @@ export default {
       fontFamily: {
         montserrat: ['var(--font-montserrat)'],
         poppins: ['var(--font-poppins)'],
+        neo: ['"Space Grotesk"', 'sans-serif'],
       },
       backdropBlur: {
         xs: '1px',
@@ -45,6 +46,10 @@ export default {
           '0%': { transform: 'translateX(80px)', opacity: '0' },
           '100%': { transform: 'translateX(0)', opacity: '1' },
         },
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
       
       },
       animation: {
@@ -57,6 +62,7 @@ export default {
         'float': 'float 2s ease-in-out infinite',
         'slide-up': 'slide-up 0.8s ease-out forwards',
         'slide-left': 'slide-left 0.8s ease-out forwards',
+        'marquee': 'marquee 12s linear infinite',
       }, colors: {
         transparent: "transparent",
         current: "currentColor",

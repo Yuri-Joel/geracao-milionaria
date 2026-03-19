@@ -37,7 +37,7 @@
   "sections": {
     "hero": {
       "title": "Sobre Nós – AGM",
-      "subtitle": " A AGM – Associação Geração Milionária é uma organização filantrópica, sem fins lucrativos, que reúne jovens de diversos estratos sociais, em especial estudantes e empreendedores.O nosso objetivo principal é estimular iniciativas de autoemprego, através do desenvolvimento de competências nas profissões liberais e incentivo a autonomia económica dos  membros por via da economia partilhada.",
+      "subtitle": " A AGM – Associação Geração Milionária é uma organização filantrópica, sem fins lucrativos, que reúne jovens de diversos estratos sociais, em especial estudantes e empreendedores. O nosso objetivo principal é estimular iniciativas de autoemprego, através do desenvolvimento de competências nas profissões liberais e incentivo a autonomia económica dos  membros por via da economia partilhada.",
       "cta": {
         "text": "Conheça Nossos Projetos",
         "link": "/projectos"
@@ -147,6 +147,10 @@
         {
           "name": "Conexão Estúdio",
           "logo": "/assets/2024/07/3.webp"
+        },
+         {
+          "name": "AGM Credito",
+          "logo": "/assets/CR.png"
         }
       ]
     }

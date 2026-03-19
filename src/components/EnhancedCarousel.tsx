@@ -68,7 +68,7 @@ const EnhancedCarousel: React.FC<EnhancedCarouselProps> = ({ slides, autoplay = 
   }
 
   return (
-    <div className="relative md:w-full md:h-[100vh] w-[30rem] h-[20rem] overflow-hidden">
+    <div className="relative w-full h-[40vh] md:h-[100vh] overflow-hidden">
       <Swiper
         modules={[Navigation, Pagination, Autoplay, EffectFade, Parallax]}
         spaceBetween={0}
@@ -93,7 +93,7 @@ const EnhancedCarousel: React.FC<EnhancedCarouselProps> = ({ slides, autoplay = 
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={slide.id}>
-            <div className="relative md:w-full md:h-full w-[30rem] h-[20rem]">
+            <div className="relative w-full h-full">
               <div
                 className="absolute inset-0  bg-cover bg-center b bg-no-repeat"
                 style={{ backgroundImage: `url(${slide.image})` }}

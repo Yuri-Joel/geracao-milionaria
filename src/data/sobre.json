@@ -118,7 +118,7 @@
             },
             {
               "id": 3,
-              "name": "Ingrácia Gaspar Manuel",
+              "name": "-",
               "position": " Secretária Para Intercâmbio e cooperação",
               "department": "Direção Executiva",
               "image": "/assets/placeholder.svg",
@@ -133,8 +133,8 @@
             },
             {
               "id": 7,
-              "name": "Lucrécia de Oliveira",
-              "position": "Secretária para Administração, Logística, Protocolo e Finanças",
+              "name": "Sebastião Neves",
+              "position": "Secretário para Administração, Logística, Protocolo e Finanças",
               "department": "Direção Executiva",
               "image": "/assets/placeholder.svg",
               "bio": "",
@@ -147,7 +147,7 @@
             },
             {
               "id": 9,
-              "name": "Elisabeth Dos Reis",
+              "name": "-",
               "position": "Secretária para Marketing, Comunicação e Imagem",
               "department": "Direção Executiva",
               "image": "/assets/placeholder.svg",
@@ -161,10 +161,10 @@
             },
             {
               "id": 10,
-              "name": "-",
-              "position": "Secretário para Ação Social, Família e Minorias Étnicas",
+              "name": "Lucrécia Alfredo",
+              "position": "Secretária para Ação Social, Família e Minorias Étnicas",
               "department": "Direção Executiva",
-              "image": "/assets/placeholder.svg",
+              "image": "/assets/Ms. Lucrecia.png",
               "bio": "",
               "specialties": [],
               "education": "",

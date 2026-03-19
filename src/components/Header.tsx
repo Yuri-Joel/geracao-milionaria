@@ -45,7 +45,7 @@ const Header: React.FC = () => {
         {/* Top Banner */}
         <div className="bg-[#222222] text-white py-2">
           <div className="container mx-auto px-4 flex justify-between items-center">
-            <p className="text-sm">A sua ajuda faz toda a diferença. Seja <Link to={"/inscricao"} className="text-[#CB0A34] underline">Membro</Link></p>
+            <p className="text-sm font-neo">Seja <Link to={"/inscricao"} className="text-[#CB0A34] underline">Membro</Link></p>
             <div className="flex space-x-4">
               <a
                 href="https://web.facebook.com/p/Gera%C3%A7%C3%A3o-Milion%C3%A1ria-AGM-100082512764759/?_rdc=1&_rdr#"
@@ -97,7 +97,7 @@ const Header: React.FC = () => {
         </div>
 
         {/* Main Header */}
-        <div className="bg-white border-b">
+        <div className="bg-white border-b px-10">
           <div className="container mx-auto px-1">
             <div className="flex items-center justify-between h-16">
               {/* Logo */}
@@ -117,10 +117,10 @@ const Header: React.FC = () => {
               {/* Desktop Navigation */}
               <nav className="hidden md:flex space-x-6 relative">
                 {homeData.header.navItems.map((item, index) => (
-                  <div key={index} className="relative group">
+                  <div key={index} className="relative group font-neo">
                     <Link
                       to={item.path}
-                      className={`flex items-center gap-1 text-sm font-medium transition-colors duration-200 hover:text-[#D10A11] ${isActive(item.path) ? "text-[#D10A11] border-b-2 border-[#D10A11] pb-1" : "text-gray-700"
+                      className={`flex items-center gap-1 text-sm transition-colors duration-200 hover:text-[#D10A11] ${isActive(item.path) ? "text-[#D10A11] border-b-2 border-[#D10A11] pb-1 font-bold" : "text-gray-700"
                         }`}
                     >
                       {item.name}
@@ -128,7 +128,7 @@ const Header: React.FC = () => {
                     </Link>
                     {/* Submenu */}
                     {item.submenu && (
-                      <div className="absolute left-0 top-full mt-2 w-40 bg-white border shadow-lg opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 translate-y-2 z-50">
+                      <div className="absolute left-0 top-full font-medium mt-2 w-40 bg-white border shadow-lg opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 translate-y-2 z-50">
                         {item.submenu.map((sub) => (
                           <Link
                             key={sub.name}
@@ -146,16 +146,16 @@ const Header: React.FC = () => {
 
               {/* Desktop Actions */}
               <div className="hidden md:flex space-x-6 relative">
-                <button
+                {/* <button
                   className="p-2 hover:bg-gray-100 rounded-full transition-colors"
                   onClick={openSearchModal}
                   aria-label="Buscar"
                 >
                   <Search className="w-5 h-5 text-gray-600" />
-                </button>
+                </button> */}
                 <Link
                   to="/inscricao"
-                  className="ml-2 px-4 py-2 bg-[#D10A11] text-white rounded-full hover:bg-[#b00a10] transition-colors duration-200 whitespace-nowrap"
+                  className="ml-2 font-neo text-sm px-4 py-2 bg-[#D10A11] text-white rounded-full hover:bg-[#b00a10] transition-colors duration-200 whitespace-nowrap"
                 >
                   Ficha de Inscrição
                 </Link>
@@ -169,7 +169,7 @@ const Header: React.FC = () => {
                   onClick={openSearchModal}
                   aria-label="Buscar"
                 >
-                  <Search className="w-5 h-5 text-gray-600" />
+                  {/* <Search className="w-5 h-5 text-gray-600" /> */}
                 </button>
                 <button
                   className="p-2 hover:bg-gray-100 rounded-full transition-colors"

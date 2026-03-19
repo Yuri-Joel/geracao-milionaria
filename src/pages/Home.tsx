@@ -8,6 +8,8 @@ import Footer from "../components/Footer"
 import { useEffect, useState } from "react"
 import { useScrollAnimation } from "../hooks/useAnimation"
 import { LoadingPage } from "../components/Loading"
+import { motion, Variants } from 'framer-motion';
+
 
 
 const Home: React.FC = () => {
@@ -37,6 +39,53 @@ const Home: React.FC = () => {
     );
   }
 
+  // Controla o "container" pai (faz os cartões aparecerem um a um em cascata)
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15, // Atraso de 0.15s entre o aparecimento de cada cartão
+      },
+    },
+  };
+
+  // Controla cada cartão individual (Entrada e Hover)
+  const cardVariants: Variants = {
+    hidden: { opacity: 0, y: 40, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { type: "spring", stiffness: 100, damping: 15 }
+    },
+    hover: {
+      y: -8,
+      scale: 1.02,
+      boxShadow: "0px 20px 25px -5px rgba(0, 0, 0, 0.1), 0px 10px 10px -5px rgba(0, 0, 0, 0.04)",
+      borderColor: "rgba(209, 10, 17, 0.2)",
+      transition: { type: "tween", ease: "easeOut", duration: 0.3 }
+    }
+  };
+  const LogoTrack = () => (
+    <>
+      {partners.items.map((partner, index) => (
+        <div
+          key={index}
+          // mx-8 a 12 dá um bom espaçamento horizontal entre as imagens
+          className="flex-shrink-0 mx-10 transition-all duration-300 transform hover:scale-110 cursor-pointer"
+        >
+          <img
+            src={partner.logo}
+            alt={partner.name}
+            // Adicionei um filtro premium: Fica cinzento e ganha cor ao passar o rato!
+            className="w-[10rem] h-[10rem] object-contain mb-2 grayscale hover:grayscale-0 transition-all duration-300"
+          />
+        </div>
+      ))}
+    </>
+  );
+
   return (
     <div className="pt-24">
 
@@ -44,9 +93,9 @@ const Home: React.FC = () => {
       <EnhancedCarousel slides={enhancedSlides} autoplay={carousel.autoplay} delay={carousel.delay} />
       <section
         data-animate="animate-slide-up"
-        className={`relative mt-10 z-30 transition-all duration-700 ease-out ${animTestimonials} `}
+        className={`relative mt-10 z-30 px-16 transition-all duration-700 ease-out ${animTestimonials} `}
       >
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto md:px-4">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-6">
             {stats.map((stat, index) => (
               <div
@@ -67,8 +116,7 @@ const Home: React.FC = () => {
           </div>
         </div>
       </section>
-
-      <section data-animate="animate-zoom-in" className={`py-10 bg-gradient-to-br mt-20 from-gray-50 via-white to-gray-50 relative overflow-hidden transition-all duration-700 ${animFeatures}`}>
+      <section data-animate="animate-fade-in-up" className={`py-10 bg-gradient-to-br mt-20 from-gray-50 via-white to-gray-50 relative overflow-hidden transition-all duration-700 ${animCTA}`}>
         <div className="absolute top-0 left-0 w-full h-full">
           <div className="absolute top-20 left-10 w-72 h-72 bg-[#D10A11]/5 rounded-full blur-3xl animate-float"></div>
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#F7B32B]/5 rounded-full blur-3xl animate-float-delayed"></div>
@@ -77,23 +125,23 @@ const Home: React.FC = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="w-full mx-auto text-center">
             <div className="animate-fade-in-up w-full">
-              <h1 className="text-5xl md:text-7xl font-bold text-[#D10A11] mb-8 leading-tight">
+              <h1 className="text-5xl md:max-w-[100rem] max-w-[25rem] font-bold text-[#D10A11] mb-8 leading-tight">
                 {hero.title}
               </h1>
-              <p className="text-xl md:text-2xl text-gray-600 mb-12 text-justify max-w-[70rem] mx-auto leading-relaxed">
+              <p className="text-lg md:text-lg text-gray-600 mb-12 text-justify md:max-w-[70rem] max-w-[23rem] mx-auto leading-relaxed">
                 {hero.subtitle}
               </p>
               <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
                 <Link
                   to={hero.cta.link}
-                  className="group inline-flex items-center px-10 py-5 bg-[#D10A11] hover:bg-[#b00a10] text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-2xl text-lg"
+                  className="group inline-flex items-center px-10 py-5 bg-[#D10A11] hover:bg-[#b00a10] text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-2xl text-sm"
                 >
                   {hero.cta.text}
                   <ArrowRight className="ml-3 w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
                 </Link>
                 <Link
                   to="/sobre"
-                  className="group inline-flex items-center px-10 py-5 border-2 border-[#D10A11] text-[#D10A11] hover:bg-[#D10A11] hover:text-white font-semibold rounded-full transition-all duration-300 text-lg"
+                  className="group inline-flex items-center px-10 py-5 border-2 border-[#D10A11] text-[#D10A11] hover:bg-[#D10A11] hover:text-white font-semibold rounded-full transition-all duration-300 text-sm"
                 >
                   Nossa História
                 </Link>
@@ -103,19 +151,25 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <section data-animate="animate-slide-up" className={`transition-all duration-700 ${animTestimonials} py-10 bg-white relative overflow-hidden`}>
+      <section data-animate="animate-slide-up" className={`transition-all duration-700 ${animTestimonials} mt-12 py-10 bg-white relative overflow-hidden`}>
         <div className="container mx-auto px-4">
           <div className="text-center mb-20 animate-fade-in-up">
-            <h2 className="text-4xl md:text-6xl font-bold text-[#D10A11] mb-6">
-              Conheça-Nos
+            <h2 className="text-4xl md:text-5xl font-bold text-[#D10A11] mb-6">
+              Conheça-nos
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Oferecemos soluções completas para o seu desenvolvimento pessoal e profissional
             </p>
           </div>
 
           <div className="w-full flex justify-center">
-            <div className="flex flex-col md:flex-row w-full justify-center gap-8 animate-zoom-in max-w-[80rem]">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible" // Anima apenas quando a secção aparece no ecrã
+              viewport={{ once: true, margin: "-50px" }} // Evita que repita a animação ao fazer scroll
+              className="flex flex-col md:flex-row w-full justify-center gap-8 max-w-[80rem]"
+            >
               {features.map((feature, index) => {
                 const Icon = {
                   Users,
@@ -125,25 +179,27 @@ const Home: React.FC = () => {
                 }[feature.icon];
 
                 return (
-                  <div
+                  <motion.div
                     key={index}
-                    className="group bg-white p-8 rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-4 border border-gray-100 hover:border-[#D10A11]/20 animate-fade-in-up"
-                    style={{ animationDelay: `${index * 0.1}s` }}
+                    variants={cardVariants}
+                    whileHover="hover"
+                    className="group bg-white p-8 rounded-3xl shadow-lg border border-gray-100 cursor-pointer"
                   >
-                    <div className="relative w-full max-w-sm group cursor-pointer">
+                    <div className="relative w-full max-w-sm">
                       <div className="absolute rounded-lg inset-0 w-full h-full bg-white border-[1px] border-gray-100 transition-all duration-300 ease-out group-hover:translate-x-2 group-hover:translate-y-2"></div>
-                      <div className={`relative rounded-lg z-10 w-full h-full min-h-[320px] ${'bg-[#FFFFFF]'} border-gray-100 p-8 flex flex-col justify-between transition-all duration-300 ease-out group-hover:-translate-x-2 group-hover:-translate-y-2`}>
+                      <div className={`relative rounded-lg z-10 w-full h-full min-h-[320px] bg-[#FFFFFF] border-gray-100 p-8 flex flex-col justify-between transition-all duration-300 ease-out group-hover:-translate-x-2 group-hover:-translate-y-2`}>
+
                         <div>
-                           <div
-                              className={`w-16 h-16 ${feature.color === "red" ? "bg-red-100" : "bg-amber-100"
-                                } rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
-                            >
-                          {Icon && (
-                            <Icon
-                              className={`w-8 h-8 ${feature.color === "red" ? "text-[#D10A11]" : "text-[#F7B32B]"
-                                }`}
-                            />
-                          )}
+                          <div
+                            className={`w-16 h-16 ${feature.color === "red" ? "bg-red-100" : "bg-amber-100"
+                              } rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
+                          >
+                            {Icon && (
+                              <Icon
+                                className={`w-8 h-8 ${feature.color === "red" ? "text-[#D10A11]" : "text-[#F7B32B]"
+                                  }`}
+                              />
+                            )}
                           </div>
                           <h2 className="text-xl font-bold uppercase flex items-center text-black mb-4">
                             {feature.title}
@@ -153,12 +209,13 @@ const Home: React.FC = () => {
                             {feature.description}
                           </p>
                         </div>
+
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 );
               })}
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -172,7 +229,7 @@ const Home: React.FC = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 md:px-[6rem] gap-8">
             {testimonials.items.map((testimonial, index) => (
               <div
                 key={index}
@@ -229,7 +286,7 @@ const Home: React.FC = () => {
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-6xl font-bold text-white mb-8 animate-fade-in-up">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-8 animate-fade-in-up">
               {cta.title}
             </h2>
             <p className="text-xl md:text-2xl text-red-100 mb-12 animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
@@ -241,14 +298,14 @@ const Home: React.FC = () => {
             >
               <Link
                 to={cta.primaryButton.link}
-                className="group inline-flex items-center px-10 py-5 bg-white text-[#D10A11] font-semibold rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl text-lg"
+                className="group text-sm inline-flex items-center px-10 py-5 bg-white text-[#D10A11] font-semibold rounded-full hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
               >
                 <Heart className="mr-3 w-6 h-6 group-hover:text-[#F7B32B] transition-colors duration-300" />
                 {cta.primaryButton.text}
               </Link>
               <Link
                 to={cta.secondaryButton.link}
-                className="group inline-flex items-center px-10 py-5 border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-[#D10A11] transition-all duration-300 text-lg"
+                className="group text-sm inline-flex items-center px-10 py-5 border-2 border-white text-white font-semibold rounded-full hover:bg-white hover:text-[#D10A11] transition-all duration-300"
               >
                 <Globe className="mr-3 w-6 h-6" />
                 {cta.secondaryButton.text}
@@ -258,39 +315,46 @@ const Home: React.FC = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+      <section className="py-20 bg-white overflow-hidden">
+        <div className="container mx-auto px-4 mb-16">
+          <div className="text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-[#D10A11] mb-4">
               {partners.title}
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">{partners.subtitle}</p>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              {partners.subtitle}
+            </p>
           </div>
+        </div>
 
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 ">
-            {partners.items.map((partner, index) => (
-              <div
-                key={index}
-                className="w-48 h-56 bg-gray-100 rounded-lg shadow-sm flex flex-col items-center justify-center hover:shadow-md transition-all duration-300 transform hover:scale-105"
-              >
-                <figure className="flex flex-col items-center justify-center">
-                  <img
-                    src={partner.logo}
-                    alt={partner.name}
-                    className="w-40 h-40 object-contain mb-2"
-                  />
-                  <figcaption className="text-gray-600 text-base font-medium text-center">
-                    {partner.name}
-                  </figcaption>
-                </figure>
-              </div>
+        <div className="relative w-full flex items-center">
 
-            ))}
+          <div className="absolute top-0 left-0 w-32 h-full bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+          <div className="absolute top-0 right-0 w-32 h-full bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
 
-          </div>
+          <motion.div
+            className="flex items-center shrink-0"
+            animate={{ x: ["0%", "-100%"] }}
+            transition={{ ease: "linear", duration: 30, repeat: Infinity }}
+          >
+            <LogoTrack />
+          </motion.div>
+
+          <motion.div
+            className="flex items-center shrink-0"
+            animate={{ x: ["0%", "-100%"] }}
+            transition={{ ease: "linear", duration: 30, repeat: Infinity }}
+            aria-hidden="true"
+          >
+            <LogoTrack />
+          </motion.div>
+
         </div>
       </section>
 
+      {/* <section className="w-full flex items-center justify-center ExemploDeMapa">
+            <MapView />
+      </section> */}
 
       <Footer />
     </div>
